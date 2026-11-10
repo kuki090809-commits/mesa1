@@ -1,0 +1,39 @@
+<div class="announcement-bar" aria-hidden="true">
+  <div class="announcement-bar__track">
+    {%- for i in (1..2) -%}
+      <div class="announcement-bar__group">
+        {%- for block in section.blocks -%}
+          <span class="announcement-bar__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Barra de anuncios",
+  "tag": "section",
+  "class": "section-announcement-bar",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Mensaje",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto", "default": "ENVÍO EN 48 HORAS" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de anuncios",
+      "blocks": [
+        { "type": "item", "settings": { "text": "DEVOLUCIÓN 30 DÍAS" } },
+        { "type": "item", "settings": { "text": "ENVÍO EN 48 HORAS" } },
+        { "type": "item", "settings": { "text": "ENVÍO CON SEGUIMIENTO" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

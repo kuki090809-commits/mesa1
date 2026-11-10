@@ -1,0 +1,65 @@
+{%- assign words = section.blocks | where: 'type', 'word' -%}
+{%- assign badges = section.blocks | where: 'type', 'badge' -%}
+<div class="marquee">
+  {%- if words.size > 0 -%}
+  <div class="marquee__row marquee__row--words" aria-hidden="true">
+    <div class="marquee__track">
+      {%- for i in (1..2) -%}
+        <div class="marquee__group">
+          {%- for block in words -%}
+            <span class="marquee__word">{{ block.settings.text }}</span>
+            <span class="marquee__divider">/</span>
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- endif -%}
+
+  {%- if badges.size > 0 -%}
+  <div class="marquee__row marquee__row--badges" aria-hidden="true">
+    <div class="marquee__track">
+      {%- for i in (1..2) -%}
+        <div class="marquee__group">
+          {%- for block in badges -%}
+            <span class="marquee__badge">{{ block.settings.text }}</span>
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Marquesina",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "word",
+      "name": "Palabra",
+      "settings": [{ "type": "text", "id": "text", "label": "Texto", "default": "AJUSTABLE" }]
+    },
+    {
+      "type": "badge",
+      "name": "Distintivo",
+      "settings": [{ "type": "text", "id": "text", "label": "Texto", "default": "DOBLE ESCALA ML" }]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquesina",
+      "blocks": [
+        { "type": "word", "settings": { "text": "AJUSTABLE" } },
+        { "type": "word", "settings": { "text": "COMPACTA" } },
+        { "type": "word", "settings": { "text": "PRECISA" } },
+        { "type": "word", "settings": { "text": "SIN GOTEO" } },
+        { "type": "badge", "settings": { "text": "DOBLE ESCALA ML" } },
+        { "type": "badge", "settings": { "text": "APTA LAVAVAJILLAS" } },
+        { "type": "badge", "settings": { "text": "PICO VERTEDOR" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,20 @@
+{%- comment -%}
+  Renders a price with an optional compare-at price and real percentage-off badge.
+  Usage: {% render 'price', target: product %} or {% render 'price', target: current_variant %}
+{%- endcomment -%}
+{%- liquid
+  assign price = target.price
+  assign compare_at = target.compare_at_price
+  assign show_compare = false
+  if compare_at and compare_at > price
+    assign show_compare = true
+    assign percent_off = compare_at | minus: price | times: 100 | divided_by: compare_at
+  endif
+-%}
+<span class="price">
+  <span class="price__current">{{ price | money }}</span>
+  {%- if show_compare -%}
+    <span class="price__compare-at">{{ compare_at | money }}</span>
+    <span class="price__badge">-{{ percent_off }}%</span>
+  {%- endif -%}
+</span>

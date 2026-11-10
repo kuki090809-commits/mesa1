@@ -1,0 +1,57 @@
+{
+  "general": {
+    "search": {
+      "placeholder": "Buscar en la tienda",
+      "submit": "Buscar",
+      "no_results": "No se han encontrado resultados para \"{{ terms }}\".",
+      "results_for": "Resultados de búsqueda para \"{{ terms }}\""
+    },
+    "404": {
+      "title": "Página no encontrada",
+      "subtext": "La página que buscas no existe o se ha movido.",
+      "link": "Volver al catálogo"
+    },
+    "password_page": {
+      "login_form_heading": "Entrar con contraseña de tienda",
+      "login_password_button": "Entrar",
+      "login_form_password_label": "Contraseña",
+      "login_form_submit": "Entrar"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Ir directamente al contenido",
+    "cart_items": "{{ count }} producto(s) en el carrito",
+    "menu": "Menú",
+    "close": "Cerrar"
+  },
+  "cart": {
+    "title": "Tu carrito",
+    "empty": "Tu carrito está vacío",
+    "continue_shopping": "Ver catálogo",
+    "product": "Producto",
+    "price": "Precio",
+    "quantity": "Cantidad",
+    "total": "Subtotal",
+    "update": "Actualizar",
+    "remove": "Eliminar",
+    "checkout": "Finalizar compra",
+    "subtotal_note": "Los gastos de envío y los impuestos se calculan en el checkout."
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Añadir al carrito",
+      "buy_now": "Comprar ahora",
+      "sold_out": "Agotado",
+      "unavailable": "No disponible",
+      "quantity": "Cantidad",
+      "you_save": "Ahorras {{ amount }}",
+      "description": "Descripción",
+      "shipping_returns": "Envíos y devoluciones"
+    }
+  },
+  "blog": {
+    "article": {
+      "read_more": "Leer más"
+    }
+  }
+}

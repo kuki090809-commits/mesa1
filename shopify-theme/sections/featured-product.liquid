@@ -1,0 +1,96 @@
+<section class="featured-product">
+  <div class="container">
+    <div class="featured-product__head">
+      <h2>{{ section.settings.heading }}</h2>
+      {%- if section.settings.product != blank -%}
+        <a href="{{ section.settings.product.url }}" class="btn btn--outline btn--small">{{ section.settings.link_label }}</a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.product != blank -%}
+      {%- assign product = section.settings.product -%}
+      {%- assign current_variant = product.selected_or_first_available_variant -%}
+      <div class="featured-product__grid">
+        <div class="featured-product__gallery">
+          {%- if section.settings.badge_text != blank -%}<span class="featured-product__badge">{{ section.settings.badge_text }}</span>{%- endif -%}
+          {%- if product.featured_image -%}
+            <img class="featured-product__main-image" src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="900" height="{{ 900 | divided_by: product.featured_image.aspect_ratio | default: 900 }}">
+          {%- endif -%}
+          {%- if product.images.size > 1 -%}
+            <div class="featured-product__thumbs">
+              {%- for image in product.images limit: 5 -%}
+                <img src="{{ image | image_url: width: 160 }}" alt="{{ image.alt | default: product.title | escape }}" width="160" height="{{ 160 | divided_by: image.aspect_ratio | default: 160 }}" loading="lazy">
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="featured-product__info">
+          {%- if section.settings.rating_value > 0 -%}
+            <div class="rating">
+              <span class="rating__stars" aria-hidden="true">{%- for i in (1..5) -%}{% render 'icon-star' %}{%- endfor -%}</span>
+              <span>{{ section.settings.rating_value }}/5 &middot; {{ section.settings.rating_count }} opiniones verificadas</span>
+            </div>
+          {%- endif -%}
+
+          <h3>{{ product.title }}</h3>
+          {% render 'price', target: current_variant %}
+          <p class="featured-product__description">{{ product.description | strip_html | truncate: 180 }}</p>
+
+          <ul class="tag-pills">
+            {%- for block in section.blocks -%}
+              <li>{% render 'icon-check' %} {{ block.settings.text }}</li>
+            {%- endfor -%}
+          </ul>
+
+          {%- form 'product', product, class: 'featured-product__form' -%}
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+            <button type="submit" class="btn btn--solid btn--full"{% unless current_variant.available %} disabled{% endunless %}>
+              {% render 'icon-cart' %}
+              {%- if current_variant.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+            </button>
+          {%- endform -%}
+
+          <p class="featured-product__shipping">{% render 'icon-truck' %} {{ section.settings.shipping_text }}</p>
+          <p class="featured-product__returns">{% render 'icon-return' %} {{ section.settings.returns_text }}</p>
+        </div>
+      </div>
+    {%- else -%}
+      <p class="featured-product__placeholder">Selecciona un producto en el personalizador del tema.</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Producto destacado",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "EL MÁS VENDIDO." },
+    { "type": "text", "id": "link_label", "label": "Texto del enlace", "default": "Ver producto" },
+    { "type": "product", "id": "product", "label": "Producto" },
+    { "type": "text", "id": "badge_text", "label": "Distintivo sobre la imagen", "default": "Oferta de lanzamiento" },
+    { "type": "range", "id": "rating_value", "label": "Valoración (0 = ocultar)", "min": 0, "max": 5, "step": 0.1, "default": 0 },
+    { "type": "number", "id": "rating_count", "label": "Número de opiniones", "default": 0 },
+    { "type": "text", "id": "shipping_text", "label": "Texto de envío", "default": "Envío con seguimiento incluido." },
+    { "type": "text", "id": "returns_text", "label": "Texto de devoluciones", "default": "Devolución gratuita en 30 días." }
+  ],
+  "blocks": [
+    {
+      "type": "tag",
+      "name": "Distintivo de check",
+      "settings": [{ "type": "text", "id": "text", "label": "Texto", "default": "Apta lavavajillas" }]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Producto destacado",
+      "blocks": [
+        { "type": "tag", "settings": { "text": "Diseño 4 en 1" } },
+        { "type": "tag", "settings": { "text": "Pico vertedor" } },
+        { "type": "tag", "settings": { "text": "Apta lavavajillas" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

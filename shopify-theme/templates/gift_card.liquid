@@ -1,0 +1,27 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ shop.name }} &ndash; Tarjeta regalo</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;600;700&amp;display=swap">
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+</head>
+<body class="gift-card-page">
+  <div class="container simple-page__center">
+    <h1>{{ shop.name }}</h1>
+    <p>Tarjeta regalo</p>
+    <p class="gift-card-amount">{{ gift_card.initial_value | money }}</p>
+    <p class="gift-card-code">{{ gift_card.code | format_code }}</p>
+    {%- unless gift_card.enabled -%}
+      <p>Esta tarjeta regalo ha expirado o ha sido desactivada.</p>
+    {%- else -%}
+      <p>Saldo disponible: {{ gift_card.balance | money }}</p>
+    {%- endunless -%}
+    {%- if gift_card.qr_identifier -%}
+      {{ gift_card | default_gift_card_qr_code: 180 }}
+    {%- endif -%}
+  </div>
+</body>
+</html>

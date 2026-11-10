@@ -1,0 +1,25 @@
+<section class="simple-page">
+  <div class="container">
+    <h1>{{ 'general.search.placeholder' | t }}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+      <button type="submit" class="btn btn--solid">{{ 'general.search.submit' | t }}</button>
+    </form>
+
+    {%- if search.performed -%}
+      {%- if search.results.size == 0 -%}
+        <p>{{ 'general.search.no_results' | t: terms: search.terms }}</p>
+      {%- else -%}
+        <p>{{ 'general.search.results_for' | t: terms: search.terms }}</p>
+        <div class="product-grid">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              {% render 'product-card', product: item %}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}{ "name": "Buscar", "settings": [] }{% endschema %}

@@ -1,0 +1,16 @@
+<section class="simple-page">
+  <div class="container">
+    <h1>Colecciones</h1>
+    <div class="collection-grid">
+      {%- for collection in collections -%}
+        <a href="{{ collection.url }}" class="collection-card">
+          {%- if collection.featured_image -%}
+            <img src="{{ collection.featured_image | image_url: width: 500 }}" alt="{{ collection.title | escape }}" width="500" height="{{ 500 | divided_by: collection.featured_image.aspect_ratio | default: 500 }}" loading="lazy">
+          {%- endif -%}
+          <span>{{ collection.title }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}{ "name": "Lista de colecciones", "settings": [] }{% endschema %}

@@ -1,0 +1,11 @@
+<section class="simple-page">
+  <article class="container article">
+    <h1>{{ article.title }}</h1>
+    <p class="article__meta">{{ article.published_at | date: '%d de %B, %Y' }}{% if article.author != blank %} &middot; {{ article.author }}{% endif %}</p>
+    {%- if article.image -%}
+      <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.title | escape }}" width="1200" height="{{ 1200 | divided_by: article.image.aspect_ratio | default: 1200 }}">
+    {%- endif -%}
+    <div class="rich-text">{{ article.content }}</div>
+  </article>
+</section>
+{% schema %}{ "name": "Artículo", "settings": [] }{% endschema %}

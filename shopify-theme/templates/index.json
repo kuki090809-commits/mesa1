@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "hero": { "type": "hero" },
+    "marquee-1": { "type": "marquee" },
+    "feature-grid": { "type": "feature-grid" },
+    "featured-product": { "type": "featured-product" },
+    "scorecard": { "type": "scorecard" },
+    "marquee-2": { "type": "marquee" }
+  },
+  "order": ["hero", "marquee-1", "feature-grid", "featured-product", "scorecard", "marquee-2"]
+}

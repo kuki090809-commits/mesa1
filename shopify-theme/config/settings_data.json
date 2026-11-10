@@ -1,0 +1,13 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_background": "#EFEDE7",
+      "color_surface": "#FFFFFF",
+      "color_ink": "#121212",
+      "color_ink_soft": "#6B6B6B",
+      "color_accent": "#FF6A1A",
+      "show_payment_icons": true
+    }
+  }
+}

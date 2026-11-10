@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "main": { "type": "main-product" },
+    "marquee": { "type": "marquee" }
+  },
+  "order": ["main", "marquee"]
+}

@@ -1,0 +1,65 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Ajusta",
+    "theme_version": "1.0.0",
+    "theme_author": "Ajusta",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colores",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Fondo general",
+        "default": "#EFEDE7"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Tarjetas y superficies",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Texto principal / fondo oscuro (header, footer, botones)",
+        "default": "#121212"
+      },
+      {
+        "type": "color",
+        "id": "color_ink_soft",
+        "label": "Texto secundario",
+        "default": "#6B6B6B"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Acento (ofertas, badges)",
+        "default": "#FF6A1A"
+      }
+    ]
+  },
+  {
+    "name": "Tipografía",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Las tipografías de marca (Anton para titulares, Inter para texto) están fijadas en el tema y se cargan desde Google Fonts: no aparecen en el selector de fuentes nativo de Shopify porque no forman parte de su catálogo. Puedes cambiarlas editando layout/theme.liquid."
+      }
+    ]
+  },
+  {
+    "name": "Confianza",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "Mostrar iconos de métodos de pago",
+        "default": true
+      }
+    ]
+  }
+]
