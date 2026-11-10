@@ -19,9 +19,6 @@
     {%- else -%}
       <p>Saldo disponible: {{ gift_card.balance | money }}</p>
     {%- endunless -%}
-    {%- if gift_card.qr_identifier -%}
-      {{ gift_card | default_gift_card_qr_code: 180 }}
-    {%- endif -%}
   </div>
 </body>
 </html>
