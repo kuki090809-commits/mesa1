@@ -831,7 +831,8 @@ a:hover .or-logo__giro { transform: rotate(90deg); }
 
   .or-banda:nth-child(even) .or-banda__media { order: 0; }
   .or-pasos__visual { position: relative; top: 0; max-width: 380px; width: 80%; margin: 0 auto; }
-  .or-paso { min-height: 0; opacity: 1; padding: 22px 0; }
+  .or-paso,
+  .or-paso:last-child { min-height: 0; opacity: 1; padding: 22px 0; }
   .or-faq__intro,
   .or-galeria { position: static; }
   .or-cierre .or-media { max-width: 360px; margin: 0 auto; width: 80%; }
