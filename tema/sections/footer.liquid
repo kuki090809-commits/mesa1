@@ -80,13 +80,17 @@
 
       {%- if section.settings.mostrar_legales -%}
         <ul class="fd-footer__legales">
-          {%- for policy in shop.policies -%}
-            {%- if policy.type != 'contact_information' -%}
-              <li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
-            {%- endif -%}
-          {%- endfor -%}
-          {%- if section.settings.legal_extra_texto != blank -%}
-            <li><a href="{{ section.settings.legal_extra_url | default: '#' }}">{{ section.settings.legal_extra_texto | escape }}</a></li>
+          {%- assign menu_legal = section.settings.menu_legal -%}
+          {%- if menu_legal != blank and menu_legal.links.size > 0 -%}
+            {%- for link in menu_legal.links -%}
+              <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for policy in shop.policies -%}
+              {%- if policy.type != 'contact_information' -%}
+                <li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
           {%- endif -%}
           {%- if section.settings.cookies_pref_texto != blank -%}
             <li><a href="{{ routes.root_url }}pages/politica-de-cookies" data-fd-cookies>{{ section.settings.cookies_pref_texto | escape }}</a></li>
@@ -152,9 +156,8 @@
     { "type": "text", "id": "contacto_email", "label": "Correo de contacto (opcional)" },
     { "type": "header", "content": "Barra inferior" },
     { "type": "text", "id": "copyright", "label": "Nombre junto al ©", "default": "FlexiDesk" },
-    { "type": "checkbox", "id": "mostrar_legales", "label": "Mostrar enlaces legales", "info": "Las políticas se editan en Configuración → Políticas.", "default": true },
-    { "type": "text", "id": "legal_extra_texto", "label": "Enlace legal extra 1: texto", "default": "Política de cookies" },
-    { "type": "url", "id": "legal_extra_url", "label": "Enlace legal extra 1: destino" },
+    { "type": "checkbox", "id": "mostrar_legales", "label": "Mostrar enlaces legales", "default": true },
+    { "type": "link_list", "id": "menu_legal", "label": "Menú de enlaces legales", "info": "Se edita en Contenido → Menús → Legal. Si lo dejas vacío, se muestran las políticas de Shopify." },
     { "type": "text", "id": "cookies_pref_texto", "label": "Enlace para cambiar las preferencias de cookies", "info": "Abre el panel de cookies de Shopify. Déjalo vacío para ocultarlo.", "default": "Preferencias de cookies" },
     { "type": "checkbox", "id": "mostrar_idiomas", "label": "Mostrar selector de idioma", "default": false },
     { "type": "checkbox", "id": "mostrar_pagos", "label": "Mostrar formas de pago", "default": true },

@@ -190,7 +190,7 @@
           "type": "pregunta",
           "settings": {
             "pregunta": "¿Y si no me convence?",
-            "respuesta": "<p>Tienes 30 días desde que la recibes para pedir la devolución. Tienes todos los detalles en nuestra <a href=\"/policies/refund-policy\">política de devoluciones</a>.</p>"
+            "respuesta": "<p>Tienes 30 días desde que la recibes para pedir la devolución. Tienes todos los detalles en nuestra <a href=\"/pages/politica-de-devoluciones\">política de devoluciones</a>.</p>"
           }
         }
       },

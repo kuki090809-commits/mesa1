@@ -7,11 +7,11 @@
       "settings": {
         "col1_enlace1_url": "shopify://products/flexidesk™-mesa-auxiliar-regulable",
         "col2_enlace1_url": "shopify://pages/preguntas-frecuentes",
-        "col2_enlace2_url": "/policies/shipping-policy",
-        "col2_enlace3_url": "/policies/refund-policy",
+        "col2_enlace2_url": "shopify://pages/politica-de-envios",
+        "col2_enlace3_url": "shopify://pages/politica-de-devoluciones",
         "col2_enlace4_url": "shopify://pages/contacto",
-        "legal_extra_url": "shopify://pages/politica-de-cookies",
-        "col1_enlace2_texto": ""
+        "col1_enlace2_texto": "",
+        "menu_legal": "legal"
       }
     }
   },

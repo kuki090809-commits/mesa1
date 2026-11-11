@@ -53,7 +53,7 @@
           "type": "acordeon",
           "settings": {
             "titulo": "Envío y devoluciones",
-            "contenido": "<p>Envío gratuito en todos los pedidos, en 5-7 días laborables desde la confirmación. Recibirás el número de seguimiento por correo.</p><p>Tienes 30 días desde la entrega para solicitar la devolución. Consulta la <a href=\"/policies/refund-policy\">política de devoluciones</a>.</p>"
+            "contenido": "<p>Envío gratuito en todos los pedidos, en 5-7 días laborables desde la confirmación. Recibirás el número de seguimiento por correo.</p><p>Tienes 30 días desde la entrega para solicitar la devolución. Consulta la <a href=\"/pages/politica-de-devoluciones\">política de devoluciones</a>.</p>"
           }
         },
         "k1": {
@@ -210,7 +210,7 @@
           "type": "pregunta",
           "settings": {
             "pregunta": "¿Y si no me convence?",
-            "respuesta": "<p>Tienes 30 días desde que la recibes para pedir la devolución. Más detalles en nuestra <a href=\"/policies/refund-policy\">política de devoluciones</a>.</p>"
+            "respuesta": "<p>Tienes 30 días desde que la recibes para pedir la devolución. Más detalles en nuestra <a href=\"/pages/politica-de-devoluciones\">política de devoluciones</a>.</p>"
           }
         }
       },
