@@ -824,7 +824,8 @@ a:hover .or-logo__giro { transform: rotate(90deg); }
   .or-producto__grid { grid-template-columns: minmax(0, 1fr); }
 
   .or-hero__grid { min-height: 0; }
-  .or-hero__visual { max-width: 480px; width: 88%; margin: 0 auto; }
+  .or-hero__visual { max-width: 480px; width: 88%; margin: 16px auto 0; }
+  .or-hero__parallax { transform: none !important; }
   .or-sello { width: 108px; height: 108px; left: -18px; }
   .or-sello__centro { font-size: 27px; }
 
@@ -872,3 +873,4 @@ a:hover .or-logo__giro { transform: rotate(90deg); }
 .or-btn .loading__spinner .spinner { width: 22px; height: 22px; }
 .or-btn .loading__spinner .path { stroke: currentColor; }
 .or-form-compra { display: block; }
+.or-compra .shopify-payment-button__more-options { color: var(--or-texto); font-size: 14px; }
