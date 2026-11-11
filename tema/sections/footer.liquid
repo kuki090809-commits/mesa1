@@ -46,7 +46,7 @@
           <nav aria-label="{{ titulo_col | escape }}">
             <h2>{{ titulo_col | escape }}</h2>
             <ul class="or-footer__links">
-              {%- for n in (1..5) -%}
+              {%- for n in (1..4) -%}
                 {%- liquid
                   assign k_l = 'col' | append: c | append: '_enlace' | append: n | append: '_texto'
                   assign k_u = 'col' | append: c | append: '_enlace' | append: n | append: '_url'
@@ -136,8 +136,6 @@
     { "type": "url", "id": "col1_enlace3_url", "label": "Enlace 3: destino" },
     { "type": "text", "id": "col1_enlace4_texto", "label": "Enlace 4: texto" },
     { "type": "url", "id": "col1_enlace4_url", "label": "Enlace 4: destino" },
-    { "type": "text", "id": "col1_enlace5_texto", "label": "Enlace 5: texto" },
-    { "type": "url", "id": "col1_enlace5_url", "label": "Enlace 5: destino" },
     { "type": "header", "content": "Columna 2" },
     { "type": "text", "id": "col2_titulo", "label": "Título", "default": "Ayuda" },
     { "type": "text", "id": "col2_enlace1_texto", "label": "Enlace 1: texto", "default": "Preguntas frecuentes" },
@@ -148,8 +146,6 @@
     { "type": "url", "id": "col2_enlace3_url", "label": "Enlace 3: destino" },
     { "type": "text", "id": "col2_enlace4_texto", "label": "Enlace 4: texto", "default": "Contacto" },
     { "type": "url", "id": "col2_enlace4_url", "label": "Enlace 4: destino" },
-    { "type": "text", "id": "col2_enlace5_texto", "label": "Enlace 5: texto" },
-    { "type": "url", "id": "col2_enlace5_url", "label": "Enlace 5: destino" },
     { "type": "header", "content": "Contacto" },
     { "type": "text", "id": "contacto_titulo", "label": "Título", "default": "Hablemos" },
     { "type": "textarea", "id": "contacto_texto", "label": "Texto", "default": "¿Dudas con tu pedido? Te respondemos lo antes posible." },
