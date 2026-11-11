@@ -1,0 +1,452 @@
+<title>Políticas de FlexiDesk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Schibsted+Grotesk:wght@600;700&display=swap">
+<style>
+  /* Layout: herramienta de dos columnas — datos fijos a la izquierda, políticas a copiar a la derecha; una columna en móvil */
+  :root {
+    --bg: #F4F4F1;
+    --surface: #FFFFFF;
+    --surface-2: #ECEDE8;
+    --fg: #17191D;
+    --muted: #5B6069;
+    --line: #DADCD5;
+    --accent: #2D5BE3;
+    --accent-fg: #FFFFFF;
+    --accent-soft: #E3E9FC;
+    --warn: #9A4A06;
+    --warn-soft: #FBEBD9;
+    --ok: #1B7A45;
+    --ok-soft: #DDF2E5;
+    --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --body: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121317; --surface: #1B1D22; --surface-2: #24272D; --fg: #ECEDEA; --muted: #A2A7B0;
+      --line: #30333A; --accent: #7D9BFF; --accent-fg: #0E1424; --accent-soft: #1E2847;
+      --warn: #F2A65E; --warn-soft: #3A2716; --ok: #6CD69A; --ok-soft: #17301F; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121317; --surface: #1B1D22; --surface-2: #24272D; --fg: #ECEDEA; --muted: #A2A7B0;
+    --line: #30333A; --accent: #7D9BFF; --accent-fg: #0E1424; --accent-soft: #1E2847;
+    --warn: #F2A65E; --warn-soft: #3A2716; --ok: #6CD69A; --ok-soft: #17301F; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.55;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 28px 56px;
+  }
+  .wrap { max-width: 1160px; margin: 0 auto; display: grid; gap: 28px; }
+  header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; }
+  h1, h2, h3 { font-family: var(--display); letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(26px, 4vw, 36px); line-height: 1.1; }
+  .sub { margin: 6px 0 0; color: var(--muted); max-width: 62ch; }
+  .progreso { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .barra { width: 90px; height: 6px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
+  .barra i { display: block; height: 100%; width: 0; background: var(--ok); transition: width .3s ease; }
+
+  .grid { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 24px; align-items: start; }
+  .panel { position: sticky; top: calc(16px + env(safe-area-inset-top, 0px)); display: grid; gap: 16px; }
+  .caja { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .caja h2 { font-size: 18px; margin-bottom: 4px; }
+  .nota { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
+  form { display: grid; gap: 12px; }
+  label { display: grid; gap: 5px; font-size: 13px; font-weight: 600; }
+  label span { font-weight: 400; color: var(--muted); }
+  input, select {
+    width: 100%; font: inherit; font-size: 15px; color: var(--fg); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
+  }
+  input:focus-visible, select:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  input.vacio { border-color: var(--warn); }
+  ol.pasos { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 14px; }
+  ol.pasos b { font-weight: 600; }
+
+  .lista { display: grid; gap: 14px; }
+  .pol { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+  .pol.hecha { border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); }
+  .pol__cab { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: 10px; }
+  .pol__cab h3 { font-size: 19px; }
+  .pol__donde { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .chip--lista { background: var(--accent-soft); color: var(--accent); }
+  .chip--falta { background: var(--warn-soft); color: var(--warn); }
+  .chip--hecha { background: var(--ok-soft); color: var(--ok); }
+  .pol__acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  button { font: inherit; cursor: pointer; border-radius: 999px; }
+  .btn { border: 0; background: var(--accent); color: var(--accent-fg); font-weight: 600; padding: 10px 20px; }
+  .btn:hover { filter: brightness(1.06); }
+  .btn--sec { background: transparent; color: var(--fg); border: 1px solid var(--line); font-weight: 500; padding: 9px 16px; }
+  .check { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; margin-left: auto; cursor: pointer; }
+  .check input { width: 18px; height: 18px; accent-color: var(--ok); }
+  .aviso { margin: 0; font-size: 13px; color: var(--warn); }
+  .aviso.ok { color: var(--ok); }
+  .texto {
+    max-height: 420px; overflow: auto; padding: 16px 18px; border-radius: 10px; background: var(--bg);
+    border: 1px solid var(--line); font-size: 14px; line-height: 1.6;
+  }
+  .texto h3 { font-size: 16px; margin: 18px 0 6px; }
+  .texto p, .texto ul, .texto ol { margin: 0 0 10px; }
+  .texto a { color: var(--accent); }
+  mark.falta { background: var(--warn-soft); color: var(--warn); border-radius: 4px; padding: 0 4px; font-weight: 600; }
+  .legal { font-size: 13px; color: var(--muted); max-width: 75ch; }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: minmax(0, 1fr); }
+    .panel { position: static; }
+    .check { margin-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .barra i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Políticas legales de FlexiDesk</h1>
+      <p class="sub">Seis textos adaptados a la ley española, con tus datos de envío, devoluciones y precios reales. Rellena tus datos, copia cada política y pégala en su cuadro de Shopify.</p>
+    </div>
+    <div class="progreso" aria-live="polite"><span id="contador">0 de 6 pegadas</span><span class="barra"><i id="barra"></i></span></div>
+  </header>
+
+  <div class="grid">
+    <aside class="panel">
+      <section class="caja" aria-labelledby="t-datos">
+        <h2 id="t-datos">1 · Tus datos</h2>
+        <p class="nota">La ley exige que aparezcan en las políticas. Se guardan solo en este navegador.</p>
+        <form id="datos" autocomplete="on">
+          <label for="titular">Titular <span>Nombre y apellidos, o nombre de la empresa</span>
+            <input id="titular" name="titular" type="text" autocomplete="name"></label>
+          <label for="nif">NIF / DNI / CIF
+            <input id="nif" name="nif" type="text" autocomplete="off"></label>
+          <label for="direccion">Dirección completa <span>Calle, número, código postal, ciudad y provincia</span>
+            <input id="direccion" name="direccion" type="text" autocomplete="street-address"></label>
+          <label for="email">Correo de atención al cliente
+            <input id="email" name="email" type="email" autocomplete="email"></label>
+          <label for="telefono">Teléfono <span>Opcional</span>
+            <input id="telefono" name="telefono" type="tel" autocomplete="tel"></label>
+          <label for="registro">Datos del Registro Mercantil <span>Solo si eres una empresa (S.L., S.A.)</span>
+            <input id="registro" name="registro" type="text"></label>
+          <label for="devolucion">¿Quién paga el envío de las devoluciones?
+            <select id="devolucion" name="devolucion">
+              <option value="gratis">Yo (devolución gratis para el cliente)</option>
+              <option value="cliente">El cliente (salvo productos defectuosos)</option>
+            </select></label>
+        </form>
+      </section>
+      <section class="caja" aria-labelledby="t-pasos">
+        <h2 id="t-pasos">2 · Pégalas en Shopify</h2>
+        <ol class="pasos">
+          <li>En tu panel de Shopify, abre <b>Configuración → Políticas</b>.</li>
+          <li>Pulsa <b>Copiar</b> en una política de esta página.</li>
+          <li>En Shopify, abre la política con el mismo nombre, borra lo que haya, pega y pulsa <b>Guardar</b>.</li>
+          <li>Marca «Ya la he pegado» y sigue con la siguiente.</li>
+        </ol>
+        <p class="nota" style="margin:12px 0 0">Si la política de privacidad aparece como gestionada automáticamente por Shopify, desactiva esa opción para poder pegar la tuya. Cuando termines, escribe «listo» en el chat y compruebo que se ven bien en tu tienda.</p>
+      </section>
+    </aside>
+
+    <main class="lista" id="lista" aria-label="Políticas"></main>
+  </div>
+
+  <p class="legal">Textos base preparados conforme a la LSSI-CE, el RGPD y la LOPDGDD, y la Ley General para la Defensa de los Consumidores y Usuarios (desistimiento de 14 días ampliado a 30, garantía legal de 3 años). No sustituyen el asesoramiento de un profesional: si tienes gestor o asesor, enséñaselos antes de lanzar la tienda.</p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var FECHA = '11 de noviembre de 2026';
+  var CAMPOS = ['titular', 'nif', 'direccion', 'email', 'telefono', 'registro', 'devolucion'];
+  var ETIQUETAS = { titular: 'titular', nif: 'NIF', direccion: 'dirección', email: 'correo' };
+  var d = {};
+  var hechas = {};
+
+  function leer(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function guardar(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function f(k) {
+    var v = (d[k] || '').trim();
+    return v ? esc(v) : '<mark class="falta">[Falta: ' + ETIQUETAS[k] + ']</mark>';
+  }
+  function tel(prefijo, sufijo) { var t = (d.telefono || '').trim(); return t ? prefijo + esc(t) + sufijo : ''; }
+  function reg(prefijo, sufijo) { var r = (d.registro || '').trim(); return r ? prefijo + esc(r) + sufijo : ''; }
+  function fecha() { return '<p><em>Última actualización: ' + FECHA + '</em></p>'; }
+  function identidad() {
+    return '<ul><li><strong>Titular:</strong> ' + f('titular') + '</li><li><strong>NIF:</strong> ' + f('nif') + '</li><li><strong>Domicilio:</strong> ' + f('direccion') + '</li><li><strong>Correo electrónico:</strong> ' + f('email') + '</li>' + tel('<li><strong>Teléfono:</strong> ', '</li>') + reg('<li><strong>Datos registrales:</strong> ', '</li>') + '</ul>';
+  }
+  function gastosDevolucion() {
+    return d.devolucion === 'cliente'
+      ? 'Los gastos de envío de la devolución corren a tu cargo, salvo que el producto sea defectuoso o no corresponda con lo que pediste; en ese caso los pagamos nosotros.'
+      : 'La devolución es <strong>gratuita</strong>: nosotros nos hacemos cargo de los gastos de envío de vuelta y te indicaremos cómo enviarlo sin coste para ti.';
+  }
+
+  var POLITICAS = [
+    {
+      id: 'reembolso', nombre: 'Política de reembolso', donde: 'Shopify → Configuración → Políticas → Política de reembolso',
+      requiere: ['email'],
+      html: function () {
+        return fecha() +
+          '<p>En FlexiDesk queremos que compres con tranquilidad. Además del derecho legal de desistimiento de 14 días, te damos <strong>30 días naturales</strong> desde que recibes tu pedido para devolverlo sin tener que darnos ningún motivo.</p>' +
+          '<h3>Cómo hacer una devolución</h3><ol>' +
+          '<li>Escríbenos a <strong>' + f('email') + '</strong> con tu número de pedido indicando que quieres devolverlo. También puedes usar el formulario de desistimiento que encontrarás en nuestros <a href="/policies/terms-of-service">Términos del servicio</a>.</li>' +
+          '<li>Te responderemos con las instrucciones y la dirección a la que enviar el producto.</li>' +
+          '<li>Envíanos el producto en un plazo máximo de 14 días naturales desde que nos comunicas la devolución.</li></ol>' +
+          '<h3>Estado del producto</h3><p>Puedes desembalar y probar el producto como lo harías en una tienda. Te pedimos que nos lo devuelvas completo, con todas sus piezas y la tornillería y, si es posible, en su embalaje original y bien protegido. Si el producto se ha usado más allá de lo necesario para comprobar su naturaleza, características y funcionamiento, podremos descontar del reembolso la depreciación que haya sufrido.</p>' +
+          '<h3>Gastos de devolución</h3><p>' + gastosDevolucion() + '</p>' +
+          '<h3>Reembolso</h3><p>Te devolveremos todo lo que pagaste, incluidos los gastos de envío iniciales si los hubo, en un plazo máximo de <strong>14 días naturales</strong> desde que nos comuniques la devolución. Podremos esperar a recibir el producto, o a que nos envíes el justificante de que lo has enviado, antes de hacer el reembolso. Lo haremos por el mismo medio de pago que utilizaste, sin ningún coste para ti.</p>' +
+          '<h3>Productos defectuosos o dañados</h3><p>Si tu producto llega dañado, tiene un defecto o no es lo que pediste, escríbenos a ' + f('email') + ' con tu número de pedido y unas fotos. Te lo repondremos o te devolveremos el dinero sin ningún coste para ti, conforme a la garantía legal de 3 años.</p>' +
+          '<h3>Cambios</h3><p>Si prefieres otro producto, la forma más rápida es devolver el que tienes y hacer un pedido nuevo.</p>' +
+          '<h3>Contacto</h3><p>Para cualquier duda sobre devoluciones, escríbenos a ' + f('email') + '.</p>';
+      }
+    },
+    {
+      id: 'privacidad', nombre: 'Política de privacidad', donde: 'Shopify → Configuración → Políticas → Política de privacidad',
+      requiere: ['titular', 'nif', 'direccion', 'email'],
+      html: function () {
+        return fecha() +
+          '<p>En FlexiDesk nos tomamos en serio tu privacidad. Aquí te explicamos qué datos personales tratamos, para qué, durante cuánto tiempo y qué derechos tienes, conforme al Reglamento (UE) 2016/679 General de Protección de Datos (RGPD) y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).</p>' +
+          '<h3>1. Responsable del tratamiento</h3>' + identidad() +
+          '<h3>2. Qué datos tratamos</h3><ul>' +
+          '<li><strong>Datos identificativos y de contacto:</strong> nombre y apellidos, correo electrónico, teléfono y direcciones de envío y facturación.</li>' +
+          '<li><strong>Datos de tus pedidos:</strong> productos comprados, importes, historial de pedidos, devoluciones e incidencias.</li>' +
+          '<li><strong>Datos de pago:</strong> los gestionan directamente las entidades de pago. No vemos ni guardamos el número completo de tu tarjeta.</li>' +
+          '<li><strong>Tus comunicaciones con nosotros:</strong> lo que nos cuentas cuando nos escribes.</li>' +
+          '<li><strong>Datos de navegación:</strong> dirección IP, dispositivo, navegador y uso de la web, a través de cookies según tus preferencias. Consulta nuestra <a href="/pages/politica-de-cookies">Política de cookies</a>.</li></ul>' +
+          '<p>Si creas una cuenta de cliente, también tratamos los datos de esa cuenta.</p>' +
+          '<h3>3. Para qué usamos tus datos y con qué base legal</h3><ul>' +
+          '<li><strong>Gestionar tus pedidos</strong> (pago, envío, devoluciones, garantía y atención posventa). Base legal: ejecución del contrato de compraventa (art. 6.1.b RGPD).</li>' +
+          '<li><strong>Responder a tus consultas.</strong> Base legal: tu solicitud y, en su caso, medidas precontractuales (art. 6.1.b RGPD).</li>' +
+          '<li><strong>Cumplir nuestras obligaciones legales</strong>, como las fiscales y contables. Base legal: obligación legal (art. 6.1.c RGPD).</li>' +
+          '<li><strong>Prevenir el fraude y mantener la seguridad de la tienda.</strong> Base legal: interés legítimo (art. 6.1.f RGPD).</li>' +
+          '<li><strong>Enviarte comunicaciones comerciales</strong>, solo si nos das tu consentimiento o, si ya eres cliente, sobre productos parecidos a los que compraste (art. 21.2 LSSI-CE). Puedes darte de baja en cualquier momento desde el enlace de cada correo. Base legal: consentimiento (art. 6.1.a RGPD) o interés legítimo.</li>' +
+          '<li><strong>Analizar el uso de la web y mostrar publicidad</strong> mediante cookies no necesarias. Base legal: tu consentimiento (art. 6.1.a RGPD).</li></ul>' +
+          '<p>No tomamos decisiones basadas únicamente en tratamientos automatizados que produzcan efectos jurídicos sobre ti.</p>' +
+          '<h3>4. Cuánto tiempo conservamos tus datos</h3><p>Mientras sean necesarios para la finalidad para la que se recogieron. Los datos de tus pedidos se guardan durante los plazos que exige la ley (por ejemplo, 6 años para la documentación contable según el Código de Comercio, además de los plazos de prescripción fiscal), y los de comunicaciones comerciales hasta que te des de baja. Pasados esos plazos, los eliminamos o anonimizamos.</p>' +
+          '<h3>5. A quién comunicamos tus datos</h3><p>No vendemos tus datos. Solo los compartimos con los proveedores que necesitamos para prestarte el servicio:</p><ul>' +
+          '<li><strong>Shopify</strong> (Shopify International Limited, Irlanda), plataforma en la que funciona la tienda.</li>' +
+          '<li><strong>Entidades de pago</strong> (por ejemplo, Shopify Payments o PayPal), para procesar tus pagos.</li>' +
+          '<li><strong>Empresas de transporte y logística</strong>, y los proveedores que preparan y envían los pedidos, para hacerte llegar tu compra.</li>' +
+          '<li><strong>Asesoría fiscal y contable</strong>, para cumplir nuestras obligaciones legales.</li>' +
+          '<li><strong>Administraciones públicas y autoridades</strong>, cuando la ley nos obligue.</li></ul>' +
+          '<h3>6. Transferencias internacionales</h3><p>Algunos de estos proveedores pueden tratar datos fuera del Espacio Económico Europeo (por ejemplo, Shopify en Canadá o Estados Unidos). En esos casos, la transferencia se ampara en una decisión de adecuación de la Comisión Europea (como la de Canadá o el Marco de Privacidad de Datos UE-EE. UU.), en cláusulas contractuales tipo o, cuando es necesaria para enviarte tu pedido, en la ejecución del contrato contigo (art. 49.1.b RGPD).</p>' +
+          '<h3>7. Tus derechos</h3><p>Puedes ejercer en cualquier momento tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad, y retirar el consentimiento que nos hayas dado, sin que ello afecte a los tratamientos anteriores. Escríbenos a <strong>' + f('email') + '</strong> con «Protección de datos» en el asunto e indica el derecho que quieres ejercer. Si tenemos dudas sobre tu identidad, podremos pedirte que la acredites. Te responderemos en el plazo máximo de un mes.</p>' +
+          '<p>Si consideras que no hemos tratado bien tus datos, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>).</p>' +
+          '<h3>8. Menores de edad</h3><p>Esta tienda no está dirigida a menores de 14 años y no tratamos conscientemente sus datos. Si eres madre, padre o tutor y crees que un menor nos ha facilitado datos, escríbenos y los eliminaremos.</p>' +
+          '<h3>9. Seguridad</h3><p>Aplicamos medidas técnicas y organizativas adecuadas para proteger tus datos. La tienda funciona con conexión cifrada (HTTPS) y los pagos se procesan en entornos seguros.</p>' +
+          '<h3>10. Cambios en esta política</h3><p>Podemos actualizar esta política para adaptarla a cambios legales o de funcionamiento. Publicaremos aquí la nueva versión con su fecha de actualización.</p>';
+      }
+    },
+    {
+      id: 'terminos', nombre: 'Términos del servicio', donde: 'Shopify → Configuración → Políticas → Términos del servicio',
+      requiere: ['titular', 'nif', 'direccion', 'email'],
+      html: function () {
+        return fecha() +
+          '<p>Estas condiciones regulan la compra de productos en la tienda online FlexiDesk. Te recomendamos leerlas antes de hacer tu pedido: al comprar, confirmas que las aceptas. Puedes guardarlas o imprimirlas cuando quieras desde esta página.</p>' +
+          '<h3>1. Quiénes somos</h3>' + identidad() +
+          '<h3>2. A quién vendemos</h3><p>Vendemos a consumidores mayores de edad con dirección de entrega en España. El proceso de compra se realiza en español.</p>' +
+          '<h3>3. Productos y precios</h3><p>Describimos los productos con la mayor exactitud posible; las fotografías e ilustraciones son orientativas. Los precios se muestran en euros e <strong>incluyen el IVA y el envío a España</strong>. Antes de pagar verás siempre el precio total del pedido. Se aplica el precio vigente en el momento de hacer el pedido.</p>' +
+          '<h3>4. Cómo comprar</h3><ol><li>Añade el producto al carrito y pulsa «Finalizar compra».</li><li>Introduce tus datos de contacto y la dirección de entrega.</li><li>Elige la forma de pago y confirma el pedido.</li></ol>' +
+          '<p>Antes de confirmar podrás revisar el pedido y corregir cualquier error. El contrato queda formalizado cuando te enviamos el correo electrónico de confirmación del pedido, que guardamos y que te sirve como justificante.</p>' +
+          '<h3>5. Formas de pago</h3><p>Puedes pagar con los medios que aparecen en la pantalla de pago (por ejemplo, tarjeta, PayPal u otros métodos disponibles). El cargo se realiza al confirmar el pedido y lo procesan de forma segura entidades de pago autorizadas.</p>' +
+          '<h3>6. Envío y entrega</h3><p>El envío a España es gratuito y tarda entre 5 y 7 días laborables desde la confirmación del pedido. Tienes toda la información en nuestra <a href="/policies/shipping-policy">Política de envío</a>. En cualquier caso, entregaremos el pedido en un plazo máximo de 30 días naturales. El riesgo de pérdida o daño del producto pasa a ti cuando lo recibes.</p>' +
+          '<h3>7. Derecho de desistimiento y devoluciones</h3><p>Tienes derecho a desistir del contrato en un plazo de <strong>14 días naturales</strong> desde que recibes el producto, sin necesidad de justificación (artículos 102 y siguientes del Real Decreto Legislativo 1/2007, Ley General para la Defensa de los Consumidores y Usuarios). Como mejora comercial, ampliamos este plazo a <strong>30 días naturales</strong>.</p>' +
+          '<p>Para ejercerlo, comunícanoslo por correo electrónico a ' + f('email') + ' o mediante el formulario que encontrarás al final de estas condiciones. Debes devolver el producto en un plazo máximo de 14 días naturales desde que nos comunicas tu decisión. ' + gastosDevolucion() + ' Te reembolsaremos todos los pagos recibidos, incluidos los gastos de entrega ordinarios, en un plazo máximo de 14 días naturales desde que nos informes de tu decisión, por el mismo medio de pago. Podremos retener el reembolso hasta recibir el producto o hasta que nos envíes el justificante de su envío. Solo serás responsable de la disminución de valor del producto que resulte de una manipulación distinta a la necesaria para comprobar su naturaleza, características y funcionamiento. Más detalles en nuestra <a href="/policies/refund-policy">Política de reembolso</a>.</p>' +
+          '<h3>8. Garantía legal</h3><p>Todos nuestros productos tienen la garantía legal de conformidad de <strong>3 años</strong> desde la entrega (artículo 120 de la Ley General para la Defensa de los Consumidores y Usuarios). Si el producto no es conforme, puedes pedir su reparación o sustitución sin coste y, si no fuera posible, una rebaja del precio o la resolución del contrato. Para usar la garantía, escríbenos a ' + f('email') + ' con tu número de pedido y una descripción o fotos del problema.</p>' +
+          '<h3>9. Atención al cliente y reclamaciones</h3><p>Puedes contactar con nosotros en ' + f('email') + tel(' o en el teléfono ', '') + '. Te responderemos lo antes posible. También puedes pedirnos las hojas oficiales de reclamación.</p>' +
+          '<p>En este momento no estamos adheridos a ningún sistema de resolución alternativa de litigios de consumo. Si no llegamos a un acuerdo, puedes acudir a los servicios de consumo de tu comunidad autónoma o a la Junta Arbitral de Consumo.</p>' +
+          '<h3>10. Uso de la web y propiedad intelectual</h3><p>Te comprometes a usar la tienda de forma lícita. Los contenidos de la web (textos, imágenes, ilustraciones, logotipos y diseño) son propiedad del titular o se usan con autorización, y no pueden reproducirse sin permiso.</p>' +
+          '<h3>11. Protección de datos</h3><p>Tratamos tus datos según nuestra <a href="/policies/privacy-policy">Política de privacidad</a>.</p>' +
+          '<h3>12. Cambios en estas condiciones</h3><p>Podemos modificar estas condiciones. Siempre se aplicarán las vigentes en el momento en que hiciste tu pedido.</p>' +
+          '<h3>13. Ley aplicable y jurisdicción</h3><p>Estas condiciones se rigen por la ley española. Si eres consumidor, cualquier controversia se resolverá en los juzgados y tribunales de tu domicilio.</p>' +
+          '<h3>Formulario de desistimiento</h3><p>(Solo debes rellenar y enviar este formulario si quieres desistir del contrato.)</p>' +
+          '<p>A la atención de: ' + f('titular') + ', ' + f('direccion') + ', ' + f('email') + '.</p>' +
+          '<p>Por la presente le comunico que desisto de mi contrato de venta del siguiente bien: ____________<br>Pedido el / recibido el: ____________<br>Número de pedido: ____________<br>Nombre del consumidor: ____________<br>Dirección del consumidor: ____________<br>Firma del consumidor (solo si el formulario se presenta en papel): ____________<br>Fecha: ____________</p>';
+      }
+    },
+    {
+      id: 'envio', nombre: 'Política de envío', donde: 'Shopify → Configuración → Políticas → Política de envío',
+      requiere: ['email'],
+      html: function () {
+        return fecha() +
+          '<h3>Dónde enviamos</h3><p>Por ahora enviamos a toda España.</p>' +
+          '<h3>Gastos de envío</h3><p><strong>El envío es gratuito en todos los pedidos</strong>: su coste ya está incluido en el precio del producto.</p>' +
+          '<h3>Plazo de entrega</h3><p>Entre 5 y 7 días laborables desde la confirmación del pedido. En cualquier caso, entregaremos tu pedido como máximo en 30 días naturales, como establece la ley. Si por cualquier motivo no pudiéramos cumplirlo, te avisaremos y podrás cancelar el pedido con el reembolso íntegro de lo pagado.</p>' +
+          '<h3>Seguimiento del pedido</h3><p>En cuanto tu pedido salga de nuestro almacén, recibirás un correo electrónico con el número de seguimiento para que sepas dónde está en todo momento.</p>' +
+          '<h3>Canarias, Ceuta y Melilla</h3><p>Los envíos a estos territorios pueden tardar algo más y estar sujetos a trámites de aduana e impuestos de importación propios (IGIC o IPSI), que corren a cargo de quien recibe el pedido.</p>' +
+          '<h3>Problemas con la entrega</h3><p>Revisa tu pedido al recibirlo. Si el paquete llega dañado, falta algo o no es lo que pediste, escríbenos lo antes posible a ' + f('email') + ' con tu número de pedido y, si puedes, unas fotos. Lo solucionaremos sin ningún coste para ti.</p>' +
+          '<p>Si el transportista no consigue entregar el pedido porque la dirección es incorrecta o incompleta, nos pondremos en contacto contigo para organizar un nuevo envío.</p>';
+      }
+    },
+    {
+      id: 'contacto', nombre: 'Información de contacto', donde: 'Shopify → Configuración → Políticas → Información de contacto',
+      requiere: ['titular', 'nif', 'direccion', 'email'],
+      html: function () {
+        return '<p><strong>Nombre comercial:</strong> FlexiDesk</p>' +
+          '<p><strong>Titular:</strong> ' + f('titular') + '</p>' +
+          '<p><strong>NIF:</strong> ' + f('nif') + '</p>' +
+          '<p><strong>Dirección:</strong> ' + f('direccion') + '</p>' +
+          '<p><strong>Correo electrónico:</strong> ' + f('email') + '</p>' +
+          tel('<p><strong>Teléfono:</strong> ', '</p>') +
+          reg('<p><strong>Datos registrales:</strong> ', '</p>') +
+          '<p>Atendemos tus consultas por correo electrónico y te respondemos lo antes posible.</p>';
+      }
+    },
+    {
+      id: 'aviso', nombre: 'Aviso legal', donde: 'Shopify → Configuración → Políticas → Aviso legal',
+      requiere: ['titular', 'nif', 'direccion', 'email'],
+      html: function () {
+        return fecha() +
+          '<h3>1. Datos identificativos</h3><p>En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), te informamos de que esta tienda online, con el nombre comercial FlexiDesk, es titularidad de:</p>' + identidad() +
+          '<h3>2. Objeto y aceptación</h3><p>Este aviso legal regula el acceso y el uso de esta web. Al navegar por ella aceptas estas condiciones. La compra de productos se rige además por nuestros <a href="/policies/terms-of-service">Términos del servicio</a>.</p>' +
+          '<h3>3. Uso de la web</h3><p>Te comprometes a hacer un uso adecuado de la web y de sus contenidos, conforme a la ley, la buena fe y el orden público, y a no emplearla para actividades ilícitas o que puedan dañar la web o a terceros.</p>' +
+          '<h3>4. Propiedad intelectual e industrial</h3><p>Los contenidos de esta web (textos, fotografías, ilustraciones, logotipos, diseño gráfico y código) son propiedad del titular o se utilizan con autorización de sus propietarios. Queda prohibida su reproducción, distribución o transformación sin autorización expresa, salvo para uso personal y privado.</p>' +
+          '<h3>5. Responsabilidad</h3><p>Trabajamos para que la información de la web sea correcta y esté actualizada, pero no podemos garantizar la ausencia de errores ni la disponibilidad continua de la web. No nos hacemos responsables de los contenidos de las webs de terceros a las que puedan dirigir los enlaces de esta página.</p>' +
+          '<h3>6. Protección de datos y cookies</h3><p>El tratamiento de tus datos personales se explica en nuestra <a href="/policies/privacy-policy">Política de privacidad</a>, y el uso de cookies en nuestra <a href="/pages/politica-de-cookies">Política de cookies</a>.</p>' +
+          '<h3>7. Legislación aplicable</h3><p>Este aviso legal se rige por la legislación española. Si eres consumidor, serán competentes los juzgados y tribunales de tu domicilio.</p>';
+      }
+    }
+  ];
+
+  var form = document.getElementById('datos');
+  var lista = document.getElementById('lista');
+
+  function faltan(p) { return p.requiere.filter(function (k) { return !(d[k] || '').trim(); }); }
+
+  function pintarProgreso() {
+    var n = POLITICAS.filter(function (p) { return hechas[p.id]; }).length;
+    document.getElementById('contador').textContent = n + ' de ' + POLITICAS.length + ' pegadas';
+    document.getElementById('barra').style.width = (n / POLITICAS.length * 100) + '%';
+  }
+
+  function construir() {
+    lista.innerHTML = '';
+    POLITICAS.forEach(function (p) {
+      var art = document.createElement('article');
+      art.className = 'pol';
+      art.id = 'pol-' + p.id;
+      art.innerHTML =
+        '<div class="pol__cab"><div><h3>' + p.nombre + '</h3><p class="pol__donde">' + p.donde + '</p></div><span class="chip"></span></div>' +
+        '<div class="pol__acciones">' +
+          '<button type="button" class="btn" data-copiar>Copiar</button>' +
+          '<button type="button" class="btn--sec" data-ver aria-expanded="false" aria-controls="txt-' + p.id + '">Ver texto</button>' +
+          '<label class="check" for="hecha-' + p.id + '"><input type="checkbox" id="hecha-' + p.id + '"> Ya la he pegado</label>' +
+        '</div>' +
+        '<p class="aviso" aria-live="polite" hidden></p>' +
+        '<div class="texto" id="txt-' + p.id + '" hidden></div>';
+      lista.appendChild(art);
+
+      var chk = art.querySelector('#hecha-' + p.id);
+      chk.checked = !!hechas[p.id];
+      chk.addEventListener('change', function () {
+        hechas[p.id] = chk.checked;
+        guardar('fd-pol-hechas', JSON.stringify(hechas));
+        actualizar();
+      });
+      art.querySelector('[data-ver]').addEventListener('click', function (e) {
+        var t = art.querySelector('.texto');
+        t.hidden = !t.hidden;
+        e.currentTarget.setAttribute('aria-expanded', String(!t.hidden));
+        e.currentTarget.textContent = t.hidden ? 'Ver texto' : 'Ocultar texto';
+      });
+      art.querySelector('[data-copiar]').addEventListener('click', function () { copiar(p, art); });
+    });
+  }
+
+  function actualizar() {
+    POLITICAS.forEach(function (p) {
+      var art = document.getElementById('pol-' + p.id);
+      var chip = art.querySelector('.chip');
+      var falta = faltan(p);
+      art.querySelector('.texto').innerHTML = p.html();
+      art.classList.toggle('hecha', !!hechas[p.id]);
+      if (hechas[p.id]) { chip.className = 'chip chip--hecha'; chip.textContent = 'Pegada'; }
+      else if (falta.length) { chip.className = 'chip chip--falta'; chip.textContent = 'Faltan datos'; }
+      else { chip.className = 'chip chip--lista'; chip.textContent = 'Lista para copiar'; }
+    });
+    CAMPOS.forEach(function (k) {
+      var el = document.getElementById(k);
+      if (el && el.tagName === 'INPUT' && ETIQUETAS[k]) el.classList.toggle('vacio', !(d[k] || '').trim());
+    });
+    pintarProgreso();
+  }
+
+  function mostrarAviso(art, msg, ok) {
+    var a = art.querySelector('.aviso');
+    a.textContent = msg;
+    a.classList.toggle('ok', !!ok);
+    a.hidden = false;
+  }
+
+  function copiar(p, art) {
+    var falta = faltan(p);
+    if (falta.length) {
+      mostrarAviso(art, 'Antes de copiarla, rellena: ' + falta.map(function (k) { return ETIQUETAS[k]; }).join(', ') + '.');
+      document.getElementById(falta[0]).focus();
+      return;
+    }
+    var html = p.html();
+    var tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    var plano = tmp.innerText || tmp.textContent;
+    var hecho = function () { mostrarAviso(art, 'Copiada. Ahora pégala en «' + p.nombre + '» en Shopify y guarda.', true); };
+    var seleccionar = function () {
+      var t = art.querySelector('.texto');
+      t.hidden = false;
+      var r = document.createRange();
+      r.selectNodeContents(t);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+      mostrarAviso(art, 'Tu navegador no deja copiar automáticamente. He seleccionado el texto: cópialo con Ctrl+C (o mantén pulsado y «Copiar» en el móvil).');
+    };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        navigator.clipboard.write([new ClipboardItem({
+          'text/html': new Blob([html], { type: 'text/html' }),
+          'text/plain': new Blob([plano], { type: 'text/plain' })
+        })]).then(hecho, seleccionar);
+        return;
+      }
+    } catch (e) {}
+    seleccionar();
+  }
+
+  // Cargar lo guardado
+  CAMPOS.forEach(function (k) {
+    var v = leer('fd-pol-' + k);
+    if (v !== null) d[k] = v;
+    var el = document.getElementById(k);
+    if (el && v !== null) el.value = v;
+  });
+  if (!d.devolucion) d.devolucion = 'gratis';
+  try { hechas = JSON.parse(leer('fd-pol-hechas') || '{}') || {}; } catch (e) { hechas = {}; }
+
+  form.addEventListener('input', function (e) {
+    var k = e.target.name;
+    if (!k) return;
+    d[k] = e.target.value;
+    guardar('fd-pol-' + k, e.target.value);
+    actualizar();
+  });
+  form.addEventListener('change', function (e) {
+    var k = e.target.name;
+    if (!k) return;
+    d[k] = e.target.value;
+    guardar('fd-pol-' + k, e.target.value);
+    actualizar();
+  });
+  form.addEventListener('submit', function (e) { e.preventDefault(); });
+
+  construir();
+  actualizar();
+})();
+</script>

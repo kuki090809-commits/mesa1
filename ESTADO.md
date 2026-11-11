@@ -69,3 +69,19 @@ La red de la sesión no llega a accounts.shopify.com, así que `shopify theme pu
 - ⬜ Recomendado: español como idioma principal; cambiar el nombre «m» de la tienda;
   revisar políticas (privacidad en inglés, devoluciones con «[INSERT RETURN ADDRESS]», falta Términos)
 - ⬜ El especiero (borrador) quedó con plantilla `ordena` asignada y descripción limpia; no afecta a la tienda.
+
+## Políticas legales (2026-11-11)
+- La conexión de Shopify NO tiene permiso `write_legal_policies`: las políticas no se pueden guardar desde aquí.
+  Plan B: página para copiar y pegar → https://claude.ai/artifact/W8sy9c3pp8qZEVo3hy4Pjk (fuente: `legal/politicas.html`).
+  El usuario rellena titular, NIF, dirección, correo (y teléfono opcional) en la página; sus datos no pasan por Claude.
+  Seis textos: reembolso, privacidad, términos del servicio, envío, información de contacto, aviso legal.
+- ✅ Página «Política de cookies» reescrita y publicada (pageUpdate). Fuente: `legal/cookies.html`.
+- ✅ Footer del tema FlexiDesk: enlace «Preferencias de cookies» (abre el panel de Shopify).
+- Mercados: solo existe el mercado «Spain» activo → la tienda solo vende a España (las zonas de envío UE 8,99 € e
+  internacional 12,99 € existen pero no se usan). En España el envío es gratis (incluido en los 99 €), así que
+  «Envío gratis en todos los pedidos» es correcto. Si se abre Europa: precio por mercado con el envío incluido.
+- ⬜ Cuando el usuario diga «listo»: comprobar /policies/* en /es y en la raíz, y quitar con translationsRemove las
+  traducciones «es» antiguas de las políticas (la de privacidad tiene una traducción automática de Shopify).
+- ⬜ Nombre de la tienda: no hay forma de cambiarlo por API → el usuario: Configuración → Detalles de la tienda.
+- ⚠️ Precio tachado de 120 €: por la normativa de precios de referencia (Ómnibus), solo se puede mostrar si fue el
+  precio más bajo de los 30 días anteriores a la rebaja. Avisado al usuario.
