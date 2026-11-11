@@ -1,0 +1,5 @@
+clave-openai.txt
+.tmp-*
+fotos-originales/
+.DS_Store
+node_modules/
