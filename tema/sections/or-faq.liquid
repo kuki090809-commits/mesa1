@@ -1,0 +1,106 @@
+{%- assign titulo_min = section.settings.titulo_tam | times: 0.6 | round -%}
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.fondo | default: 'var(--or-fondo-alt)' }};
+  }
+  #shopify-section-{{ section.id }} .or-faq { background: transparent; --or-faq-tam: {{ section.settings.pregunta_tam }}px; }
+  #shopify-section-{{ section.id }} .or-h2 { font-size: clamp({{ titulo_min }}px, 5vw, {{ section.settings.titulo_tam }}px); }
+  #shopify-section-{{ section.id }} .or-faq__intro { text-align: {{ section.settings.alineacion }}; }
+  #shopify-section-{{ section.id }} .or-faq__respuesta { font-size: {{ section.settings.texto_tam }}px; }
+{% endstyle %}
+
+<section class="or-section or-faq" aria-label="{{ section.settings.titulo | strip_html | escape }}">
+  <div class="or-container">
+    <div class="or-faq__grid">
+      <div class="or-faq__intro">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="or-eyebrow or-reveal">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="or-h2 or-reveal" style="--or-i: 1">{{ section.settings.titulo }}</h2>
+        {%- if section.settings.texto != blank -%}
+          <p class="or-body or-reveal" style="--or-i: 2">{{ section.settings.texto | newline_to_br }}</p>
+        {%- endif -%}
+        {%- if section.settings.boton_texto != blank -%}
+          <a class="or-btn or-btn--linea or-reveal" style="--or-i: 3" href="{{ section.settings.boton_enlace | default: '/pages/contacto' }}">{{ section.settings.boton_texto | escape }}</a>
+        {%- endif -%}
+      </div>
+      <div class="or-faq__lista">
+        {%- for block in section.blocks -%}
+          <details class="or-faq__item or-reveal" style="--or-i: {{ forloop.index }}"{% if forloop.first and section.settings.abrir_primera %} open{% endif %} {{ block.shopify_attributes }}>
+            <summary>
+              <span>{{ block.settings.pregunta | escape }}</span>
+              <span class="or-faq__icono" aria-hidden="true"></span>
+            </summary>
+            <div class="or-faq__respuesta">{{ block.settings.respuesta }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- if section.settings.datos_google and section.blocks.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for block in section.blocks -%}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.pregunta | json }},
+            "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.respuesta | strip_html | json }} }
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Ordena – Preguntas",
+  "tag": "div",
+  "class": "or-wrap",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "header", "content": "Textos" },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Preguntas frecuentes" },
+    { "type": "inline_richtext", "id": "titulo", "label": "Título", "default": "Lo que suelen <em>preguntarnos.</em>" },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "¿No encuentras tu respuesta? Escríbenos y te contestamos encantados." },
+    { "type": "text", "id": "boton_texto", "label": "Botón: texto", "default": "Contactar" },
+    { "type": "url", "id": "boton_enlace", "label": "Botón: enlace", "info": "Vacío = página de contacto." },
+    { "type": "checkbox", "id": "abrir_primera", "label": "Primera pregunta abierta", "default": true },
+    { "type": "checkbox", "id": "datos_google", "label": "Mostrar estas preguntas a Google (resultados enriquecidos)", "default": true },
+    { "type": "header", "content": "Tipografía y color" },
+    { "type": "range", "id": "titulo_tam", "label": "Tamaño del título (px)", "min": 24, "max": 72, "step": 2, "unit": "px", "default": 50 },
+    { "type": "range", "id": "pregunta_tam", "label": "Tamaño de las preguntas (px)", "min": 16, "max": 32, "step": 1, "unit": "px", "default": 22 },
+    { "type": "range", "id": "texto_tam", "label": "Tamaño de las respuestas (px)", "min": 13, "max": 22, "step": 1, "unit": "px", "default": 16 },
+    { "type": "select", "id": "alineacion", "label": "Alineación de la introducción", "options": [ { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" } ], "default": "left" },
+    { "type": "color", "id": "fondo", "label": "Color de fondo", "info": "Vacío = fondo secundario de la marca." },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 104 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 104 }
+  ],
+  "blocks": [
+    {
+      "type": "pregunta",
+      "name": "Pregunta",
+      "settings": [
+        { "type": "text", "id": "pregunta", "label": "Pregunta", "default": "¿Cuánto espacio ocupa?" },
+        { "type": "richtext", "id": "respuesta", "label": "Respuesta", "default": "<p>Lo justo para un único punto de almacenaje: en lugar de varios botes repartidos, todo queda reunido en un especiero que gira.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ordena – Preguntas",
+      "blocks": [
+        { "type": "pregunta" }
+      ]
+    }
+  ]
+}
+{% endschema %}

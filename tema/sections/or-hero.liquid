@@ -1,0 +1,133 @@
+{%- liquid
+  assign producto = section.settings.producto
+  assign enlace = section.settings.boton_enlace | default: producto.url | default: routes.all_products_collection_url
+  assign enlace2 = section.settings.boton2_enlace | default: '#como-funciona'
+  assign titulo_min = section.settings.titulo_tam | times: 0.5 | round
+-%}
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: var(--or-fondo);
+  }
+  #shopify-section-{{ section.id }} .or-hero__grid { --or-hero-alto: {{ section.settings.alto }}px; }
+  #shopify-section-{{ section.id }} .or-h1 {
+    font-size: clamp({{ titulo_min }}px, 7.4vw, {{ section.settings.titulo_tam }}px);
+  }
+  #shopify-section-{{ section.id }} .or-hero__texto { text-align: {{ section.settings.alineacion }}; }
+  #shopify-section-{{ section.id }} .or-lead { font-size: {{ section.settings.texto_tam }}px; }
+  {%- if section.settings.alineacion == 'center' -%}
+    #shopify-section-{{ section.id }} .or-lead { margin-left: auto; margin-right: auto; }
+    #shopify-section-{{ section.id }} .or-botones,
+    #shopify-section-{{ section.id }} .or-chips,
+    #shopify-section-{{ section.id }} .or-hero__precio { justify-content: center; }
+  {%- endif -%}
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .or-hero__texto { text-align: {{ section.settings.alineacion_movil }}; }
+  }
+{% endstyle %}
+
+<section class="or-section or-hero" aria-label="{{ section.settings.titulo | strip_html | escape }}">
+  <div class="or-container">
+    <div class="or-hero__grid">
+      <div class="or-hero__texto">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="or-eyebrow or-reveal" style="--or-i: 0">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="or-h1 or-reveal" style="--or-i: 1">{{ section.settings.titulo }}</h2>
+        {%- if section.settings.texto != blank -%}
+          <p class="or-lead or-reveal" style="--or-i: 2">{{ section.settings.texto | newline_to_br }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.mostrar_precio and producto != blank and producto.available -%}
+          <p class="or-hero__precio or-reveal" style="--or-i: 3">
+            <strong>{{ producto.price | money }}</strong>
+            {%- if producto.compare_at_price > producto.price -%}
+              <s>{{ producto.compare_at_price | money }}</s>
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+
+        <div class="or-botones or-reveal" style="--or-i: 3">
+          {%- if section.settings.boton_texto != blank -%}
+            <a class="or-btn" href="{{ enlace }}">{{ section.settings.boton_texto }}{% render 'or-icono', nombre: 'flecha' %}</a>
+          {%- endif -%}
+          {%- if section.settings.boton2_texto != blank -%}
+            <a class="or-btn or-btn--linea" href="{{ enlace2 }}">{{ section.settings.boton2_texto }}</a>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.chips != blank -%}
+          {%- assign chips = section.settings.chips | newline_to_br | split: '<br />' -%}
+          <ul class="or-chips or-reveal" style="--or-i: 4">
+            {%- for chip in chips -%}
+              {%- assign c = chip | strip -%}
+              {%- if c != blank -%}<li>{% render 'or-icono', nombre: 'check' %}{{ c }}</li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      <div class="or-hero__visual or-reveal" style="--or-i: 2">
+        <div class="or-hero__parallax" data-or-parallax="{{ section.settings.parallax }}">
+          {%- render 'or-imagen',
+            imagen: section.settings.imagen,
+            tipo: 'frontal',
+            clase: 'or-hero__marco',
+            eager: true,
+            sizes: '(min-width: 990px) 45vw, 88vw',
+            alt: section.settings.titulo
+          -%}
+        </div>
+        {%- if section.settings.sello_mostrar -%}
+          <div class="or-sello" aria-hidden="true">
+            <svg viewBox="0 0 136 136">
+              <defs><path id="or-sello-{{ section.id }}" d="M68 68 m-50 0 a50 50 0 1 1 100 0 a50 50 0 1 1 -100 0"/></defs>
+              <text><textPath href="#or-sello-{{ section.id }}">{{ section.settings.sello_texto | escape }}</textPath></text>
+            </svg>
+            <span class="or-sello__centro">{{ section.settings.sello_centro | escape }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ordena – Apertura",
+  "tag": "div",
+  "class": "or-wrap",
+  "settings": [
+    { "type": "header", "content": "Producto" },
+    { "type": "product", "id": "producto", "label": "Producto (para precio y enlace)" },
+    { "type": "checkbox", "id": "mostrar_precio", "label": "Mostrar el precio", "default": true },
+    { "type": "header", "content": "Textos" },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Ordena · Especiero Giratorio 360°" },
+    { "type": "inline_richtext", "id": "titulo", "label": "Título", "info": "Pon una palabra en cursiva para que salga en color de acento.", "default": "Gira. Encuentra. <em>Cocina.</em>" },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Todas tus especias a la vista y al alcance de la mano, en un solo giro. Sin apilar botes, sin rebuscar al fondo del armario." },
+    { "type": "textarea", "id": "chips", "label": "Ventajas bajo los botones (una por línea)", "default": "Envío gratis\nDevolución en 30 días\nPago seguro" },
+    { "type": "header", "content": "Botones" },
+    { "type": "text", "id": "boton_texto", "label": "Botón principal: texto", "default": "Lo quiero" },
+    { "type": "url", "id": "boton_enlace", "label": "Botón principal: enlace", "info": "Si lo dejas vacío, lleva al producto elegido arriba." },
+    { "type": "text", "id": "boton2_texto", "label": "Botón secundario: texto", "default": "Cómo funciona" },
+    { "type": "url", "id": "boton2_enlace", "label": "Botón secundario: enlace", "info": "Si lo dejas vacío, baja a la sección «Cómo funciona»." },
+    { "type": "header", "content": "Imagen" },
+    { "type": "image_picker", "id": "imagen", "label": "Foto principal", "info": "Vertical (4:5). Mientras no subas una, se ve la ilustración del especiero." },
+    { "type": "range", "id": "parallax", "label": "Movimiento de la foto al hacer scroll", "min": 0, "max": 30, "step": 2, "default": 10 },
+    { "type": "checkbox", "id": "sello_mostrar", "label": "Mostrar sello giratorio", "default": true },
+    { "type": "text", "id": "sello_texto", "label": "Texto del sello", "default": "Gira · Encuentra · Cocina · " },
+    { "type": "text", "id": "sello_centro", "label": "Centro del sello", "default": "360°" },
+    { "type": "header", "content": "Tipografía y alineación" },
+    { "type": "range", "id": "titulo_tam", "label": "Tamaño del título (px)", "min": 32, "max": 120, "step": 2, "unit": "px", "default": 92 },
+    { "type": "range", "id": "texto_tam", "label": "Tamaño del texto (px)", "min": 14, "max": 26, "step": 1, "unit": "px", "default": 19 },
+    { "type": "select", "id": "alineacion", "label": "Alineación del texto", "options": [ { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" }, { "value": "right", "label": "Derecha" } ], "default": "left" },
+    { "type": "select", "id": "alineacion_movil", "label": "Alineación en móvil", "options": [ { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" } ], "default": "left" },
+    { "type": "header", "content": "Tamaño y espaciado" },
+    { "type": "range", "id": "alto", "label": "Altura mínima (px)", "min": 400, "max": 900, "step": 20, "unit": "px", "default": 680 },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 72 }
+  ],
+  "presets": [ { "name": "Ordena – Apertura" } ]
+}
+{% endschema %}

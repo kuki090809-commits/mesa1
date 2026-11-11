@@ -9,6 +9,9 @@
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- else -%}
+      <link rel="icon" type="image/png" href="{{ 'or-favicon.png' | asset_url }}">
+      <link rel="apple-touch-icon" href="{{ 'or-favicon.png' | asset_url }}">
     {%- endif -%}
 
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
@@ -319,6 +322,9 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+    {%- render 'or-tokens' -%}
+    {{ 'or-styles.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'or-scripts.js' | asset_url }}" defer="defer"></script>
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

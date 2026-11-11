@@ -1,0 +1,120 @@
+{%- assign titulo_min = section.settings.titulo_tam | times: 0.6 | round -%}
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.fondo | default: 'var(--or-fondo)' }};
+  }
+  #shopify-section-{{ section.id }} .or-bandas { background: transparent; }
+  #shopify-section-{{ section.id }} .or-bandas__cabecera .or-h2 { font-size: clamp({{ titulo_min }}px, 5vw, {{ section.settings.titulo_tam }}px); }
+  #shopify-section-{{ section.id }} .or-banda { --or-banda-tam: {{ section.settings.banda_tam }}px; }
+  #shopify-section-{{ section.id }} .or-banda .or-body { font-size: {{ section.settings.texto_tam }}px; }
+  #shopify-section-{{ section.id }} .or-banda__texto { text-align: {{ section.settings.alineacion }}; }
+  {%- if section.settings.empezar == 'texto' -%}
+    @media screen and (min-width: 990px) {
+      #shopify-section-{{ section.id }} .or-banda:nth-child(odd) .or-banda__media { order: 2; }
+      #shopify-section-{{ section.id }} .or-banda:nth-child(even) .or-banda__media { order: 0; }
+    }
+  {%- endif -%}
+{% endstyle %}
+
+<section class="or-section or-bandas" aria-label="{{ section.settings.titulo | strip_html | escape }}">
+  <div class="or-container">
+    {%- if section.settings.titulo != blank or section.settings.eyebrow != blank -%}
+      <div class="or-bandas__cabecera">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="or-eyebrow or-reveal">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.titulo != blank -%}
+          <h2 class="or-h2 or-reveal" style="--or-i: 1">{{ section.settings.titulo }}</h2>
+        {%- endif -%}
+        {%- if section.settings.texto != blank -%}
+          <p class="or-body or-reveal" style="--or-i: 2; margin-top: 16px;">{{ section.settings.texto | newline_to_br }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="or-bandas__lista">
+      {%- for block in section.blocks -%}
+        <article class="or-banda" {{ block.shopify_attributes }}>
+          <div class="or-banda__media or-reveal">
+            {%- render 'or-imagen', imagen: block.settings.imagen, tipo: block.settings.ilustracion, sizes: '(min-width: 990px) 50vw, 100vw', alt: block.settings.titulo -%}
+          </div>
+          <div class="or-banda__texto">
+            {%- if block.settings.eyebrow != blank -%}
+              <p class="or-eyebrow or-reveal">{{ block.settings.eyebrow | escape }}</p>
+            {%- endif -%}
+            <h3 class="or-h3 or-reveal" style="--or-i: 1">{{ block.settings.titulo }}</h3>
+            {%- if block.settings.texto != blank -%}
+              <p class="or-body or-reveal" style="--or-i: 2">{{ block.settings.texto | newline_to_br }}</p>
+            {%- endif -%}
+            {%- if block.settings.lista != blank -%}
+              {%- assign items = block.settings.lista | newline_to_br | split: '<br />' -%}
+              <ul class="or-checks or-reveal" style="--or-i: 3">
+                {%- for item in items -%}
+                  {%- assign t = item | strip -%}
+                  {%- if t != blank -%}<li>{% render 'or-icono', nombre: 'check' %}<span>{{ t }}</span></li>{%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+            {%- if block.settings.boton_texto != blank -%}
+              <div class="or-botones or-reveal" style="--or-i: 4; margin-top: 28px;">
+                <a class="or-btn or-btn--linea" href="{{ block.settings.boton_enlace | default: routes.all_products_collection_url }}">{{ block.settings.boton_texto | escape }}</a>
+              </div>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ordena – Bandas foto y texto",
+  "tag": "div",
+  "class": "or-wrap",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "header", "content": "Cabecera" },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Pensado para cocinas pequeñas" },
+    { "type": "inline_richtext", "id": "titulo", "label": "Título", "default": "Cabe donde ya no cabía <em>nada más.</em>" },
+    { "type": "textarea", "id": "texto", "label": "Texto (opcional)" },
+    { "type": "select", "id": "empezar", "label": "La primera banda empieza por", "options": [ { "value": "imagen", "label": "La foto (a la izquierda)" }, { "value": "texto", "label": "El texto (a la izquierda)" } ], "default": "imagen" },
+    { "type": "header", "content": "Tipografía y color" },
+    { "type": "range", "id": "titulo_tam", "label": "Tamaño del título (px)", "min": 24, "max": 80, "step": 2, "unit": "px", "default": 54 },
+    { "type": "range", "id": "banda_tam", "label": "Tamaño del título de cada banda (px)", "min": 20, "max": 60, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "texto_tam", "label": "Tamaño del texto (px)", "min": 14, "max": 24, "step": 1, "unit": "px", "default": 18 },
+    { "type": "select", "id": "alineacion", "label": "Alineación del texto", "options": [ { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" } ], "default": "left" },
+    { "type": "color", "id": "fondo", "label": "Color de fondo", "info": "Vacío = fondo principal de la marca." },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 104 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 112 }
+  ],
+  "blocks": [
+    {
+      "type": "banda",
+      "name": "Banda",
+      "settings": [
+        { "type": "image_picker", "id": "imagen", "label": "Foto", "info": "Apaisada (5:4)." },
+        { "type": "select", "id": "ilustracion", "label": "Ilustración mientras no haya foto", "options": [ { "value": "encimera", "label": "Especiero en la encimera" }, { "value": "despues", "label": "Armario ordenado" }, { "value": "antes", "label": "Armario desordenado" }, { "value": "frontal", "label": "Especiero de frente" }, { "value": "cenital", "label": "Especiero desde arriba" } ], "default": "encimera" },
+        { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "En la encimera" },
+        { "type": "inline_richtext", "id": "titulo", "label": "Título", "default": "Todo a mano mientras cocinas" },
+        { "type": "textarea", "id": "texto", "label": "Texto", "default": "Junto a los fogones, tus especias quedan reunidas en un único punto que gira." },
+        { "type": "textarea", "id": "lista", "label": "Lista de ventajas (una por línea)" },
+        { "type": "text", "id": "boton_texto", "label": "Botón: texto (opcional)" },
+        { "type": "url", "id": "boton_enlace", "label": "Botón: enlace" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ordena – Bandas foto y texto",
+      "blocks": [
+        { "type": "banda", "settings": { "ilustracion": "encimera", "eyebrow": "En la encimera", "titulo": "Todo a mano <em>mientras cocinas</em>" } },
+        { "type": "banda", "settings": { "ilustracion": "despues", "eyebrow": "Dentro del armario", "titulo": "Un solo hueco <em>en vez de diez</em>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

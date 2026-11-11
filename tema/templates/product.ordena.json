@@ -1,0 +1,207 @@
+{
+  "sections": {
+    "principal": {
+      "type": "or-producto",
+      "blocks": {
+        "g1": {
+          "type": "garantia",
+          "settings": {
+            "icono": "envio",
+            "titulo": "Envío gratis",
+            "texto": "5-7 días laborables"
+          }
+        },
+        "g2": {
+          "type": "garantia",
+          "settings": {
+            "icono": "devolucion",
+            "titulo": "30 días",
+            "texto": "para devolverlo"
+          }
+        },
+        "g3": {
+          "type": "garantia",
+          "settings": {
+            "icono": "pago",
+            "titulo": "Pago seguro",
+            "texto": "Datos cifrados"
+          }
+        },
+        "a1": {
+          "type": "acordeon",
+          "settings": {
+            "titulo": "Descripción",
+            "usar_descripcion": true,
+            "abierto": true
+          }
+        },
+        "a2": {
+          "type": "incluye",
+          "settings": {
+            "titulo": "Qué incluye",
+            "lista": "1 Especiero Giratorio 360° de Ordena"
+          }
+        },
+        "a3": {
+          "type": "acordeon",
+          "settings": {
+            "titulo": "Envío y devoluciones",
+            "contenido": "<p>Envío gratuito en todos los pedidos, en 5-7 días laborables desde la confirmación. Recibirás el número de seguimiento por correo.</p><p>Tienes 30 días desde la entrega para solicitar la devolución. Consulta la <a href=\"/policies/refund-policy\">política de devoluciones</a>.</p>"
+          }
+        },
+        "k1": {
+          "type": "caracteristica",
+          "settings": {
+            "icono": "giro",
+            "titulo": "Giro de 360°",
+            "texto": "Accede a cualquier especia sin mover las demás."
+          }
+        },
+        "k2": {
+          "type": "caracteristica",
+          "settings": {
+            "icono": "espacio",
+            "titulo": "Para cocinas pequeñas",
+            "texto": "Un solo punto de almacenaje en vez de botes dispersos."
+          }
+        },
+        "k3": {
+          "type": "caracteristica",
+          "settings": {
+            "icono": "vista",
+            "titulo": "Todo a la vista",
+            "texto": "Encuentra lo que necesitas de un vistazo, sin etiquetas escondidas."
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "a1",
+        "a2",
+        "a3",
+        "k1",
+        "k2",
+        "k3"
+      ],
+      "settings": {
+        "intro": "<p>Toda tu colección de especias a la vista y al alcance de la mano. Gira, encuentra el bote que necesitas y sigue cocinando.</p>"
+      }
+    },
+    "cinta": {
+      "type": "or-marquesina",
+      "blocks": {
+        "f1": {
+          "type": "frase",
+          "settings": {
+            "texto": "Gira 360°"
+          }
+        },
+        "f2": {
+          "type": "frase",
+          "settings": {
+            "texto": "Todo a la vista"
+          }
+        },
+        "f3": {
+          "type": "frase",
+          "settings": {
+            "texto": "Un solo hueco"
+          }
+        },
+        "f4": {
+          "type": "frase",
+          "settings": {
+            "texto": "Cocina sin rebuscar"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
+      "settings": {}
+    },
+    "antes-despues": {
+      "type": "or-antes-despues",
+      "settings": {}
+    },
+    "como-funciona": {
+      "type": "or-pasos",
+      "blocks": {
+        "p1": {
+          "type": "paso",
+          "settings": {
+            "titulo": "Colócalo",
+            "texto": "Busca su sitio en la encimera o dentro del armario. Ocupa un solo hueco en lugar de varios botes sueltos."
+          }
+        },
+        "p2": {
+          "type": "paso",
+          "settings": {
+            "titulo": "Llénalo",
+            "texto": "Reúne tus especias en un único punto: pimentón, comino, orégano, canela… todas juntas y a la vista."
+          }
+        },
+        "p3": {
+          "type": "paso",
+          "settings": {
+            "titulo": "Gíralo",
+            "texto": "Un giro y el bote que buscas viene a ti. Sin mover los demás, sin rebuscar al fondo."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {}
+    },
+    "preguntas": {
+      "type": "or-faq",
+      "blocks": {
+        "q1": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Cuánto tarda en llegar?",
+            "respuesta": "<p>El envío es gratuito y tarda entre 5 y 7 días laborables desde que confirmas el pedido.</p>"
+          }
+        },
+        "q2": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Y si no me convence?",
+            "respuesta": "<p>Tienes 30 días desde que lo recibes para pedir la devolución. Más detalles en nuestra <a href=\"/policies/refund-policy\">política de devoluciones</a>.</p>"
+          }
+        },
+        "q3": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Dónde puedo ponerlo?",
+            "respuesta": "<p>En la encimera o dentro del armario: está pensado para cocinas con poco espacio.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "boton_enlace": "shopify://pages/contacto",
+        "datos_google": false
+      }
+    }
+  },
+  "order": [
+    "principal",
+    "cinta",
+    "antes-despues",
+    "como-funciona",
+    "preguntas"
+  ]
+}

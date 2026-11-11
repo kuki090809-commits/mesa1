@@ -1,0 +1,73 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.fondo | default: 'var(--or-acento)' }};
+  }
+  #shopify-section-{{ section.id }} .or-marquesina {
+    --or-mq-fondo: {{ section.settings.fondo | default: 'var(--or-acento)' }};
+    --or-mq-texto: {{ section.settings.texto | default: 'var(--or-acento-texto)' }};
+    --or-mq-vel: {{ section.settings.velocidad }}s;
+    --or-mq-tam: {{ section.settings.tam }}px;
+  }
+  {%- if section.settings.direccion == 'derecha' -%}
+    #shopify-section-{{ section.id }} .or-marquesina__pista { animation-direction: reverse; }
+  {%- endif -%}
+{% endstyle %}
+
+<section class="or-section or-marquesina" aria-label="{{ section.settings.etiqueta | escape }}">
+  {%- capture grupo -%}
+    {%- for block in section.blocks -%}
+      <span class="or-marquesina__item" {{ block.shopify_attributes }}>
+        {{- block.settings.texto | escape -}}
+        {%- if section.settings.separador -%}{% render 'or-icono', nombre: 'ola' %}{%- endif -%}
+      </span>
+    {%- endfor -%}
+  {%- endcapture -%}
+  <div class="or-marquesina__pista">
+    {%- for i in (1..4) -%}
+      <div class="or-marquesina__grupo"{% if i > 1 %} aria-hidden="true"{% endif %}>{{ grupo }}</div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ordena – Cinta de frases",
+  "tag": "div",
+  "class": "or-wrap",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "etiqueta", "label": "Nombre para lectores de pantalla", "default": "Ventajas de Ordena" },
+    { "type": "header", "content": "Movimiento" },
+    { "type": "range", "id": "velocidad", "label": "Duración de una vuelta (segundos; más = más lento)", "min": 10, "max": 90, "step": 2, "unit": "s", "default": 36 },
+    { "type": "select", "id": "direccion", "label": "Dirección", "options": [ { "value": "izquierda", "label": "Hacia la izquierda" }, { "value": "derecha", "label": "Hacia la derecha" } ], "default": "izquierda" },
+    { "type": "checkbox", "id": "separador", "label": "Mostrar estrella entre frases", "default": true },
+    { "type": "header", "content": "Estilo" },
+    { "type": "range", "id": "tam", "label": "Tamaño del texto (px)", "min": 16, "max": 64, "step": 2, "unit": "px", "default": 30 },
+    { "type": "color", "id": "fondo", "label": "Color de fondo", "info": "Vacío = color de acento de la marca." },
+    { "type": "color", "id": "texto", "label": "Color del texto", "info": "Vacío = texto sobre acento de la marca." },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "frase",
+      "name": "Frase",
+      "settings": [ { "type": "text", "id": "texto", "label": "Texto", "default": "Gira 360°" } ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ordena – Cinta de frases",
+      "blocks": [
+        { "type": "frase", "settings": { "texto": "Gira 360°" } },
+        { "type": "frase", "settings": { "texto": "Todo a la vista" } },
+        { "type": "frase", "settings": { "texto": "Un solo hueco" } },
+        { "type": "frase", "settings": { "texto": "Cocina sin rebuscar" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

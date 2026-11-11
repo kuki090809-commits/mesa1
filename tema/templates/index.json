@@ -1,75 +1,213 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "apertura": {
+      "type": "or-hero",
+      "settings": {
+        "producto": "especiero-giratorio-360",
+        "mostrar_precio": true
+      }
+    },
+    "cinta": {
+      "type": "or-marquesina",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "f1": {
+          "type": "frase",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "texto": "Gira 360°"
           }
         },
-        "button": {
-          "type": "buttons",
+        "f2": {
+          "type": "frase",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "texto": "Todo a la vista"
+          }
+        },
+        "f3": {
+          "type": "frase",
+          "settings": {
+            "texto": "Un solo hueco"
+          }
+        },
+        "f4": {
+          "type": "frase",
+          "settings": {
+            "texto": "Cocina sin rebuscar"
+          }
+        },
+        "f5": {
+          "type": "frase",
+          "settings": {
+            "texto": "Envío gratis"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5"
+      ],
+      "settings": {}
+    },
+    "antes-despues": {
+      "type": "or-antes-despues",
+      "settings": {}
+    },
+    "cifras": {
+      "type": "or-cifras",
+      "blocks": {
+        "c1": {
+          "type": "cifra",
+          "settings": {
+            "numero": "360",
+            "sufijo": "°",
+            "texto": "de giro para llegar a cualquier bote"
+          }
+        },
+        "c2": {
+          "type": "cifra",
+          "settings": {
+            "numero": "1",
+            "sufijo": "",
+            "texto": "solo hueco en la encimera o el armario"
+          }
+        },
+        "c3": {
+          "type": "cifra",
+          "settings": {
+            "numero": "0",
+            "sufijo": "",
+            "texto": "botes que mover para coger el de detrás"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {}
+    },
+    "como-funciona": {
+      "type": "or-pasos",
+      "blocks": {
+        "p1": {
+          "type": "paso",
+          "settings": {
+            "titulo": "Colócalo",
+            "texto": "Busca su sitio en la encimera o dentro del armario. Ocupa un solo hueco en lugar de varios botes sueltos."
+          }
+        },
+        "p2": {
+          "type": "paso",
+          "settings": {
+            "titulo": "Llénalo",
+            "texto": "Reúne tus especias en un único punto: pimentón, comino, orégano, canela… todas juntas y a la vista."
+          }
+        },
+        "p3": {
+          "type": "paso",
+          "settings": {
+            "titulo": "Gíralo",
+            "texto": "Un giro y el bote que buscas viene a ti. Sin mover los demás, sin rebuscar al fondo."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {}
+    },
+    "bandas": {
+      "type": "or-bandas",
+      "blocks": {
+        "b1": {
+          "type": "banda",
+          "settings": {
+            "ilustracion": "encimera",
+            "eyebrow": "En la encimera",
+            "titulo": "Todo a mano <em>mientras cocinas</em>",
+            "texto": "Junto a los fogones, tus especias quedan reunidas en un único punto que gira. Estiras la mano, giras y sigues cocinando.",
+            "lista": "Sin botes sueltos por la encimera\nEl que necesitas, siempre delante\nUn rincón ordenado que da gusto ver"
+          }
+        },
+        "b2": {
+          "type": "banda",
+          "settings": {
+            "ilustracion": "despues",
+            "eyebrow": "Dentro del armario",
+            "titulo": "Un solo hueco <em>en vez de diez</em>",
+            "texto": "En armarios estrechos, cada bote que tienes que apartar para llegar al de detrás es tiempo perdido. Con el especiero giratorio, el fondo del armario deja de existir.",
+            "lista": "Aprovecha armarios con poco espacio\nNada queda escondido detrás\nLibera sitio para todo lo demás"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {}
+    },
+    "preguntas": {
+      "type": "or-faq",
+      "blocks": {
+        "q1": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Cuánto espacio ocupa?",
+            "respuesta": "<p>Lo justo para un único punto de almacenaje: en lugar de varios botes sueltos repartidos por la encimera o el armario, todo queda reunido en un especiero que gira.</p>"
+          }
+        },
+        "q2": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Dónde puedo ponerlo?",
+            "respuesta": "<p>Está pensado para encimeras y armarios con poco espacio. Elige el rincón que te quede más a mano mientras cocinas.</p>"
+          }
+        },
+        "q3": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Cuánto tarda en llegar?",
+            "respuesta": "<p>El envío es gratuito y tarda entre 5 y 7 días laborables desde que confirmas el pedido. Te mandamos el número de seguimiento por correo en cuanto sale.</p>"
+          }
+        },
+        "q4": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Y si no me convence?",
+            "respuesta": "<p>Tienes 30 días desde que lo recibes para pedir la devolución. Escríbenos y te explicamos cómo hacerlo; tienes todos los detalles en nuestra <a href=\"/policies/refund-policy\">política de devoluciones</a>.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "boton_enlace": "shopify://pages/contacto"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "cierre": {
+      "type": "or-cierre",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "producto": "especiero-giratorio-360"
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "apertura",
+    "cinta",
+    "antes-despues",
+    "cifras",
+    "como-funciona",
+    "bandas",
+    "preguntas",
+    "cierre"
   ]
 }

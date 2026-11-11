@@ -1,0 +1,42 @@
+{%- comment -%}
+  Ordena: formulario de compra (usa el carrito lateral de Dawn).
+  Parámetros: producto, seccion (section.id), texto_boton, texto_agotado,
+              cantidad (true/false), pago_rapido (true/false), ancho (true/false)
+{%- endcomment -%}
+{%- liquid
+  assign variante = producto.selected_or_first_available_variant
+  assign form_id = 'or-form-' | append: seccion
+  assign t_boton = texto_boton | default: 'Añadir al carrito'
+  assign t_agotado = texto_agotado | default: 'Agotado'
+-%}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<product-form class="product-form or-form-compra" data-section-id="{{ seccion }}" data-hide-errors="false">
+  <div class="product-form__error-message-wrapper" role="alert" hidden>
+    <span class="product-form__error-message"></span>
+  </div>
+  {%- form 'product', producto, id: form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+    <input type="hidden" name="id" value="{{ variante.id }}" class="product-variant-id">
+    <div class="or-compra__fila">
+      {%- if cantidad -%}
+        <div class="or-cantidad">
+          <button type="button" data-paso="-1" aria-label="Quitar una unidad">−</button>
+          <input type="number" name="quantity" value="1" min="1" inputmode="numeric" aria-label="Cantidad" form="{{ form_id }}">
+          <button type="button" data-paso="1" aria-label="Añadir una unidad">+</button>
+        </div>
+      {%- endif -%}
+      <button
+        type="submit"
+        name="add"
+        class="or-btn{% if ancho %} or-btn--ancho{% endif %}"
+        data-or-boton-compra
+        {% unless variante.available %}disabled{% endunless %}
+      >
+        <span>{% if variante.available %}{{ t_boton | escape }}{% else %}{{ t_agotado | escape }}{% endif %}</span>
+        {%- render 'loading-spinner' -%}
+      </button>
+    </div>
+    {%- if pago_rapido -%}
+      {{ form | payment_button }}
+    {%- endif -%}
+  {%- endform -%}
+</product-form>
