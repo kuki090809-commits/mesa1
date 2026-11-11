@@ -99,3 +99,6 @@ La red de la sesión no llega a accounts.shopify.com, así que `shopify theme pu
     «Términos del servicio» ni «Aviso legal» oficiales. Se arregla con: (a) español como idioma principal
     (webPresenceUpdate defaultLocale «es» — pendiente del sí del usuario) o (b) que el usuario autorice
     `write_legal_policies` desde un ordenador (verificador PKCE guardado fuera del repo, en el scratchpad de la sesión).
+- ✅ 2026-11-11: español como idioma principal de la web (webPresenceUpdate: defaultLocale «es», inglés en /en).
+  La raíz ya sale en español y las políticas oficiales muestran los textos nuevos. Vista previa del tema:
+  https://0tp1ts-pj.myshopify.com/?preview_theme_id=199328891262
