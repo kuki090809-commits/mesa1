@@ -997,7 +997,7 @@ html.fd-js .fd-polaroid.fd-reveal.fd-visible:hover { transform: rotate(0deg) tra
   .fd-altura__grid { gap: 0; }
   .fd-altura__texto { display: contents; }
   .fd-altura__visual { order: 4; margin-top: 28px; }
-  .fd-altura__panel { order: 5; position: relative; z-index: 2; margin: -44px 14px 0; }
+  .fd-altura__panel { order: 5; position: relative; z-index: 2; margin: -14px 14px 0; }
 }
 @media screen and (max-width: 749px) {
   .fd-usos__grid {
