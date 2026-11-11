@@ -161,11 +161,10 @@ html.shopify-design-mode .or-reveal { opacity: 1 !important; transform: none !im
 .or-media__ilu {
   position: absolute;
   inset: 0;
-  display: grid;
-  place-items: center;
+  display: block;
   padding: 7%;
 }
-.or-media__ilu svg { width: 100%; height: 100%; max-height: 100%; }
+.or-media__ilu svg { display: block; width: 100%; height: 100%; }
 .or-media--sin-margen .or-media__ilu { padding: 0; }
 .or-media__aviso {
   position: absolute;
@@ -421,7 +420,7 @@ a:hover .or-logo__giro { transform: rotate(90deg); }
   letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
 }
-.or-cifra__num small { font-size: 0.5em; color: var(--or-acento); margin-left: 2px; }
+.or-cifra__num small { display: inline-block; font-size: 0.42em; color: var(--or-acento); margin-left: 2px; vertical-align: top; transform: translateY(0.1em); }
 .or-cifra__texto { display: block; max-width: 260px; margin: 16px auto 0; font-size: 16px; line-height: 1.5; opacity: 0.8; }
 
 /* ==========================================================================
@@ -449,6 +448,7 @@ a:hover .or-logo__giro { transform: rotate(90deg); }
   transition: opacity 0.6s var(--or-ease);
 }
 .or-paso.is-activo { opacity: 1; }
+.or-paso:last-child { min-height: 48vh; }
 .or-paso__num {
   display: block;
   margin-bottom: 14px;
@@ -569,6 +569,7 @@ a:hover .or-logo__giro { transform: rotate(90deg); }
   animation: or-giro 60s linear infinite;
 }
 .or-cierre .or-media { --or-ratio: 1 / 1; border-radius: 50%; background: var(--or-fondo); }
+.or-cierre .or-media__ilu { padding: 13%; }
 .or-cierre .or-lead { color: inherit; opacity: 0.85; margin-bottom: 28px; }
 .or-cierre .or-h2 { margin-bottom: 18px; }
 .or-cierre__precio { display: flex; align-items: baseline; gap: 14px; margin-bottom: 24px; }

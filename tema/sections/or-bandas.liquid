@@ -38,7 +38,13 @@
       {%- for block in section.blocks -%}
         <article class="or-banda" {{ block.shopify_attributes }}>
           <div class="or-banda__media or-reveal">
-            {%- render 'or-imagen', imagen: block.settings.imagen, tipo: block.settings.ilustracion, sizes: '(min-width: 990px) 50vw, 100vw', alt: block.settings.titulo -%}
+            {%- liquid
+              assign clase_ilu = ''
+              if block.settings.ilustracion == 'encimera'
+                assign clase_ilu = 'or-media--sin-margen'
+              endif
+              render 'or-imagen', imagen: block.settings.imagen, tipo: block.settings.ilustracion, clase: clase_ilu, sizes: '(min-width: 990px) 50vw, 100vw', alt: block.settings.titulo
+            -%}
           </div>
           <div class="or-banda__texto">
             {%- if block.settings.eyebrow != blank -%}

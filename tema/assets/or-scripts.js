@@ -78,7 +78,7 @@
       wrap.dataset.orListo = '1';
       var pasos = wrap.querySelectorAll('.or-paso');
       var ilu = wrap.querySelector('.or-ilu--cenital');
-      var grados = parseFloat(wrap.getAttribute('data-or-grados')) || 120;
+      var grados = parseFloat(wrap.getAttribute('data-or-grados')) || 90;
       if (!pasos.length) return;
       function activar(i) {
         pasos.forEach(function (p, j) { p.classList.toggle('is-activo', j === i); });

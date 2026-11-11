@@ -50,10 +50,10 @@
           {%- if producto.has_only_default_variant and section.settings.compra_directa -%}
             {%- render 'or-form-compra', producto: producto, seccion: section.id, texto_boton: section.settings.boton_texto, cantidad: false, pago_rapido: false -%}
           {%- else -%}
-            <a class="or-btn" href="{{ enlace }}">{{ section.settings.boton_texto | escape }}{% render 'or-icono', nombre: 'flecha' %}</a>
+            <a class="or-btn" href="{{ enlace }}">{{ section.settings.boton_ver_texto | default: section.settings.boton_texto | escape }}{% render 'or-icono', nombre: 'flecha' %}</a>
           {%- endif -%}
         {%- else -%}
-          <a class="or-btn" href="{{ enlace }}">{{ section.settings.boton_texto | escape }}{% render 'or-icono', nombre: 'flecha' %}</a>
+          <a class="or-btn" href="{{ enlace }}">{{ section.settings.boton_ver_texto | default: section.settings.boton_texto | escape }}{% render 'or-icono', nombre: 'flecha' %}</a>
         {%- endif -%}
 
         {%- if section.settings.chips != blank -%}
@@ -85,6 +85,7 @@
     { "type": "inline_richtext", "id": "titulo", "label": "Título", "default": "Tu cocina, en orden <em>con un solo giro.</em>" },
     { "type": "textarea", "id": "texto", "label": "Texto", "default": "Deja de rebuscar entre botes. Todo a la vista, al alcance de la mano y en un único hueco." },
     { "type": "text", "id": "boton_texto", "label": "Botón: texto", "default": "Añadir al carrito" },
+    { "type": "text", "id": "boton_ver_texto", "label": "Botón cuando lleva a la página del producto", "default": "Ver el especiero" },
     { "type": "url", "id": "boton_enlace", "label": "Botón: enlace", "info": "Solo se usa si no se puede comprar desde aquí. Vacío = página del producto." },
     { "type": "textarea", "id": "chips", "label": "Ventajas (una por línea)", "default": "Envío gratis en 5-7 días laborables\nDevolución en 30 días\nPago 100% seguro" },
     { "type": "header", "content": "Tipografía y color" },
