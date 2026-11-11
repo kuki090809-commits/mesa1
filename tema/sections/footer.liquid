@@ -88,8 +88,8 @@
           {%- if section.settings.legal_extra_texto != blank -%}
             <li><a href="{{ section.settings.legal_extra_url | default: '#' }}">{{ section.settings.legal_extra_texto | escape }}</a></li>
           {%- endif -%}
-          {%- if section.settings.legal_extra2_texto != blank -%}
-            <li><a href="{{ section.settings.legal_extra2_url | default: '#' }}">{{ section.settings.legal_extra2_texto | escape }}</a></li>
+          {%- if section.settings.cookies_pref_texto != blank -%}
+            <li><a href="{{ routes.root_url }}pages/politica-de-cookies" data-fd-cookies>{{ section.settings.cookies_pref_texto | escape }}</a></li>
           {%- endif -%}
         </ul>
       {%- endif -%}
@@ -155,8 +155,7 @@
     { "type": "checkbox", "id": "mostrar_legales", "label": "Mostrar enlaces legales", "info": "Las políticas se editan en Configuración → Políticas.", "default": true },
     { "type": "text", "id": "legal_extra_texto", "label": "Enlace legal extra 1: texto", "default": "Política de cookies" },
     { "type": "url", "id": "legal_extra_url", "label": "Enlace legal extra 1: destino" },
-    { "type": "text", "id": "legal_extra2_texto", "label": "Enlace legal extra 2: texto" },
-    { "type": "url", "id": "legal_extra2_url", "label": "Enlace legal extra 2: destino" },
+    { "type": "text", "id": "cookies_pref_texto", "label": "Enlace para cambiar las preferencias de cookies", "info": "Abre el panel de cookies de Shopify. Déjalo vacío para ocultarlo.", "default": "Preferencias de cookies" },
     { "type": "checkbox", "id": "mostrar_idiomas", "label": "Mostrar selector de idioma", "default": false },
     { "type": "checkbox", "id": "mostrar_pagos", "label": "Mostrar formas de pago", "default": true },
     { "type": "header", "content": "Estilo" },

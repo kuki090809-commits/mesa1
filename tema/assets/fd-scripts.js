@@ -274,4 +274,14 @@
     initAll(document);
   }
   document.addEventListener('shopify:section:load', function (e) { initAll(e.target); });
+
+  /* ---------- Enlace «Preferencias de cookies» (panel de Shopify) ---------- */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-fd-cookies]');
+    if (!a) return;
+    if (window.privacyBanner && typeof window.privacyBanner.showPreferences === 'function') {
+      e.preventDefault();
+      window.privacyBanner.showPreferences();
+    }
+  });
 })();
