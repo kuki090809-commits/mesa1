@@ -16,7 +16,9 @@
   {%- if section.settings.alineacion == 'center' -%}
     #shopify-section-{{ section.id }} .fd-hero__cabecera { margin-left: auto; margin-right: auto; }
     #shopify-section-{{ section.id }} .fd-lead { margin-left: auto; margin-right: auto; }
-    #shopify-section-{{ section.id }} .fd-hero__compra { justify-content: center; }
+    #shopify-section-{{ section.id }} .fd-hero__compra,
+    #shopify-section-{{ section.id }} .fd-botones { justify-content: center; }
+    #shopify-section-{{ section.id }} .fd-hero__cabecera .fd-eyebrow::before { display: none; }
   {%- endif -%}
 {% endstyle %}
 
