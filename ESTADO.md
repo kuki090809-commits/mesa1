@@ -85,3 +85,17 @@ La red de la sesión no llega a accounts.shopify.com, así que `shopify theme pu
 - ⬜ Nombre de la tienda: no hay forma de cambiarlo por API → el usuario: Configuración → Detalles de la tienda.
 - ⚠️ Precio tachado de 120 €: por la normativa de precios de referencia (Ómnibus), solo se puede mostrar si fue el
   precio más bajo de los 30 días anteriores a la rebaja. Avisado al usuario.
+
+## Políticas legales publicadas (2026-11-11, después)
+- El enlace de autorización (permiso de políticas) no le funcionó al usuario → plan alternativo, todo hecho por Claude:
+  - ✅ 5 páginas nuevas con los datos del titular (nombre, NIF/NIE, domicilio de Shopify y correo de la tienda;
+    teléfono NO publicado): /pages/aviso-legal, /pages/politica-de-privacidad, /pages/terminos-y-condiciones,
+    /pages/politica-de-devoluciones, /pages/politica-de-envios (+ /pages/politica-de-cookies reescrita).
+    Los textos se generan desde `legal/politicas.html` (los datos personales NO se guardan en el repo).
+  - ✅ Menú «Legal» (handle `legal`) con esas 6 páginas; el footer del tema FlexiDesk lo usa (ajuste `menu_legal`).
+  - ✅ Traducción «es» de las políticas oficiales de Shopify (privacidad, reembolso, envío) = mismos textos → el pago
+    en español ya muestra las políticas nuevas.
+  - ⬜ Las políticas oficiales en el idioma principal (inglés, sin /es) siguen con el texto antiguo, y no existen
+    «Términos del servicio» ni «Aviso legal» oficiales. Se arregla con: (a) español como idioma principal
+    (webPresenceUpdate defaultLocale «es» — pendiente del sí del usuario) o (b) que el usuario autorice
+    `write_legal_policies` desde un ordenador (verificador PKCE guardado fuera del repo, en el scratchpad de la sesión).
