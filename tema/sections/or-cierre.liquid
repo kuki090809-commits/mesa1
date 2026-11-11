@@ -15,7 +15,7 @@
   }
   #shopify-section-{{ section.id }} .or-cierre__panel {
     --or-ci-fondo: {{ section.settings.fondo | default: 'var(--or-oscuro)' }};
-    --or-ci-texto: {{ section.settings.texto | default: 'var(--or-claro)' }};
+    --or-ci-texto: {{ section.settings.color_texto | default: 'var(--or-claro)' }};
   }
   #shopify-section-{{ section.id }} .or-h2 { font-size: clamp({{ titulo_min }}px, 5vw, {{ section.settings.titulo_tam }}px); }
   #shopify-section-{{ section.id }} .or-cierre__texto { text-align: {{ section.settings.alineacion }}; }
@@ -92,7 +92,7 @@
     { "type": "range", "id": "texto_tam", "label": "Tamaño del texto (px)", "min": 14, "max": 24, "step": 1, "unit": "px", "default": 18 },
     { "type": "select", "id": "alineacion", "label": "Alineación del texto", "options": [ { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" } ], "default": "left" },
     { "type": "color", "id": "fondo", "label": "Color del panel", "info": "Vacío = fondo oscuro de la marca." },
-    { "type": "color", "id": "texto", "label": "Color del texto del panel", "info": "Vacío = texto sobre fondo oscuro." },
+    { "type": "color", "id": "color_texto", "label": "Color del texto del panel", "info": "Vacío = texto sobre fondo oscuro." },
     { "type": "color", "id": "fondo_seccion", "label": "Color de fondo alrededor del panel", "info": "Vacío = fondo principal." },
     { "type": "header", "content": "Espaciado" },
     { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
