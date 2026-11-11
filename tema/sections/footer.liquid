@@ -93,7 +93,7 @@
             {%- endfor -%}
           {%- endif -%}
           {%- if section.settings.cookies_pref_texto != blank -%}
-            <li><a href="{{ routes.root_url }}pages/politica-de-cookies" data-fd-cookies>{{ section.settings.cookies_pref_texto | escape }}</a></li>
+            <li><a href="{{ pages['politica-de-cookies'].url | default: '/pages/politica-de-cookies' }}" data-fd-cookies>{{ section.settings.cookies_pref_texto | escape }}</a></li>
           {%- endif -%}
         </ul>
       {%- endif -%}
