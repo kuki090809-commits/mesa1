@@ -3,7 +3,7 @@
   assign titulo_min = section.settings.titulo_tam | times: 0.6 | round
   assign enlace = section.settings.boton_enlace | default: producto.url | default: routes.all_products_collection_url
   assign imagen = section.settings.imagen
-  if imagen == blank and producto != blank
+  if imagen == blank and producto != blank and section.settings.foto_producto
     assign imagen = producto.featured_image
   endif
 -%}
@@ -11,57 +11,57 @@
   #shopify-section-{{ section.id }} {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
-    background: {{ section.settings.fondo_seccion | default: 'var(--or-fondo)' }};
+    background: {{ section.settings.fondo_seccion | default: 'var(--fd-fondo)' }};
   }
-  #shopify-section-{{ section.id }} .or-cierre__panel {
-    --or-ci-fondo: {{ section.settings.fondo | default: 'var(--or-oscuro)' }};
-    --or-ci-texto: {{ section.settings.color_texto | default: 'var(--or-claro)' }};
+  #shopify-section-{{ section.id }} .fd-cierre__panel {
+    --fd-ci-fondo: {{ section.settings.fondo | default: 'var(--fd-oscuro)' }};
+    --fd-ci-texto: {{ section.settings.color_texto | default: 'var(--fd-claro)' }};
   }
-  #shopify-section-{{ section.id }} .or-h2 { font-size: clamp({{ titulo_min }}px, 5vw, {{ section.settings.titulo_tam }}px); }
-  #shopify-section-{{ section.id }} .or-cierre__texto { text-align: {{ section.settings.alineacion }}; }
-  #shopify-section-{{ section.id }} .or-lead { font-size: {{ section.settings.texto_tam }}px; }
+  #shopify-section-{{ section.id }} .fd-h2 { font-size: clamp({{ titulo_min }}px, 5vw, {{ section.settings.titulo_tam }}px); }
+  #shopify-section-{{ section.id }} .fd-cierre__texto { text-align: {{ section.settings.alineacion }}; }
+  #shopify-section-{{ section.id }} .fd-lead { font-size: {{ section.settings.texto_tam }}px; }
 {% endstyle %}
 
-<section class="or-section or-cierre" aria-label="{{ section.settings.titulo | strip_html | escape }}">
-  <div class="or-container">
-    <div class="or-cierre__panel or-reveal">
-      <div class="or-cierre__media">
-        {%- render 'or-imagen', imagen: imagen, tipo: 'frontal', sizes: '(min-width: 990px) 40vw, 80vw', alt: section.settings.titulo -%}
+<section class="fd-section fd-cierre" aria-label="{{ section.settings.titulo | strip_html | escape }}">
+  <div class="fd-container">
+    <div class="fd-cierre__panel fd-reveal">
+      <div class="fd-cierre__media">
+        {%- render 'fd-imagen', imagen: imagen, tipo: 'frontal', sizes: '(min-width: 990px) 40vw, 80vw', alt: section.settings.titulo -%}
       </div>
-      <div class="or-cierre__texto">
+      <div class="fd-cierre__texto">
         {%- if section.settings.eyebrow != blank -%}
-          <p class="or-eyebrow">{{ section.settings.eyebrow }}</p>
+          <p class="fd-eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
-        <h2 class="or-h2">{{ section.settings.titulo }}</h2>
+        <h2 class="fd-h2">{{ section.settings.titulo }}</h2>
         {%- if section.settings.texto != blank -%}
-          <p class="or-lead">{{ section.settings.texto | newline_to_br }}</p>
+          <p class="fd-lead">{{ section.settings.texto | newline_to_br }}</p>
         {%- endif -%}
 
         {%- if producto != blank and producto.available -%}
           {%- assign v = producto.selected_or_first_available_variant -%}
-          <div class="or-cierre__precio">
+          <div class="fd-cierre__precio">
             <strong>{{ v.price | money }}</strong>
             {%- if v.compare_at_price > v.price -%}
               <s>{{ v.compare_at_price | money }}</s>
               {%- assign ahorro = v.compare_at_price | minus: v.price | times: 100 | divided_by: v.compare_at_price -%}
-              <span class="or-ahorro">-{{ ahorro }}%</span>
+              <span class="fd-ahorro">-{{ ahorro }}%</span>
             {%- endif -%}
           </div>
           {%- if producto.has_only_default_variant and section.settings.compra_directa -%}
-            {%- render 'or-form-compra', producto: producto, seccion: section.id, texto_boton: section.settings.boton_texto, cantidad: false, pago_rapido: false -%}
+            {%- render 'fd-form-compra', producto: producto, seccion: section.id, texto_boton: section.settings.boton_texto, cantidad: false, pago_rapido: false -%}
           {%- else -%}
-            <a class="or-btn" href="{{ enlace }}">{{ section.settings.boton_ver_texto | default: section.settings.boton_texto | escape }}{% render 'or-icono', nombre: 'flecha' %}</a>
+            <a class="fd-btn" href="{{ enlace }}">{{ section.settings.boton_ver_texto | default: section.settings.boton_texto | escape }}{% render 'fd-icono', nombre: 'flecha' %}</a>
           {%- endif -%}
         {%- else -%}
-          <a class="or-btn" href="{{ enlace }}">{{ section.settings.boton_ver_texto | default: section.settings.boton_texto | escape }}{% render 'or-icono', nombre: 'flecha' %}</a>
+          <a class="fd-btn" href="{{ enlace }}">{{ section.settings.boton_ver_texto | default: section.settings.boton_texto | escape }}{% render 'fd-icono', nombre: 'flecha' %}</a>
         {%- endif -%}
 
         {%- if section.settings.chips != blank -%}
           {%- assign chips = section.settings.chips | newline_to_br | split: '<br />' -%}
-          <ul class="or-chips">
+          <ul class="fd-chips">
             {%- for chip in chips -%}
               {%- assign c = chip | strip -%}
-              {%- if c != blank -%}<li>{% render 'or-icono', nombre: 'check' %}{{ c }}</li>{%- endif -%}
+              {%- if c != blank -%}<li>{% render 'fd-icono', nombre: 'check' %}{{ c }}</li>{%- endif -%}
             {%- endfor -%}
           </ul>
         {%- endif -%}
@@ -72,20 +72,21 @@
 
 {% schema %}
 {
-  "name": "Ordena – Cierre y compra",
+  "name": "FlexiDesk – Cierre",
   "tag": "div",
-  "class": "or-wrap",
+  "class": "fd-wrap",
   "settings": [
     { "type": "header", "content": "Producto" },
     { "type": "product", "id": "producto", "label": "Producto" },
     { "type": "checkbox", "id": "compra_directa", "label": "Añadir al carrito desde aquí (si el producto no tiene opciones)", "default": true },
-    { "type": "image_picker", "id": "imagen", "label": "Foto (opcional)", "info": "Vacío = la foto principal del producto (o la ilustración si aún no tiene)." },
+    { "type": "image_picker", "id": "imagen", "label": "Foto (opcional)", "info": "Vacío = la ilustración (o la foto del producto si marcas la casilla de abajo)." },
+    { "type": "checkbox", "id": "foto_producto", "label": "Usar la foto principal del producto si no eliges otra", "default": false },
     { "type": "header", "content": "Textos" },
-    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Especiero Giratorio 360°" },
-    { "type": "inline_richtext", "id": "titulo", "label": "Título", "default": "Tu cocina, en orden <em>con un solo giro.</em>" },
-    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Deja de rebuscar entre botes. Todo a la vista, al alcance de la mano y en un único hueco." },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "FlexiDesk™" },
+    { "type": "inline_richtext", "id": "titulo", "label": "Título", "default": "Tu escritorio, <em>donde tú estés.</em>" },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Junto a la cama, el sofá o el sillón. Sube, baja y muévela cuando quieras." },
     { "type": "text", "id": "boton_texto", "label": "Botón: texto", "default": "Añadir al carrito" },
-    { "type": "text", "id": "boton_ver_texto", "label": "Botón cuando lleva a la página del producto", "default": "Ver el especiero" },
+    { "type": "text", "id": "boton_ver_texto", "label": "Botón cuando lleva a la página del producto", "default": "Ver la FlexiDesk" },
     { "type": "url", "id": "boton_enlace", "label": "Botón: enlace", "info": "Solo se usa si no se puede comprar desde aquí. Vacío = página del producto." },
     { "type": "textarea", "id": "chips", "label": "Ventajas (una por línea)", "default": "Envío gratis en 5-7 días laborables\nDevolución en 30 días\nPago 100% seguro" },
     { "type": "header", "content": "Tipografía y color" },
@@ -99,6 +100,6 @@
     { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
     { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 112 }
   ],
-  "presets": [ { "name": "Ordena – Cierre y compra" } ]
+  "presets": [ { "name": "FlexiDesk – Cierre" } ]
 }
 {% endschema %}

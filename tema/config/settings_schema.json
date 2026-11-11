@@ -8,59 +8,59 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
-    "name": "Ordena · Colores de marca",
+    "name": "FlexiDesk · Colores de marca",
     "settings": [
       {
         "type": "paragraph",
-        "content": "Estos colores visten todas las secciones de Ordena (las que empiezan por «Ordena –»). Los colores del carrito, buscador y páginas de Shopify se cambian en «Colores»."
+        "content": "Estos colores visten todas las secciones de FlexiDesk (las que empiezan por «FlexiDesk –»). Los colores del carrito, buscador y páginas de Shopify se cambian en «Colores»."
       },
       {
         "type": "color",
-        "id": "or_fondo",
+        "id": "fd_fondo",
         "label": "Fondo principal",
-        "default": "#F4EFE6"
+        "default": "#F3F3EF"
       },
       {
         "type": "color",
-        "id": "or_fondo_alt",
+        "id": "fd_fondo_alt",
         "label": "Fondo secundario (tarjetas y marcos)",
-        "default": "#EAE2D3"
+        "default": "#E5E7E1"
       },
       {
         "type": "color",
-        "id": "or_texto",
+        "id": "fd_texto",
         "label": "Texto",
-        "default": "#1F2A22"
+        "default": "#17191D"
       },
       {
         "type": "color",
-        "id": "or_acento",
+        "id": "fd_acento",
         "label": "Acento (botones y detalles)",
-        "default": "#C4502A"
+        "default": "#2D5BE3"
       },
       {
         "type": "color",
-        "id": "or_acento_texto",
+        "id": "fd_acento_texto",
         "label": "Texto sobre el acento",
         "default": "#FFFFFF"
       },
       {
         "type": "color",
-        "id": "or_oscuro",
+        "id": "fd_oscuro",
         "label": "Fondo oscuro (bandas destacadas)",
-        "default": "#1F2A22"
+        "default": "#17191D"
       },
       {
         "type": "color",
-        "id": "or_claro",
+        "id": "fd_claro",
         "label": "Texto sobre fondo oscuro",
-        "default": "#F4EFE6"
+        "default": "#F3F3EF"
       },
       {
         "type": "color",
-        "id": "or_salvia",
+        "id": "fd_salvia",
         "label": "Color de apoyo (iconos y líneas)",
-        "default": "#7D8C6A"
+        "default": "#8B95A5"
       },
       {
         "type": "header",
@@ -68,17 +68,17 @@
       },
       {
         "type": "range",
-        "id": "or_radio",
+        "id": "fd_radio",
         "label": "Redondeo de esquinas (px)",
         "min": 0,
         "max": 48,
         "step": 2,
         "unit": "px",
-        "default": 20
+        "default": 14
       },
       {
         "type": "checkbox",
-        "id": "or_animaciones",
+        "id": "fd_animaciones",
         "label": "Animaciones al hacer scroll",
         "default": true
       }

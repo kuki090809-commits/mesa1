@@ -7,22 +7,22 @@
   #shopify-section-{{ section.id }} {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
-    background: {{ section.settings.fondo | default: 'var(--or-fondo)' }};
+    background: {{ section.settings.fondo | default: 'var(--fd-fondo)' }};
   }
-  #shopify-section-{{ section.id }} .or-producto { background: transparent; }
-  #shopify-section-{{ section.id }} .or-compra__titulo { font-size: clamp({{ titulo_min }}px, 4.6vw, {{ section.settings.titulo_tam }}px); }
-  #shopify-section-{{ section.id }} .or-compra__intro { font-size: {{ section.settings.texto_tam }}px; }
-  #shopify-section-{{ section.id }} .or-caracteristicas { --or-car-cols: {{ section.settings.car_columnas }}; }
-  #shopify-section-{{ section.id }} .or-compra { text-align: {{ section.settings.alineacion }}; }
+  #shopify-section-{{ section.id }} .fd-producto { background: transparent; }
+  #shopify-section-{{ section.id }} .fd-compra__titulo { font-size: clamp({{ titulo_min }}px, 4.6vw, {{ section.settings.titulo_tam }}px); }
+  #shopify-section-{{ section.id }} .fd-compra__intro { font-size: {{ section.settings.texto_tam }}px; }
+  #shopify-section-{{ section.id }} .fd-caracteristicas { --fd-car-cols: {{ section.settings.car_columnas }}; }
+  #shopify-section-{{ section.id }} .fd-compra { text-align: {{ section.settings.alineacion }}; }
 {% endstyle %}
 
-<section class="or-section or-producto" aria-label="{{ product.title | escape }}">
-  <div class="or-container">
-    <div class="or-producto__grid">
+<section class="fd-section fd-producto" aria-label="{{ product.title | escape }}">
+  <div class="fd-container">
+    <div class="fd-producto__grid">
 
       {%- comment -%} ===== Galería (sigue a las fotos del producto en el catálogo) ===== {%- endcomment -%}
-      <div class="or-galeria" data-or-galeria>
-        <div class="or-galeria__principal">
+      <div class="fd-galeria" data-fd-galeria>
+        <div class="fd-galeria__principal">
           {%- if product.media.size > 0 -%}
             {%- for media in product.media -%}
               {%- liquid
@@ -36,35 +36,35 @@
                 endif
               -%}
               {%- if activa -%}{%- assign carga = 'eager' -%}{%- else -%}{%- assign carga = 'lazy' -%}{%- endif -%}
-              <div class="or-galeria__slide{% if activa %} is-activa{% endif %}" data-media-id="{{ media.id }}">
-                <div class="or-media" style="--or-ratio: 1 / 1;">
+              <div class="fd-galeria__slide{% if activa %} is-activa{% endif %}" data-media-id="{{ media.id }}">
+                <div class="fd-media" style="--fd-ratio: 1 / 1;">
                   {%- case media.media_type -%}
                     {%- when 'image' -%}
                       {{ media | image_url: width: 1800 | image_tag:
-                          class: 'or-media__img',
+                          class: 'fd-media__img',
                           loading: carga,
                           widths: '480, 720, 960, 1200, 1500, 1800',
                           sizes: '(min-width: 990px) 55vw, 100vw',
                           alt: media.alt | default: product.title
                       }}
                     {%- when 'video' -%}
-                      {{ media | video_tag: class: 'or-media__img', controls: true, muted: true, playsinline: true }}
+                      {{ media | video_tag: class: 'fd-media__img', controls: true, muted: true, playsinline: true }}
                     {%- when 'external_video' -%}
-                      {{ media | external_video_tag: class: 'or-media__img' }}
+                      {{ media | external_video_tag: class: 'fd-media__img' }}
                     {%- else -%}
-                      {{ media.preview_image | image_url: width: 1800 | image_tag: class: 'or-media__img', loading: 'lazy', alt: product.title }}
+                      {{ media.preview_image | image_url: width: 1800 | image_tag: class: 'fd-media__img', loading: 'lazy', alt: product.title }}
                   {%- endcase -%}
                 </div>
               </div>
             {%- endfor -%}
           {%- else -%}
-            <div class="or-galeria__slide is-activa">
-              {%- render 'or-imagen', imagen: blank, tipo: 'frontal', alt: product.title -%}
+            <div class="fd-galeria__slide is-activa">
+              {%- render 'fd-imagen', imagen: blank, tipo: 'frontal', alt: product.title -%}
             </div>
           {%- endif -%}
         </div>
         {%- if product.media.size > 1 -%}
-          <ul class="or-galeria__miniaturas" aria-label="Fotos del producto">
+          <ul class="fd-galeria__miniaturas" aria-label="Fotos del producto">
             {%- for media in product.media -%}
               {%- liquid
                 assign activa = false
@@ -77,7 +77,7 @@
                 endif
               -%}
               <li>
-                <button type="button" class="or-galeria__mini{% if activa %} is-activa{% endif %}" data-media-id="{{ media.id }}" aria-label="Ver foto {{ forloop.index }}" aria-current="{{ activa }}">
+                <button type="button" class="fd-galeria__mini{% if activa %} is-activa{% endif %}" data-media-id="{{ media.id }}" aria-label="Ver foto {{ forloop.index }}" aria-current="{{ activa }}">
                   {{ media.preview_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: '' }}
                 </button>
               </li>
@@ -88,27 +88,28 @@
 
       {%- comment -%} ===== Columna de compra ===== {%- endcomment -%}
       <div
-        class="or-compra"
-        data-or-producto
-        data-or-comprar="{{ section.settings.boton_texto | escape }}"
-        data-or-agotado="{{ section.settings.agotado_texto | escape }}"
+        class="fd-compra"
+        data-fd-producto
+        data-fd-ancla-barra
+        data-fd-comprar="{{ section.settings.boton_texto | escape }}"
+        data-fd-agotado="{{ section.settings.agotado_texto | escape }}"
       >
         {%- assign eyebrow = section.settings.eyebrow | default: product.vendor -%}
         {%- if eyebrow != blank -%}
-          <p class="or-eyebrow">{{ eyebrow | escape }}</p>
+          <p class="fd-eyebrow">{{ eyebrow | escape }}</p>
         {%- endif -%}
-        <h1 class="or-compra__titulo">{{ product.title | escape }}</h1>
+        <h1 class="fd-compra__titulo">{{ product.title | escape }}</h1>
 
-        <div class="or-compra__precio">
-          <span class="or-precio-actual" data-or-precio>{{ variante.price | money }}</span>
-          <s data-or-tachado{% unless variante.compare_at_price > variante.price %} hidden{% endunless %}>
+        <div class="fd-compra__precio">
+          <span class="fd-precio-actual" data-fd-precio>{{ variante.price | money }}</span>
+          <s data-fd-tachado{% unless variante.compare_at_price > variante.price %} hidden{% endunless %}>
             {%- if variante.compare_at_price > variante.price -%}{{ variante.compare_at_price | money }}{%- endif -%}
           </s>
           {%- if variante.compare_at_price > variante.price -%}
             {%- assign ahorro = variante.compare_at_price | minus: variante.price | times: 100 | divided_by: variante.compare_at_price -%}
-            <span class="or-ahorro" data-or-ahorro>-{{ ahorro }}%</span>
+            <span class="fd-ahorro" data-fd-ahorro>-{{ ahorro }}%</span>
           {%- else -%}
-            <span class="or-ahorro" data-or-ahorro hidden></span>
+            <span class="fd-ahorro" data-fd-ahorro hidden></span>
           {%- endif -%}
         </div>
         {%- capture nota -%}
@@ -117,10 +118,10 @@
           {{- section.settings.impuestos_texto | escape -}}
         {%- endcapture -%}
         {%- if nota != blank -%}
-          <p class="or-compra__impuestos">{{ nota }}</p>
+          <p class="fd-compra__impuestos">{{ nota }}</p>
         {%- endif -%}
 
-        <div class="or-compra__intro or-body">
+        <div class="fd-compra__intro fd-body">
           {%- if section.settings.intro != blank -%}
             {{ section.settings.intro }}
           {%- else -%}
@@ -130,18 +131,18 @@
 
         {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
-            <fieldset class="or-opcion">
+            <fieldset class="fd-opcion">
               <legend>{{ option.name | escape }}: <span>{{ option.selected_value | escape }}</span></legend>
-              <div class="or-opcion__valores">
+              <div class="fd-opcion__valores">
                 {%- for value in option.values -%}
                   {%- assign oid = section.id | append: '-' | append: option.position | append: '-' | append: forloop.index0 -%}
-                  <input type="radio" id="or-op-{{ oid }}" name="or-op-{{ section.id }}-{{ option.position }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %}>
-                  <label for="or-op-{{ oid }}">{{ value | escape }}</label>
+                  <input type="radio" id="fd-op-{{ oid }}" name="fd-op-{{ section.id }}-{{ option.position }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %}>
+                  <label for="fd-op-{{ oid }}">{{ value | escape }}</label>
                 {%- endfor -%}
               </div>
             </fieldset>
           {%- endfor -%}
-          <script type="application/json" data-or-variantes>
+          <script type="application/json" data-fd-variantes>
             [
               {%- for v in product.variants -%}
                 {
@@ -158,7 +159,7 @@
           </script>
         {%- endunless -%}
 
-        {%- render 'or-form-compra',
+        {%- render 'fd-form-compra',
           producto: product,
           seccion: section.id,
           texto_boton: section.settings.boton_texto,
@@ -170,23 +171,23 @@
 
         {%- assign garantias = section.blocks | where: 'type', 'garantia' -%}
         {%- if garantias.size > 0 -%}
-          <ul class="or-garantias">
+          <ul class="fd-garantias">
             {%- for block in garantias -%}
-              <li class="or-garantia" {{ block.shopify_attributes }}>
-                {%- render 'or-icono', nombre: block.settings.icono -%}
+              <li class="fd-garantia" {{ block.shopify_attributes }}>
+                {%- render 'fd-icono', nombre: block.settings.icono -%}
                 <span><b>{{ block.settings.titulo | escape }}</b>{{ block.settings.texto | escape }}</span>
               </li>
             {%- endfor -%}
           </ul>
         {%- endif -%}
 
-        <div class="or-acordeon">
+        <div class="fd-acordeon">
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when 'acordeon' -%}
                 <details {{ block.shopify_attributes }}{% if block.settings.abierto %} open{% endif %}>
                   <summary>{{ block.settings.titulo | escape }}</summary>
-                  <div class="or-acordeon__contenido">
+                  <div class="fd-acordeon__contenido">
                     {%- if block.settings.usar_descripcion -%}
                       {{ product.description }}
                     {%- else -%}
@@ -197,7 +198,7 @@
               {%- when 'incluye' -%}
                 <details {{ block.shopify_attributes }}{% if block.settings.abierto %} open{% endif %}>
                   <summary>{{ block.settings.titulo | escape }}</summary>
-                  <div class="or-acordeon__contenido">
+                  <div class="fd-acordeon__contenido">
                     {%- assign items = block.settings.lista | newline_to_br | split: '<br />' -%}
                     <ul>
                       {%- for item in items -%}
@@ -216,10 +217,10 @@
     {%- comment -%} ===== Cuadrícula de características ===== {%- endcomment -%}
     {%- assign caracteristicas = section.blocks | where: 'type', 'caracteristica' -%}
     {%- if caracteristicas.size > 0 -%}
-      <div class="or-caracteristicas">
+      <div class="fd-caracteristicas">
         {%- for block in caracteristicas -%}
-          <div class="or-caracteristica or-reveal" style="--or-i: {{ forloop.index0 }}" {{ block.shopify_attributes }}>
-            <span class="or-caracteristica__icono">{% render 'or-icono', nombre: block.settings.icono %}</span>
+          <div class="fd-caracteristica fd-reveal" style="--fd-i: {{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            <span class="fd-caracteristica__icono">{% render 'fd-icono', nombre: block.settings.icono %}</span>
             <h3>{{ block.settings.titulo | escape }}</h3>
             <p>{{ block.settings.texto | escape }}</p>
           </div>
@@ -235,9 +236,9 @@
 
 {% schema %}
 {
-  "name": "Ordena – Ficha producto",
+  "name": "FlexiDesk – Ficha",
   "tag": "div",
-  "class": "or-wrap",
+  "class": "fd-wrap",
   "settings": [
     { "type": "header", "content": "Textos" },
     { "type": "text", "id": "eyebrow", "label": "Texto pequeño sobre el título", "info": "Vacío = nombre de la marca del producto." },
@@ -284,7 +285,7 @@
       "name": "Lista (qué incluye…)",
       "settings": [
         { "type": "text", "id": "titulo", "label": "Título", "default": "Qué incluye" },
-        { "type": "textarea", "id": "lista", "label": "Elementos (uno por línea)", "default": "1 especiero giratorio 360°" },
+        { "type": "textarea", "id": "lista", "label": "Elementos (uno por línea)", "default": "1 mesa auxiliar FlexiDesk\nTornillería para el montaje" },
         { "type": "checkbox", "id": "abierto", "label": "Abierto al cargar", "default": false }
       ]
     },
@@ -292,9 +293,9 @@
       "type": "caracteristica",
       "name": "Característica",
       "settings": [
-        { "type": "select", "id": "icono", "label": "Icono", "options": [ { "value": "giro", "label": "Giro" }, { "value": "espacio", "label": "Espacio" }, { "value": "vista", "label": "A la vista" }, { "value": "mano", "label": "Al alcance" }, { "value": "caja", "label": "Caja" }, { "value": "check", "label": "Visto bueno" }, { "value": "estrella", "label": "Estrella" } ], "default": "giro" },
-        { "type": "text", "id": "titulo", "label": "Título", "default": "Giro de 360°" },
-        { "type": "textarea", "id": "texto", "label": "Texto", "default": "Accede a cualquier especia sin mover las demás." }
+        { "type": "select", "id": "icono", "label": "Icono", "options": [ { "value": "altura", "label": "Altura" }, { "value": "ruedas", "label": "Ruedas" }, { "value": "superficie", "label": "Superficie" }, { "value": "llave", "label": "Montaje" }, { "value": "portatil", "label": "Portátil" }, { "value": "espacio", "label": "Espacio" }, { "value": "mano", "label": "Al alcance" }, { "value": "caja", "label": "Caja" }, { "value": "check", "label": "Visto bueno" }, { "value": "estrella", "label": "Estrella" } ], "default": "altura" },
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Altura de 60 a 90 cm" },
+        { "type": "textarea", "id": "texto", "label": "Texto", "default": "Ajústala a tu posición: sofá, sillón o cama." }
       ]
     }
   ]

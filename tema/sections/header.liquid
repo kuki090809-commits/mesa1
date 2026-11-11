@@ -165,10 +165,10 @@
     endif
   -%}
   {%- liquid
-    assign or_logo = section.settings.or_logo | default: settings.logo
-    assign or_logo_ancho = settings.logo_width
-    if section.settings.or_logo != blank
-      assign or_logo_ancho = section.settings.or_logo_ancho
+    assign fd_logo = section.settings.fd_logo | default: settings.logo
+    assign fd_logo_ancho = settings.logo_width
+    if section.settings.fd_logo != blank
+      assign fd_logo_ancho = section.settings.fd_logo_ancho
     endif
   -%}
   <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if country_selector or language_selector %} header--has-localizations{% endif %}">
@@ -192,27 +192,27 @@
         <h1 class="header__heading">
       {%- endif -%}
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-        {%- if or_logo != blank -%}
+        {%- if fd_logo != blank -%}
           <div class="header__heading-logo-wrapper">
-            {%- assign logo_alt = or_logo.alt | default: shop.name | escape -%}
-            {%- assign logo_height = or_logo_ancho | divided_by: or_logo.aspect_ratio -%}
-            {% capture sizes %}(max-width: {{ or_logo_ancho | times: 2 }}px) 50vw, {{ or_logo_ancho }}px{% endcapture %}
-            {% capture widths %}{{ or_logo_ancho }}, {{ or_logo_ancho | times: 1.5 | round }}, {{ or_logo_ancho | times: 2 }}{% endcapture %}
+            {%- assign logo_alt = fd_logo.alt | default: shop.name | escape -%}
+            {%- assign logo_height = fd_logo_ancho | divided_by: fd_logo.aspect_ratio -%}
+            {% capture sizes %}(max-width: {{ fd_logo_ancho | times: 2 }}px) 50vw, {{ fd_logo_ancho }}px{% endcapture %}
+            {% capture widths %}{{ fd_logo_ancho }}, {{ fd_logo_ancho | times: 1.5 | round }}, {{ fd_logo_ancho | times: 2 }}{% endcapture %}
             {{
-              or_logo
+              fd_logo
               | image_url: width: 600
               | image_tag:
                 class: 'header__heading-logo motion-reduce',
                 widths: widths,
                 height: logo_height,
-                width: or_logo_ancho,
+                width: fd_logo_ancho,
                 alt: logo_alt,
                 sizes: sizes,
                 preload: true
             }}
           </div>
         {%- else -%}
-          {%- render 'or-logo', texto: section.settings.or_logo_texto, icono: section.settings.or_logo_icono, alto: section.settings.or_logo_texto_tam -%}
+          {%- render 'fd-logo', texto: section.settings.fd_logo_texto, icono: section.settings.fd_logo_icono, alto: section.settings.fd_logo_texto_tam -%}
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -235,27 +235,27 @@
         <h1 class="header__heading">
       {%- endif -%}
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-        {%- if or_logo != blank -%}
+        {%- if fd_logo != blank -%}
           <div class="header__heading-logo-wrapper">
-            {%- assign logo_alt = or_logo.alt | default: shop.name | escape -%}
-            {%- assign logo_height = or_logo_ancho | divided_by: or_logo.aspect_ratio -%}
-            {% capture sizes %}(min-width: 750px) {{ or_logo_ancho }}px, 50vw{% endcapture %}
-            {% capture widths %}{{ or_logo_ancho }}, {{ or_logo_ancho | times: 1.5 | round }}, {{ or_logo_ancho | times: 2 }}{% endcapture %}
+            {%- assign logo_alt = fd_logo.alt | default: shop.name | escape -%}
+            {%- assign logo_height = fd_logo_ancho | divided_by: fd_logo.aspect_ratio -%}
+            {% capture sizes %}(min-width: 750px) {{ fd_logo_ancho }}px, 50vw{% endcapture %}
+            {% capture widths %}{{ fd_logo_ancho }}, {{ fd_logo_ancho | times: 1.5 | round }}, {{ fd_logo_ancho | times: 2 }}{% endcapture %}
             {{
-              or_logo
+              fd_logo
               | image_url: width: 600
               | image_tag:
                 class: 'header__heading-logo',
                 widths: widths,
                 height: logo_height,
-                width: or_logo_ancho,
+                width: fd_logo_ancho,
                 alt: logo_alt,
                 sizes: sizes,
                 preload: true
             }}
           </div>
         {%- else -%}
-          {%- render 'or-logo', texto: section.settings.or_logo_texto, icono: section.settings.or_logo_icono, alto: section.settings.or_logo_texto_tam -%}
+          {%- render 'fd-logo', texto: section.settings.fd_logo_texto, icono: section.settings.fd_logo_icono, alto: section.settings.fd_logo_texto_tam -%}
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -511,13 +511,13 @@
   "class": "section-header",
   "max_blocks": 3,
   "settings": [
-    { "type": "header", "content": "Ordena · Logo" },
-    { "type": "paragraph", "content": "Si no subes imagen de logo, se muestra el logo de texto de Ordena." },
-    { "type": "image_picker", "id": "or_logo", "label": "Imagen del logo (opcional)" },
-    { "type": "range", "id": "or_logo_ancho", "label": "Ancho de la imagen del logo (px)", "min": 50, "max": 300, "step": 5, "unit": "px", "default": 120 },
-    { "type": "text", "id": "or_logo_texto", "label": "Logo de texto", "default": "Ordena" },
-    { "type": "range", "id": "or_logo_texto_tam", "label": "Tamaño del logo de texto (px)", "min": 18, "max": 48, "step": 1, "unit": "px", "default": 28 },
-    { "type": "checkbox", "id": "or_logo_icono", "label": "Mostrar el icono giratorio junto al texto", "default": true },
+    { "type": "header", "content": "FlexiDesk · Logo" },
+    { "type": "paragraph", "content": "Si no subes imagen de logo, se muestra el logo de texto de FlexiDesk." },
+    { "type": "image_picker", "id": "fd_logo", "label": "Imagen del logo (opcional)" },
+    { "type": "range", "id": "fd_logo_ancho", "label": "Ancho de la imagen del logo (px)", "min": 50, "max": 300, "step": 5, "unit": "px", "default": 120 },
+    { "type": "text", "id": "fd_logo_texto", "label": "Logo de texto", "default": "FlexiDesk" },
+    { "type": "range", "id": "fd_logo_texto_tam", "label": "Tamaño del logo de texto (px)", "min": 18, "max": 48, "step": 1, "unit": "px", "default": 28 },
+    { "type": "checkbox", "id": "fd_logo_icono", "label": "Mostrar el icono junto al texto", "default": true },
     {
       "type": "select",
       "id": "logo_position",

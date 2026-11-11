@@ -1,0 +1,26 @@
+{%- comment -%}
+  FlexiDesk: variables de diseño globales. Los valores salen de
+  Personalizar → Configuración del tema → «FlexiDesk · Colores de marca».
+{%- endcomment -%}
+<script>document.documentElement.classList.add('fd-js');</script>
+<style>
+  :root {
+    --fd-fondo: {{ settings.fd_fondo | default: '#F3F3EF' }};
+    --fd-fondo-alt: {{ settings.fd_fondo_alt | default: '#E5E7E1' }};
+    --fd-texto: {{ settings.fd_texto | default: '#17191D' }};
+    --fd-texto-rgb: {{ settings.fd_texto | default: '#17191D' | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    --fd-acento: {{ settings.fd_acento | default: '#2D5BE3' }};
+    --fd-acento-hover: {{ settings.fd_acento | default: '#2D5BE3' | color_darken: 8 }};
+    --fd-acento-claro: {{ settings.fd_acento | default: '#2D5BE3' | color_lighten: 22 }};
+    --fd-acento-texto: {{ settings.fd_acento_texto | default: '#FFFFFF' }};
+    --fd-oscuro: {{ settings.fd_oscuro | default: '#17191D' }};
+    --fd-claro: {{ settings.fd_claro | default: '#F3F3EF' }};
+    --fd-salvia: {{ settings.fd_salvia | default: '#8B95A5' }};
+    --fd-radio: {{ settings.fd_radio | default: 14 }}px;
+    --fd-titulos: var(--font-heading-family);
+    --fd-cuerpo: var(--font-body-family);
+  }
+  {%- unless settings.fd_animaciones -%}
+    .fd-reveal { opacity: 1 !important; transform: none !important; }
+  {%- endunless -%}
+</style>

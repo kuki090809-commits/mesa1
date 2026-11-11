@@ -1,0 +1,95 @@
+{%- assign titulo_min = section.settings.titulo_tam | times: 0.6 | round -%}
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.fondo | default: 'var(--fd-fondo)' }};
+  }
+  #shopify-section-{{ section.id }} .fd-h2 { font-size: clamp({{ titulo_min }}px, 5vw, {{ section.settings.titulo_tam }}px); }
+  #shopify-section-{{ section.id }} .fd-comparador__texto { text-align: {{ section.settings.alineacion }}; }
+  #shopify-section-{{ section.id }} .fd-body { font-size: {{ section.settings.texto_tam }}px; }
+  {%- if section.settings.orden == 'comparador-primero' -%}
+    @media screen and (min-width: 990px) {
+      #shopify-section-{{ section.id }} .fd-comparador__grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); }
+      #shopify-section-{{ section.id }} .fd-comparador__texto { order: 2; }
+    }
+  {%- endif -%}
+{% endstyle %}
+
+<section class="fd-section fd-comparador" aria-label="{{ section.settings.titulo | strip_html | escape }}">
+  <div class="fd-container">
+    <div class="fd-comparador__grid">
+      <div class="fd-comparador__texto">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="fd-eyebrow fd-reveal">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="fd-h2 fd-reveal" style="--fd-i: 1">{{ section.settings.titulo }}</h2>
+        {%- if section.settings.texto != blank -%}
+          <p class="fd-body fd-reveal" style="--fd-i: 2">{{ section.settings.texto | newline_to_br }}</p>
+        {%- endif -%}
+        <ul class="fd-leyenda fd-reveal" style="--fd-i: 3">
+          {%- if section.settings.antes_titulo != blank -%}
+            <li><span class="fd-leyenda__punto"></span><span><b>{{ section.settings.antes_titulo }}</b>{{ section.settings.antes_texto }}</span></li>
+          {%- endif -%}
+          {%- if section.settings.despues_titulo != blank -%}
+            <li><span class="fd-leyenda__punto"></span><span><b>{{ section.settings.despues_titulo }}</b>{{ section.settings.despues_texto }}</span></li>
+          {%- endif -%}
+        </ul>
+      </div>
+
+      <div class="fd-comp fd-reveal" style="--fd-i: 1; --pos: {{ section.settings.posicion }}%;">
+        <div class="fd-comp__capa fd-comp__capa--antes">
+          {%- render 'fd-imagen', imagen: section.settings.imagen_antes, tipo: 'antes', clase: 'fd-media--sin-margen', sizes: '(min-width: 990px) 55vw, 100vw', alt: section.settings.etiqueta_antes -%}
+        </div>
+        <div class="fd-comp__capa fd-comp__capa--despues">
+          {%- render 'fd-imagen', imagen: section.settings.imagen_despues, tipo: 'despues', clase: 'fd-media--sin-margen', sizes: '(min-width: 990px) 55vw, 100vw', alt: section.settings.etiqueta_despues -%}
+        </div>
+        {%- if section.settings.etiqueta_antes != blank -%}
+          <span class="fd-comp__etiqueta fd-comp__etiqueta--antes">{{ section.settings.etiqueta_antes | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.etiqueta_despues != blank -%}
+          <span class="fd-comp__etiqueta fd-comp__etiqueta--despues">{{ section.settings.etiqueta_despues | escape }}</span>
+        {%- endif -%}
+        <input class="fd-comp__rango" type="range" min="0" max="100" value="{{ section.settings.posicion }}" aria-label="{{ section.settings.etiqueta_rango | escape }}">
+        <div class="fd-comp__asa" aria-hidden="true">
+          <span class="fd-comp__boton">{% render 'fd-icono', nombre: 'flechas' %}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FlexiDesk – Antes/después",
+  "tag": "div",
+  "class": "fd-wrap",
+  "settings": [
+    { "type": "header", "content": "Textos" },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Antes y después" },
+    { "type": "inline_richtext", "id": "titulo", "label": "Título", "default": "Del portátil en las rodillas <em>a tu propio escritorio.</em>" },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Desliza para ver la diferencia: la misma postura de siempre en el sofá, pero con todo a la altura justa." },
+    { "type": "text", "id": "antes_titulo", "label": "Leyenda «antes»: título", "default": "Antes" },
+    { "type": "text", "id": "antes_texto", "label": "Leyenda «antes»: texto", "default": "El portátil sobre las rodillas o en un cojín, y el café en el suelo." },
+    { "type": "text", "id": "despues_titulo", "label": "Leyenda «después»: título", "default": "Con FlexiDesk" },
+    { "type": "text", "id": "despues_texto", "label": "Leyenda «después»: texto", "default": "Una superficie estable a tu altura, que acercas y apartas con las ruedas." },
+    { "type": "header", "content": "Comparador" },
+    { "type": "image_picker", "id": "imagen_antes", "label": "Foto «antes»", "info": "Cuadrada. Usa el mismo encuadre en las dos fotos." },
+    { "type": "image_picker", "id": "imagen_despues", "label": "Foto «después»" },
+    { "type": "text", "id": "etiqueta_antes", "label": "Etiqueta sobre la foto «antes»", "default": "Antes" },
+    { "type": "text", "id": "etiqueta_despues", "label": "Etiqueta sobre la foto «después»", "default": "Con FlexiDesk" },
+    { "type": "text", "id": "etiqueta_rango", "label": "Texto del deslizador para lectores de pantalla", "default": "Desliza para comparar antes y después" },
+    { "type": "range", "id": "posicion", "label": "Posición inicial del deslizador (%)", "min": 10, "max": 90, "step": 5, "unit": "%", "default": 50 },
+    { "type": "select", "id": "orden", "label": "Colocación", "options": [ { "value": "texto-primero", "label": "Texto a la izquierda" }, { "value": "comparador-primero", "label": "Comparador a la izquierda" } ], "default": "texto-primero" },
+    { "type": "header", "content": "Tipografía y color" },
+    { "type": "range", "id": "titulo_tam", "label": "Tamaño del título (px)", "min": 24, "max": 80, "step": 2, "unit": "px", "default": 54 },
+    { "type": "range", "id": "texto_tam", "label": "Tamaño del texto (px)", "min": 14, "max": 24, "step": 1, "unit": "px", "default": 18 },
+    { "type": "select", "id": "alineacion", "label": "Alineación del texto", "options": [ { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" }, { "value": "right", "label": "Derecha" } ], "default": "left" },
+    { "type": "color", "id": "fondo", "label": "Color de fondo", "info": "Vacío = fondo principal de la marca." },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 112 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 112 }
+  ],
+  "presets": [ { "name": "FlexiDesk – Antes/después" } ]
+}
+{% endschema %}

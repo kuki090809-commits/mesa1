@@ -1,0 +1,133 @@
+{%- assign titulo_min = section.settings.titulo_tam | times: 0.6 | round -%}
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.fondo | default: 'var(--fd-oscuro)' }};
+  }
+  #shopify-section-{{ section.id }} .fd-medidas {
+    --fd-md-fondo: {{ section.settings.fondo | default: 'var(--fd-oscuro)' }};
+    --fd-md-texto: {{ section.settings.color_texto | default: 'var(--fd-claro)' }};
+  }
+  #shopify-section-{{ section.id }} .fd-h2 { font-size: clamp({{ titulo_min }}px, 5vw, {{ section.settings.titulo_tam }}px); }
+  #shopify-section-{{ section.id }} .fd-medidas__texto { text-align: {{ section.settings.alineacion }}; }
+{% endstyle %}
+
+<section id="{{ section.settings.ancla | default: 'medidas' | handleize }}" class="fd-section fd-medidas" aria-label="{{ section.settings.titulo | strip_html | escape }}">
+  <div class="fd-container">
+    <div class="fd-medidas__grid">
+      <div class="fd-medidas__plano fd-reveal">
+        <svg viewBox="0 0 600 560" role="img" aria-label="{{ section.settings.titulo | strip_html | escape }}">
+          <defs>
+            <pattern id="fd-cuadricula-{{ section.id }}" width="24" height="24" patternUnits="userSpaceOnUse">
+              <path d="M24 0H0V24" fill="none" stroke="currentColor" stroke-width=".6" opacity=".12"/>
+            </pattern>
+            <marker id="fd-punta-{{ section.id }}" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0L10 5 0 10z" fill="var(--fd-acento-claro)"/>
+            </marker>
+          </defs>
+          <rect width="600" height="560" fill="url(#fd-cuadricula-{{ section.id }})"/>
+          <g class="fd-plano__mesa">
+            <polygon points="146,96 454,96 480,124 120,124"/>
+            <rect x="120" y="124" width="360" height="14" rx="3"/>
+            <rect x="255" y="138" width="90" height="10" rx="3"/>
+            <rect x="291" y="148" width="18" height="92"/>
+            <rect x="286" y="240" width="28" height="196" rx="4"/>
+            <circle cx="328" cy="262" r="7"/>
+            <rect x="160" y="436" width="280" height="14" rx="7"/>
+            <circle cx="180" cy="462" r="12"/>
+            <circle cx="420" cy="462" r="12"/>
+          </g>
+          <line x1="20" y1="476" x2="580" y2="476" class="fd-plano__suelo"/>
+          <g class="fd-plano__cota">
+            <line x1="120" y1="112" x2="120" y2="52" class="fd-plano__aux"/>
+            <line x1="480" y1="112" x2="480" y2="52" class="fd-plano__aux"/>
+            <line x1="126" y1="62" x2="474" y2="62" marker-start="url(#fd-punta-{{ section.id }})" marker-end="url(#fd-punta-{{ section.id }})"/>
+            <rect x="248" y="44" width="104" height="36" rx="18" class="fd-plano__pastilla"/>
+            <text x="300" y="68" text-anchor="middle">{{ section.settings.ancho_txt | escape }}</text>
+
+            <line x1="490" y1="124" x2="560" y2="124" class="fd-plano__aux"/>
+            <line x1="545" y1="130" x2="545" y2="470" marker-start="url(#fd-punta-{{ section.id }})" marker-end="url(#fd-punta-{{ section.id }})"/>
+            <rect x="490" y="278" width="110" height="36" rx="18" class="fd-plano__pastilla"/>
+            <text x="545" y="302" text-anchor="middle">{{ section.settings.alto_txt | escape }}</text>
+
+            <line x1="160" y1="456" x2="160" y2="530" class="fd-plano__aux"/>
+            <line x1="440" y1="456" x2="440" y2="530" class="fd-plano__aux"/>
+            <line x1="166" y1="516" x2="434" y2="516" marker-start="url(#fd-punta-{{ section.id }})" marker-end="url(#fd-punta-{{ section.id }})"/>
+            <rect x="248" y="498" width="104" height="36" rx="18" class="fd-plano__pastilla"/>
+            <text x="300" y="522" text-anchor="middle">{{ section.settings.base_txt | escape }}</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="fd-medidas__texto">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="fd-eyebrow fd-reveal">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="fd-h2 fd-reveal" style="--fd-i: 1">{{ section.settings.titulo }}</h2>
+        {%- if section.settings.texto != blank -%}
+          <p class="fd-body fd-reveal" style="--fd-i: 2">{{ section.settings.texto | newline_to_br }}</p>
+        {%- endif -%}
+        <dl class="fd-specs">
+          {%- for block in section.blocks -%}
+            <div class="fd-spec fd-reveal" style="--fd-i: {{ forloop.index | plus: 2 }}" {{ block.shopify_attributes }}>
+              <span class="fd-spec__icono">{% render 'fd-icono', nombre: block.settings.icono %}</span>
+              <dt>{{ block.settings.titulo | escape }}</dt>
+              <dd>{{ block.settings.valor | escape }}</dd>
+            </div>
+          {%- endfor -%}
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FlexiDesk – Medidas",
+  "tag": "div",
+  "class": "fd-wrap",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "header", "content": "Textos" },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Medidas" },
+    { "type": "inline_richtext", "id": "titulo", "label": "Título", "default": "Todo lo que necesitas, <em>en 60 × 40 cm.</em>" },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Espacio suficiente para el portátil, una tablet, un libro y tus accesorios." },
+    { "type": "text", "id": "ancla", "label": "Nombre del ancla", "info": "El botón «Ver medidas» baja hasta aquí.", "default": "medidas" },
+    { "type": "header", "content": "Cotas del dibujo" },
+    { "type": "text", "id": "ancho_txt", "label": "Ancho del tablero", "default": "60 cm" },
+    { "type": "text", "id": "alto_txt", "label": "Altura", "default": "60 – 90 cm" },
+    { "type": "text", "id": "base_txt", "label": "Ancho de la base", "default": "57 cm" },
+    { "type": "header", "content": "Estilo" },
+    { "type": "range", "id": "titulo_tam", "label": "Tamaño del título (px)", "min": 24, "max": 80, "step": 2, "unit": "px", "default": 52 },
+    { "type": "select", "id": "alineacion", "label": "Alineación del texto", "options": [ { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" } ], "default": "left" },
+    { "type": "color", "id": "fondo", "label": "Color de fondo", "info": "Vacío = fondo oscuro de la marca." },
+    { "type": "color", "id": "color_texto", "label": "Color del texto", "info": "Vacío = texto sobre fondo oscuro." },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 104 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 104 }
+  ],
+  "blocks": [
+    {
+      "type": "medida",
+      "name": "Dato",
+      "settings": [
+        { "type": "select", "id": "icono", "label": "Icono", "options": [ { "value": "altura", "label": "Altura" }, { "value": "superficie", "label": "Superficie" }, { "value": "ruedas", "label": "Ruedas" }, { "value": "llave", "label": "Montaje" }, { "value": "caja", "label": "Caja" }, { "value": "check", "label": "Visto bueno" } ], "default": "altura" },
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Altura regulable" },
+        { "type": "text", "id": "valor", "label": "Valor", "default": "60 – 90 cm" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FlexiDesk – Medidas",
+      "blocks": [
+        { "type": "medida", "settings": { "icono": "altura", "titulo": "Altura regulable", "valor": "60 – 90 cm" } },
+        { "type": "medida", "settings": { "icono": "superficie", "titulo": "Superficie", "valor": "60 × 40 cm" } },
+        { "type": "medida", "settings": { "icono": "ruedas", "titulo": "Base con ruedas", "valor": "57 × 40 cm" } },
+        { "type": "medida", "settings": { "icono": "llave", "titulo": "Montaje", "valor": "En minutos, tornillería incluida" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -5,13 +5,13 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "col1_enlace1_url": "shopify://products/especiero-giratorio-360",
-        "col1_enlace2_url": "shopify://collections/all",
+        "col1_enlace1_url": "shopify://products/flexidesk™-mesa-auxiliar-regulable",
         "col2_enlace1_url": "shopify://pages/preguntas-frecuentes",
         "col2_enlace2_url": "/policies/shipping-policy",
         "col2_enlace3_url": "/policies/refund-policy",
         "col2_enlace4_url": "shopify://pages/contacto",
-        "legal_extra_url": "shopify://pages/politica-de-cookies"
+        "legal_extra_url": "shopify://pages/politica-de-cookies",
+        "col1_enlace2_texto": ""
       }
     }
   },

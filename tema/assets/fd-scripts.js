@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ORDENA · interacciones (sin librerías externas)
+   FLEXIDESK · interacciones (sin librerías externas)
    Cada función comprueba si su elemento existe, así el mismo archivo sirve
    en todas las páginas. Se reinicia cuando editas una sección en Shopify.
    ========================================================================== */
@@ -11,17 +11,17 @@
   /* ---------- Entradas al hacer scroll (un solo observador) ---------- */
   var revealObserver = null;
   function initReveal(root) {
-    var items = (root || document).querySelectorAll('.or-reveal:not(.or-visible)');
+    var items = (root || document).querySelectorAll('.fd-reveal:not(.fd-visible)');
     if (!items.length) return;
     if (reduceMotion || !('IntersectionObserver' in window)) {
-      items.forEach(function (el) { el.classList.add('or-visible'); });
+      items.forEach(function (el) { el.classList.add('fd-visible'); });
       return;
     }
     if (!revealObserver) {
       revealObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            entry.target.classList.add('or-visible');
+            entry.target.classList.add('fd-visible');
             revealObserver.unobserve(entry.target);
           }
         });
@@ -32,13 +32,13 @@
 
   /* ---------- Cifras que cuentan ---------- */
   function initCifras(root) {
-    var nums = (root || document).querySelectorAll('[data-or-contar]');
+    var nums = (root || document).querySelectorAll('[data-fd-contar]');
     if (!nums.length) return;
     function animate(el) {
-      var final = parseFloat(el.getAttribute('data-or-contar')) || 0;
-      var target = el.querySelector('.or-cifra__valor') || el;
+      var final = parseFloat(el.getAttribute('data-fd-contar')) || 0;
+      var target = el.querySelector('.fd-cifra__valor') || el;
       if (reduceMotion || final === 0) { target.textContent = formatNum(final); return; }
-      var dur = parseInt(el.getAttribute('data-or-duracion'), 10) || 1600;
+      var dur = parseInt(el.getAttribute('data-fd-duracion'), 10) || 1600;
       var start = null;
       function step(ts) {
         if (!start) start = ts;
@@ -61,38 +61,73 @@
 
   /* ---------- Comparador antes / después ---------- */
   function initComparador(root) {
-    (root || document).querySelectorAll('.or-comp').forEach(function (comp) {
-      var range = comp.querySelector('.or-comp__rango');
-      if (!range || range.dataset.orListo) return;
-      range.dataset.orListo = '1';
+    (root || document).querySelectorAll('.fd-comp').forEach(function (comp) {
+      var range = comp.querySelector('.fd-comp__rango');
+      if (!range || range.dataset.fdListo) return;
+      range.dataset.fdListo = '1';
       function update() { comp.style.setProperty('--pos', range.value + '%'); }
       range.addEventListener('input', update);
       update();
     });
   }
 
-  /* ---------- Cómo funciona: el especiero gira con cada paso ---------- */
-  function initPasos(root) {
-    (root || document).querySelectorAll('[data-or-pasos]').forEach(function (wrap) {
-      if (wrap.dataset.orListo) return;
-      wrap.dataset.orListo = '1';
-      var pasos = wrap.querySelectorAll('.or-paso');
-      var ilu = wrap.querySelector('.or-ilu--cenital');
-      var grados = parseFloat(wrap.getAttribute('data-or-grados')) || 90;
-      if (!pasos.length) return;
-      function activar(i) {
-        pasos.forEach(function (p, j) { p.classList.toggle('is-activo', j === i); });
-        if (ilu) ilu.style.setProperty('--or-giro', (-grados * i) + 'deg');
+  /* ---------- Altura: la mesa sube y baja con el deslizador ---------- */
+  function initAltura(root) {
+    (root || document).querySelectorAll('[data-fd-altura]').forEach(function (box) {
+      if (box.dataset.fdListo) return;
+      box.dataset.fdListo = '1';
+      var range = box.querySelector('.fd-altura__rango');
+      var sube = box.querySelector('.fd-altura__sube');
+      if (!range) return;
+      var min = parseFloat(box.getAttribute('data-min')) || 60;
+      var max = parseFloat(box.getAttribute('data-max')) || 90;
+      var u1 = parseFloat(box.getAttribute('data-umbral1')) || 70;
+      var u2 = parseFloat(box.getAttribute('data-umbral2')) || 80;
+      var lectura = box.querySelectorAll('[data-fd-cm]');
+      var etiqueta = box.querySelector('[data-fd-cm-svg]');
+      var pistas = box.querySelectorAll('[data-fd-pista]');
+      function update() {
+        var v = parseFloat(range.value);
+        var pct = (v - min) / (max - min);
+        range.style.setProperty('--fd-pct', (pct * 100).toFixed(1) + '%');
+        if (sube) sube.style.setProperty('--fd-dy', (-135 * pct).toFixed(1) + 'px');
+        lectura.forEach(function (el) { el.textContent = Math.round(v); });
+        if (etiqueta) etiqueta.textContent = Math.round(v) + ' cm';
+        var nivel = v < u1 ? '1' : (v < u2 ? '2' : '3');
+        pistas.forEach(function (p) { p.hidden = p.getAttribute('data-fd-pista') !== nivel; });
       }
-      activar(0);
-      if (!('IntersectionObserver' in window)) return;
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) activar(Array.prototype.indexOf.call(pasos, e.target));
-        });
-      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-      pasos.forEach(function (p) { io.observe(p); });
+      range.addEventListener('input', update);
+      update();
     });
+  }
+
+  /* ---------- Barra de compra fija ---------- */
+  var barraBound = false;
+  function initBarra() {
+    var barra = document.querySelector('[data-fd-barra]');
+    if (!barra || barraBound) return;
+    barraBound = true;
+    var ancla = document.querySelector('[data-fd-ancla-barra]');
+    var pie = document.querySelector('footer, .fd-footer');
+    var pasadoAncla = false;
+    var enPie = false;
+    function pintar() {
+      var ver = pasadoAncla && !enPie;
+      barra.classList.toggle('is-visible', ver);
+      if (ver) barra.removeAttribute('inert'); else barra.setAttribute('inert', '');
+    }
+    if (!('IntersectionObserver' in window)) { pasadoAncla = true; pintar(); return; }
+    if (ancla) {
+      new IntersectionObserver(function (e) {
+        pasadoAncla = !e[0].isIntersecting && e[0].boundingClientRect.top < 0;
+        pintar();
+      }, { threshold: 0 }).observe(ancla);
+    } else {
+      window.addEventListener('scroll', function () { pasadoAncla = window.scrollY > 600; pintar(); }, { passive: true });
+    }
+    if (pie) {
+      new IntersectionObserver(function (e) { enPie = e[0].isIntersecting; pintar(); }, { threshold: 0 }).observe(pie);
+    }
   }
 
   /* ---------- Parallax suave del hero ---------- */
@@ -100,7 +135,7 @@
   var ticking = false;
   function initParallax(root) {
     if (reduceMotion) return;
-    (root || document).querySelectorAll('[data-or-parallax]').forEach(function (el) {
+    (root || document).querySelectorAll('[data-fd-parallax]').forEach(function (el) {
       if (parallaxEls.indexOf(el) === -1) parallaxEls.push(el);
     });
     if (!parallaxEls.length || initParallax.bound) return;
@@ -111,10 +146,10 @@
       requestAnimationFrame(function () {
         parallaxEls.forEach(function (el) {
           if (!el.isConnected) return;
-          var k = parseFloat(el.getAttribute('data-or-parallax')) || 0;
+          var k = parseFloat(el.getAttribute('data-fd-parallax')) || 0;
           var r = el.getBoundingClientRect();
           var center = r.top + r.height / 2 - window.innerHeight / 2;
-          el.style.setProperty('--or-py', (center * -k / 100).toFixed(1) + 'px');
+          el.style.setProperty('--fd-py', (center * -k / 100).toFixed(1) + 'px');
         });
         ticking = false;
       });
@@ -125,11 +160,11 @@
 
   /* ---------- Galería de producto ---------- */
   function initGaleria(root) {
-    (root || document).querySelectorAll('[data-or-galeria]').forEach(function (gal) {
-      if (gal.dataset.orListo) return;
-      gal.dataset.orListo = '1';
-      var slides = gal.querySelectorAll('.or-galeria__slide');
-      var minis = gal.querySelectorAll('.or-galeria__mini');
+    (root || document).querySelectorAll('[data-fd-galeria]').forEach(function (gal) {
+      if (gal.dataset.fdListo) return;
+      gal.dataset.fdListo = '1';
+      var slides = gal.querySelectorAll('.fd-galeria__slide');
+      var minis = gal.querySelectorAll('.fd-galeria__mini');
       function mostrar(id) {
         slides.forEach(function (s) { s.classList.toggle('is-activa', s.getAttribute('data-media-id') === id); });
         minis.forEach(function (m) {
@@ -141,32 +176,32 @@
       minis.forEach(function (m) {
         m.addEventListener('click', function () { mostrar(m.getAttribute('data-media-id')); });
       });
-      gal.addEventListener('or:media', function (e) { if (e.detail) mostrar(String(e.detail)); });
+      gal.addEventListener('fd:media', function (e) { if (e.detail) mostrar(String(e.detail)); });
     });
   }
 
   /* ---------- Variantes de producto ---------- */
   function initVariantes(root) {
-    (root || document).querySelectorAll('[data-or-producto]').forEach(function (box) {
-      if (box.dataset.orListo) return;
-      box.dataset.orListo = '1';
-      var dataEl = box.querySelector('script[data-or-variantes]');
+    (root || document).querySelectorAll('[data-fd-producto]').forEach(function (box) {
+      if (box.dataset.fdListo) return;
+      box.dataset.fdListo = '1';
+      var dataEl = box.querySelector('script[data-fd-variantes]');
       if (!dataEl) return;
       var variantes;
       try { variantes = JSON.parse(dataEl.textContent); } catch (err) { return; }
-      var inputs = box.querySelectorAll('.or-opcion input[type="radio"]');
+      var inputs = box.querySelectorAll('.fd-opcion input[type="radio"]');
       var idInputs = box.querySelectorAll('input[name="id"]');
-      var precio = box.querySelector('[data-or-precio]');
-      var tachado = box.querySelector('[data-or-tachado]');
-      var ahorro = box.querySelector('[data-or-ahorro]');
-      var botones = box.querySelectorAll('[data-or-boton-compra]');
-      var textoAgotado = box.getAttribute('data-or-agotado') || 'Agotado';
-      var textoComprar = box.getAttribute('data-or-comprar') || 'Añadir al carrito';
-      var galeria = document.querySelector('[data-or-galeria]');
+      var precio = box.querySelector('[data-fd-precio]');
+      var tachado = box.querySelector('[data-fd-tachado]');
+      var ahorro = box.querySelector('[data-fd-ahorro]');
+      var botones = box.querySelectorAll('[data-fd-boton-compra]');
+      var textoAgotado = box.getAttribute('data-fd-agotado') || 'Agotado';
+      var textoComprar = box.getAttribute('data-fd-comprar') || 'Añadir al carrito';
+      var galeria = document.querySelector('[data-fd-galeria]');
 
       function seleccion() {
         var sel = [];
-        box.querySelectorAll('.or-opcion').forEach(function (fs) {
+        box.querySelectorAll('.fd-opcion').forEach(function (fs) {
           var c = fs.querySelector('input:checked');
           sel.push(c ? c.value : null);
           var lbl = fs.querySelector('legend span');
@@ -194,7 +229,7 @@
         if (precio) precio.textContent = v.price;
         if (tachado) { tachado.textContent = v.compare || ''; tachado.hidden = !v.compare; }
         if (ahorro) { ahorro.textContent = v.saving || ''; ahorro.hidden = !v.saving; }
-        if (v.media && galeria) galeria.dispatchEvent(new CustomEvent('or:media', { detail: v.media }));
+        if (v.media && galeria) galeria.dispatchEvent(new CustomEvent('fd:media', { detail: v.media }));
         if (window.history && window.history.replaceState) {
           var url = new URL(window.location.href);
           url.searchParams.set('variant', v.id);
@@ -207,9 +242,9 @@
 
   /* ---------- Selector de cantidad ---------- */
   function initCantidad(root) {
-    (root || document).querySelectorAll('.or-cantidad').forEach(function (q) {
-      if (q.dataset.orListo) return;
-      q.dataset.orListo = '1';
+    (root || document).querySelectorAll('.fd-cantidad').forEach(function (q) {
+      if (q.dataset.fdListo) return;
+      q.dataset.fdListo = '1';
       var input = q.querySelector('input');
       q.querySelectorAll('button[data-paso]').forEach(function (b) {
         b.addEventListener('click', function () {
@@ -225,7 +260,8 @@
     initReveal(root);
     initCifras(root);
     initComparador(root);
-    initPasos(root);
+    initAltura(root);
+    initBarra();
     initParallax(root);
     initGaleria(root);
     initVariantes(root);

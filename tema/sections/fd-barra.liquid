@@ -1,0 +1,53 @@
+{%- liquid
+  assign producto = section.settings.producto
+  if producto == blank and product != blank
+    assign producto = product
+  endif
+-%}
+{%- if producto != blank and producto.available -%}
+  {%- assign v = producto.selected_or_first_available_variant -%}
+  {% style %}
+    #shopify-section-{{ section.id }} { padding: 0; }
+    {%- unless section.settings.en_ordenador -%}
+      @media screen and (min-width: 990px) { #shopify-section-{{ section.id }} .fd-barra { display: none; } }
+    {%- endunless -%}
+  {% endstyle %}
+  <div class="fd-barra" data-fd-barra inert>
+    <div class="fd-barra__interior">
+      <div class="fd-barra__info">
+        {%- if producto.featured_image -%}
+          {{ producto.featured_image | image_url: width: 120 | image_tag: class: 'fd-barra__miniatura', loading: 'lazy', alt: '' }}
+        {%- endif -%}
+        <div>
+          <p class="fd-barra__titulo">{{ section.settings.titulo | default: producto.title | escape }}</p>
+          <p class="fd-barra__precio">
+            <strong>{{ v.price | money }}</strong>
+            {%- if v.compare_at_price > v.price -%}<s>{{ v.compare_at_price | money }}</s>{%- endif -%}
+          </p>
+        </div>
+      </div>
+      {%- if producto.has_only_default_variant and section.settings.compra_directa -%}
+        {%- render 'fd-form-compra', producto: producto, seccion: section.id, texto_boton: section.settings.boton_texto, cantidad: false, pago_rapido: false -%}
+      {%- else -%}
+        <a class="fd-btn" href="{{ producto.url }}">{{ section.settings.boton_texto | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "FlexiDesk – Barra compra",
+  "tag": "div",
+  "class": "fd-wrap",
+  "settings": [
+    { "type": "paragraph", "content": "Barra fija abajo que aparece cuando bajas por la página, para comprar sin volver arriba." },
+    { "type": "product", "id": "producto", "label": "Producto", "info": "En la página de producto se usa ese producto automáticamente." },
+    { "type": "text", "id": "titulo", "label": "Nombre a mostrar", "info": "Vacío = nombre del producto." },
+    { "type": "text", "id": "boton_texto", "label": "Texto del botón", "default": "Añadir al carrito" },
+    { "type": "checkbox", "id": "compra_directa", "label": "Añadir al carrito directamente (si no tiene opciones)", "default": true },
+    { "type": "checkbox", "id": "en_ordenador", "label": "Mostrar también en ordenador", "default": true }
+  ],
+  "presets": [ { "name": "FlexiDesk – Barra compra" } ]
+}
+{% endschema %}

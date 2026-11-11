@@ -1,5 +1,5 @@
 {%- comment -%}
-  Ordena: pie de página propio (sustituye al de Dawn en este tema).
+  FlexiDesk: pie de página propio (sustituye al de Dawn en este tema).
   Todo se edita desde Personalizar → Pie de página.
 {%- endcomment -%}
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
@@ -7,33 +7,33 @@
   #shopify-section-{{ section.id }} {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
-    background: {{ section.settings.fondo | default: 'var(--or-oscuro)' }};
+    background: {{ section.settings.fondo | default: 'var(--fd-oscuro)' }};
   }
-  #shopify-section-{{ section.id }} .or-footer {
-    --or-ft-fondo: {{ section.settings.fondo | default: 'var(--or-oscuro)' }};
-    --or-ft-texto: {{ section.settings.texto | default: 'var(--or-claro)' }};
+  #shopify-section-{{ section.id }} .fd-footer {
+    --fd-ft-fondo: {{ section.settings.fondo | default: 'var(--fd-oscuro)' }};
+    --fd-ft-texto: {{ section.settings.texto | default: 'var(--fd-claro)' }};
     background: transparent;
   }
-  #shopify-section-{{ section.id }} .or-footer__links,
-  #shopify-section-{{ section.id }} .or-footer__texto { font-size: {{ section.settings.texto_tam }}px; }
+  #shopify-section-{{ section.id }} .fd-footer__links,
+  #shopify-section-{{ section.id }} .fd-footer__texto { font-size: {{ section.settings.texto_tam }}px; }
 {% endstyle %}
 
-<footer class="or-section or-footer">
-  <div class="or-container">
-    <div class="or-footer__grid">
-      <div class="or-footer__marca">
+<footer class="fd-section fd-footer">
+  <div class="fd-container">
+    <div class="fd-footer__grid">
+      <div class="fd-footer__marca">
         <a href="{{ routes.root_url }}" aria-label="{{ section.settings.logo_texto | default: shop.name | escape }}">
           {%- if section.settings.logo != blank -%}
             {{ section.settings.logo | image_url: width: 600 | image_tag: width: section.settings.logo_ancho, loading: 'lazy', alt: section.settings.logo_texto, style: 'height:auto; margin-bottom:18px;' }}
           {%- else -%}
-            {%- render 'or-logo', texto: section.settings.logo_texto, icono: section.settings.logo_icono, alto: 32 -%}
+            {%- render 'fd-logo', texto: section.settings.logo_texto, icono: section.settings.logo_icono, alto: 32 -%}
           {%- endif -%}
         </a>
         {%- if section.settings.lema != blank -%}
-          <p class="or-footer__lema">{{ section.settings.lema | newline_to_br }}</p>
+          <p class="fd-footer__lema">{{ section.settings.lema | newline_to_br }}</p>
         {%- endif -%}
         {%- if section.settings.mostrar_redes -%}
-          {%- render 'social-icons', class: 'or-footer__redes' -%}
+          {%- render 'social-icons', class: 'fd-footer__redes' -%}
         {%- endif -%}
       </div>
 
@@ -45,7 +45,7 @@
         {%- if titulo_col != blank -%}
           <nav aria-label="{{ titulo_col | escape }}">
             <h2>{{ titulo_col | escape }}</h2>
-            <ul class="or-footer__links">
+            <ul class="fd-footer__links">
               {%- for n in (1..4) -%}
                 {%- liquid
                   assign k_l = 'col' | append: c | append: '_enlace' | append: n | append: '_texto'
@@ -66,20 +66,20 @@
         <div>
           <h2>{{ section.settings.contacto_titulo | escape }}</h2>
           {%- if section.settings.contacto_texto != blank -%}
-            <p class="or-footer__texto">{{ section.settings.contacto_texto | newline_to_br }}</p>
+            <p class="fd-footer__texto">{{ section.settings.contacto_texto | newline_to_br }}</p>
           {%- endif -%}
           {%- if section.settings.contacto_email != blank -%}
-            <p class="or-footer__texto" style="margin-top: 12px;"><a href="mailto:{{ section.settings.contacto_email | escape }}">{{ section.settings.contacto_email | escape }}</a></p>
+            <p class="fd-footer__texto" style="margin-top: 12px;"><a href="mailto:{{ section.settings.contacto_email | escape }}">{{ section.settings.contacto_email | escape }}</a></p>
           {%- endif -%}
         </div>
       {%- endif -%}
     </div>
 
-    <div class="or-footer__barra">
-      <span class="or-footer__copy">© {{ 'now' | date: '%Y' }} {{ section.settings.copyright | default: shop.name | escape }}</span>
+    <div class="fd-footer__barra">
+      <span class="fd-footer__copy">© {{ 'now' | date: '%Y' }} {{ section.settings.copyright | default: shop.name | escape }}</span>
 
       {%- if section.settings.mostrar_legales -%}
-        <ul class="or-footer__legales">
+        <ul class="fd-footer__legales">
           {%- for policy in shop.policies -%}
             {%- if policy.type != 'contact_information' -%}
               <li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
@@ -95,7 +95,7 @@
       {%- endif -%}
 
       {%- if section.settings.mostrar_idiomas and localization.available_languages.size > 1 -%}
-        <ul class="or-footer__legales" aria-label="Idioma">
+        <ul class="fd-footer__legales" aria-label="Idioma">
           {%- for language in localization.available_languages -%}
             <li><a href="{{ language.root_url }}" lang="{{ language.iso_code }}"{% if language.iso_code == request.locale.iso_code %} aria-current="true" style="text-decoration: underline;"{% endif %}>{{ language.endonym_name | capitalize }}</a></li>
           {%- endfor -%}
@@ -103,7 +103,7 @@
       {%- endif -%}
 
       {%- if section.settings.mostrar_pagos and shop.enabled_payment_types.size > 0 -%}
-        <ul class="or-footer__pagos" aria-label="Formas de pago">
+        <ul class="fd-footer__pagos" aria-label="Formas de pago">
           {%- for type in shop.enabled_payment_types -%}
             <li>{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
           {%- endfor -%}
@@ -115,20 +115,20 @@
 
 {% schema %}
 {
-  "name": "Ordena – Pie de página",
+  "name": "FlexiDesk – Pie de página",
   "tag": "div",
-  "class": "or-wrap",
+  "class": "fd-wrap",
   "settings": [
     { "type": "header", "content": "Marca" },
     { "type": "image_picker", "id": "logo", "label": "Imagen del logo (opcional)", "info": "Vacío = logo de texto." },
     { "type": "range", "id": "logo_ancho", "label": "Ancho de la imagen del logo (px)", "min": 60, "max": 300, "step": 10, "unit": "px", "default": 140 },
-    { "type": "text", "id": "logo_texto", "label": "Logo de texto", "default": "Ordena" },
+    { "type": "text", "id": "logo_texto", "label": "Logo de texto", "default": "FlexiDesk" },
     { "type": "checkbox", "id": "logo_icono", "label": "Mostrar icono junto al texto", "default": true },
-    { "type": "textarea", "id": "lema", "label": "Frase de la marca", "default": "Organización de cocina para casas reales: menos rebuscar, más cocinar." },
+    { "type": "textarea", "id": "lema", "label": "Frase de la marca", "default": "Mobiliario práctico para trabajar, estudiar y descansar donde estés." },
     { "type": "checkbox", "id": "mostrar_redes", "label": "Mostrar redes sociales", "info": "Los enlaces se ponen en Configuración del tema → Redes sociales.", "default": true },
     { "type": "header", "content": "Columna 1" },
     { "type": "text", "id": "col1_titulo", "label": "Título", "default": "Tienda" },
-    { "type": "text", "id": "col1_enlace1_texto", "label": "Enlace 1: texto", "default": "Especiero Giratorio 360°" },
+    { "type": "text", "id": "col1_enlace1_texto", "label": "Enlace 1: texto", "default": "FlexiDesk™" },
     { "type": "url", "id": "col1_enlace1_url", "label": "Enlace 1: destino" },
     { "type": "text", "id": "col1_enlace2_texto", "label": "Enlace 2: texto", "default": "Todos los productos" },
     { "type": "url", "id": "col1_enlace2_url", "label": "Enlace 2: destino" },
@@ -151,7 +151,7 @@
     { "type": "textarea", "id": "contacto_texto", "label": "Texto", "default": "¿Dudas con tu pedido? Te respondemos lo antes posible." },
     { "type": "text", "id": "contacto_email", "label": "Correo de contacto (opcional)" },
     { "type": "header", "content": "Barra inferior" },
-    { "type": "text", "id": "copyright", "label": "Nombre junto al ©", "default": "Ordena" },
+    { "type": "text", "id": "copyright", "label": "Nombre junto al ©", "default": "FlexiDesk" },
     { "type": "checkbox", "id": "mostrar_legales", "label": "Mostrar enlaces legales", "info": "Las políticas se editan en Configuración → Políticas.", "default": true },
     { "type": "text", "id": "legal_extra_texto", "label": "Enlace legal extra 1: texto", "default": "Política de cookies" },
     { "type": "url", "id": "legal_extra_url", "label": "Enlace legal extra 1: destino" },

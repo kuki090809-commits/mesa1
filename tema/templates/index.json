@@ -1,185 +1,196 @@
 {
   "sections": {
     "apertura": {
-      "type": "or-hero",
+      "type": "fd-hero",
       "settings": {
-        "producto": "especiero-giratorio-360",
-        "mostrar_precio": true
+        "producto": "flexidesk™-mesa-auxiliar-regulable"
       }
     },
-    "cinta": {
-      "type": "or-marquesina",
+    "usos": {
+      "type": "fd-usos",
       "blocks": {
-        "f1": {
-          "type": "frase",
+        "u1": {
+          "type": "uso",
           "settings": {
-            "texto": "Gira 360°"
+            "icono": "portatil",
+            "titulo": "Trabaja",
+            "texto": "El portátil a la altura justa, sin hacer equilibrios sobre las rodillas."
           }
         },
-        "f2": {
-          "type": "frase",
+        "u2": {
+          "type": "uso",
           "settings": {
-            "texto": "Todo a la vista"
+            "icono": "lapiz",
+            "titulo": "Estudia",
+            "texto": "Apuntes, tablet y libro a mano desde el sillón o la cama."
           }
         },
-        "f3": {
-          "type": "frase",
+        "u3": {
+          "type": "uso",
           "settings": {
-            "texto": "Un solo hueco"
+            "icono": "libro",
+            "titulo": "Lee",
+            "texto": "Un apoyo estable para leer cómodo, sin cargar con el peso."
           }
         },
-        "f4": {
-          "type": "frase",
+        "u4": {
+          "type": "uso",
           "settings": {
-            "texto": "Cocina sin rebuscar"
-          }
-        },
-        "f5": {
-          "type": "frase",
-          "settings": {
-            "texto": "Envío gratis"
+            "icono": "taza",
+            "titulo": "Desayuna",
+            "texto": "El café y el desayuno junto a la cama, sin bandejas que vuelcan."
           }
         }
       },
       "block_order": [
-        "f1",
-        "f2",
-        "f3",
-        "f4",
-        "f5"
+        "u1",
+        "u2",
+        "u3",
+        "u4"
       ],
+      "settings": {
+        "fondo": "#E5E7E1"
+      }
+    },
+    "altura": {
+      "type": "fd-altura",
       "settings": {}
     },
     "antes-despues": {
-      "type": "or-antes-despues",
-      "settings": {}
+      "type": "fd-antes-despues",
+      "settings": {
+        "eyebrow": "Antes y después",
+        "fondo": "#E5E7E1"
+      }
     },
-    "cifras": {
-      "type": "or-cifras",
+    "medidas": {
+      "type": "fd-medidas",
       "blocks": {
-        "c1": {
-          "type": "cifra",
+        "m1": {
+          "type": "medida",
           "settings": {
-            "numero": "360",
-            "sufijo": "°",
-            "texto": "de giro para llegar a cualquier bote"
+            "icono": "altura",
+            "titulo": "Altura regulable",
+            "valor": "60 – 90 cm"
           }
         },
-        "c2": {
-          "type": "cifra",
+        "m2": {
+          "type": "medida",
           "settings": {
-            "numero": "1",
-            "sufijo": "",
-            "texto": "solo hueco en la encimera o el armario"
+            "icono": "superficie",
+            "titulo": "Superficie",
+            "valor": "60 × 40 cm"
           }
         },
-        "c3": {
-          "type": "cifra",
+        "m3": {
+          "type": "medida",
           "settings": {
-            "numero": "0",
-            "sufijo": "",
-            "texto": "botes que mover para coger el de detrás"
+            "icono": "ruedas",
+            "titulo": "Base con ruedas",
+            "valor": "57 × 40 cm"
+          }
+        },
+        "m4": {
+          "type": "medida",
+          "settings": {
+            "icono": "llave",
+            "titulo": "Montaje",
+            "valor": "En minutos, tornillería incluida"
           }
         }
       },
       "block_order": [
-        "c1",
-        "c2",
-        "c3"
+        "m1",
+        "m2",
+        "m3",
+        "m4"
       ],
       "settings": {}
     },
-    "como-funciona": {
-      "type": "or-pasos",
-      "blocks": {
-        "p1": {
-          "type": "paso",
-          "settings": {
-            "titulo": "Colócalo",
-            "texto": "Busca su sitio en la encimera o dentro del armario. Ocupa un solo hueco en lugar de varios botes sueltos."
-          }
-        },
-        "p2": {
-          "type": "paso",
-          "settings": {
-            "titulo": "Llénalo",
-            "texto": "Reúne tus especias en un único punto: pimentón, comino, orégano, canela… todas juntas y a la vista."
-          }
-        },
-        "p3": {
-          "type": "paso",
-          "settings": {
-            "titulo": "Gíralo",
-            "texto": "Un giro y el bote que buscas viene a ti. Sin mover los demás, sin rebuscar al fondo."
-          }
-        }
-      },
-      "block_order": [
-        "p1",
-        "p2",
-        "p3"
-      ],
-      "settings": {}
+    "en-casa": {
+      "type": "fd-galeria",
+      "settings": {
+        "producto": "flexidesk™-mesa-auxiliar-regulable"
+      }
     },
-    "bandas": {
-      "type": "or-bandas",
+    "montaje": {
+      "type": "fd-montaje",
       "blocks": {
-        "b1": {
-          "type": "banda",
+        "s1": {
+          "type": "paso",
           "settings": {
-            "ilustracion": "encimera",
-            "eyebrow": "En la encimera",
-            "titulo": "Todo a mano <em>mientras cocinas</em>",
-            "texto": "Junto a los fogones, tus especias quedan reunidas en un único punto que gira. Estiras la mano, giras y sigues cocinando.",
-            "lista": "Sin botes sueltos por la encimera\nEl que necesitas, siempre delante\nUn rincón ordenado que da gusto ver"
+            "icono": "caja",
+            "titulo": "Abre la caja",
+            "texto": "Las piezas y la tornillería necesaria vienen incluidas."
           }
         },
-        "b2": {
-          "type": "banda",
+        "s2": {
+          "type": "paso",
           "settings": {
-            "ilustracion": "despues",
-            "eyebrow": "Dentro del armario",
-            "titulo": "Un solo hueco <em>en vez de diez</em>",
-            "texto": "En armarios estrechos, cada bote que tienes que apartar para llegar al de detrás es tiempo perdido. Con el especiero giratorio, el fondo del armario deja de existir.",
-            "lista": "Aprovecha armarios con poco espacio\nNada queda escondido detrás\nLibera sitio para todo lo demás"
+            "icono": "llave",
+            "titulo": "Atornilla",
+            "texto": "Une la base con ruedas, la columna y el tablero."
+          }
+        },
+        "s3": {
+          "type": "paso",
+          "settings": {
+            "icono": "altura",
+            "titulo": "Ajusta y listo",
+            "texto": "Elige tu altura entre 60 y 90 cm y acércala donde la necesites."
           }
         }
       },
       "block_order": [
-        "b1",
-        "b2"
+        "s1",
+        "s2",
+        "s3"
       ],
       "settings": {}
     },
     "preguntas": {
-      "type": "or-faq",
+      "type": "fd-faq",
       "blocks": {
         "q1": {
           "type": "pregunta",
           "settings": {
-            "pregunta": "¿Cuánto espacio ocupa?",
-            "respuesta": "<p>Lo justo para un único punto de almacenaje: en lugar de varios botes sueltos repartidos por la encimera o el armario, todo queda reunido en un especiero que gira.</p>"
+            "pregunta": "¿Entre qué alturas se regula?",
+            "respuesta": "<p>De 60 a 90 cm, para que se adapte a tu posición: junto al sofá, al sillón o a la cama.</p>"
           }
         },
         "q2": {
           "type": "pregunta",
           "settings": {
-            "pregunta": "¿Dónde puedo ponerlo?",
-            "respuesta": "<p>Está pensado para encimeras y armarios con poco espacio. Elige el rincón que te quede más a mano mientras cocinas.</p>"
+            "pregunta": "¿Qué cabe encima?",
+            "respuesta": "<p>La superficie mide 60 × 40 cm: suficiente para el portátil, una tablet, un libro y tus accesorios.</p>"
           }
         },
         "q3": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Es difícil de montar?",
+            "respuesta": "<p>No. Incluye la tornillería necesaria y el montaje es sencillo: no lleva más de unos minutos.</p>"
+          }
+        },
+        "q4": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Se puede mover fácilmente?",
+            "respuesta": "<p>Sí. La base, de 57 × 40 cm, lleva ruedas para desplazarla con facilidad.</p>"
+          }
+        },
+        "q5": {
           "type": "pregunta",
           "settings": {
             "pregunta": "¿Cuánto tarda en llegar?",
             "respuesta": "<p>El envío es gratuito y tarda entre 5 y 7 días laborables desde que confirmas el pedido. Te mandamos el número de seguimiento por correo en cuanto sale.</p>"
           }
         },
-        "q4": {
+        "q6": {
           "type": "pregunta",
           "settings": {
             "pregunta": "¿Y si no me convence?",
-            "respuesta": "<p>Tienes 30 días desde que lo recibes para pedir la devolución. Escríbenos y te explicamos cómo hacerlo; tienes todos los detalles en nuestra <a href=\"/policies/refund-policy\">política de devoluciones</a>.</p>"
+            "respuesta": "<p>Tienes 30 días desde que la recibes para pedir la devolución. Tienes todos los detalles en nuestra <a href=\"/policies/refund-policy\">política de devoluciones</a>.</p>"
           }
         }
       },
@@ -187,27 +198,38 @@
         "q1",
         "q2",
         "q3",
-        "q4"
+        "q4",
+        "q5",
+        "q6"
       ],
       "settings": {
-        "boton_enlace": "shopify://pages/contacto"
+        "boton_enlace": "shopify://pages/contacto",
+        "titulo": "Lo que suelen <em>preguntarnos.</em>"
       }
     },
     "cierre": {
-      "type": "or-cierre",
+      "type": "fd-cierre",
       "settings": {
-        "producto": "especiero-giratorio-360"
+        "producto": "flexidesk™-mesa-auxiliar-regulable"
+      }
+    },
+    "barra": {
+      "type": "fd-barra",
+      "settings": {
+        "producto": "flexidesk™-mesa-auxiliar-regulable"
       }
     }
   },
   "order": [
     "apertura",
-    "cinta",
+    "usos",
+    "altura",
     "antes-despues",
-    "cifras",
-    "como-funciona",
-    "bandas",
+    "medidas",
+    "en-casa",
+    "montaje",
     "preguntas",
-    "cierre"
+    "cierre",
+    "barra"
   ]
 }

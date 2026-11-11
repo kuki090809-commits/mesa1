@@ -3,37 +3,37 @@
   #shopify-section-{{ section.id }} {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
-    background: {{ section.settings.fondo | default: 'var(--or-fondo-alt)' }};
+    background: {{ section.settings.fondo | default: 'var(--fd-fondo-alt)' }};
   }
-  #shopify-section-{{ section.id }} .or-faq { background: transparent; --or-faq-tam: {{ section.settings.pregunta_tam }}px; }
-  #shopify-section-{{ section.id }} .or-h2 { font-size: clamp({{ titulo_min }}px, 5vw, {{ section.settings.titulo_tam }}px); }
-  #shopify-section-{{ section.id }} .or-faq__intro { text-align: {{ section.settings.alineacion }}; }
-  #shopify-section-{{ section.id }} .or-faq__respuesta { font-size: {{ section.settings.texto_tam }}px; }
+  #shopify-section-{{ section.id }} .fd-faq { background: transparent; --fd-faq-tam: {{ section.settings.pregunta_tam }}px; }
+  #shopify-section-{{ section.id }} .fd-h2 { font-size: clamp({{ titulo_min }}px, 5vw, {{ section.settings.titulo_tam }}px); }
+  #shopify-section-{{ section.id }} .fd-faq__intro { text-align: {{ section.settings.alineacion }}; }
+  #shopify-section-{{ section.id }} .fd-faq__respuesta { font-size: {{ section.settings.texto_tam }}px; }
 {% endstyle %}
 
-<section class="or-section or-faq" aria-label="{{ section.settings.titulo | strip_html | escape }}">
-  <div class="or-container">
-    <div class="or-faq__grid">
-      <div class="or-faq__intro">
+<section class="fd-section fd-faq" aria-label="{{ section.settings.titulo | strip_html | escape }}">
+  <div class="fd-container">
+    <div class="fd-faq__grid">
+      <div class="fd-faq__intro">
         {%- if section.settings.eyebrow != blank -%}
-          <p class="or-eyebrow or-reveal">{{ section.settings.eyebrow }}</p>
+          <p class="fd-eyebrow fd-reveal">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
-        <h2 class="or-h2 or-reveal" style="--or-i: 1">{{ section.settings.titulo }}</h2>
+        <h2 class="fd-h2 fd-reveal" style="--fd-i: 1">{{ section.settings.titulo }}</h2>
         {%- if section.settings.texto != blank -%}
-          <p class="or-body or-reveal" style="--or-i: 2">{{ section.settings.texto | newline_to_br }}</p>
+          <p class="fd-body fd-reveal" style="--fd-i: 2">{{ section.settings.texto | newline_to_br }}</p>
         {%- endif -%}
         {%- if section.settings.boton_texto != blank -%}
-          <a class="or-btn or-btn--linea or-reveal" style="--or-i: 3" href="{{ section.settings.boton_enlace | default: '/pages/contacto' }}">{{ section.settings.boton_texto | escape }}</a>
+          <a class="fd-btn fd-btn--linea fd-reveal" style="--fd-i: 3" href="{{ section.settings.boton_enlace | default: '/pages/contacto' }}">{{ section.settings.boton_texto | escape }}</a>
         {%- endif -%}
       </div>
-      <div class="or-faq__lista">
+      <div class="fd-faq__lista">
         {%- for block in section.blocks -%}
-          <details class="or-faq__item or-reveal" style="--or-i: {{ forloop.index }}"{% if forloop.first and section.settings.abrir_primera %} open{% endif %} {{ block.shopify_attributes }}>
+          <details class="fd-faq__item fd-reveal" style="--fd-i: {{ forloop.index }}"{% if forloop.first and section.settings.abrir_primera %} open{% endif %} {{ block.shopify_attributes }}>
             <summary>
               <span>{{ block.settings.pregunta | escape }}</span>
-              <span class="or-faq__icono" aria-hidden="true"></span>
+              <span class="fd-faq__icono" aria-hidden="true"></span>
             </summary>
-            <div class="or-faq__respuesta">{{ block.settings.respuesta }}</div>
+            <div class="fd-faq__respuesta">{{ block.settings.respuesta }}</div>
           </details>
         {%- endfor -%}
       </div>
@@ -61,9 +61,9 @@
 
 {% schema %}
 {
-  "name": "Ordena – Preguntas",
+  "name": "FlexiDesk – Preguntas",
   "tag": "div",
-  "class": "or-wrap",
+  "class": "fd-wrap",
   "max_blocks": 16,
   "settings": [
     { "type": "header", "content": "Textos" },
@@ -89,14 +89,14 @@
       "type": "pregunta",
       "name": "Pregunta",
       "settings": [
-        { "type": "text", "id": "pregunta", "label": "Pregunta", "default": "¿Cuánto espacio ocupa?" },
-        { "type": "richtext", "id": "respuesta", "label": "Respuesta", "default": "<p>Lo justo para un único punto de almacenaje: en lugar de varios botes repartidos, todo queda reunido en un especiero que gira.</p>" }
+        { "type": "text", "id": "pregunta", "label": "Pregunta", "default": "¿Entre qué alturas se regula?" },
+        { "type": "richtext", "id": "respuesta", "label": "Respuesta", "default": "<p>De 60 a 90 cm, para adaptarse a tu posición.</p>" }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Ordena – Preguntas",
+      "name": "FlexiDesk – Preguntas",
       "blocks": [
         { "type": "pregunta" }
       ]

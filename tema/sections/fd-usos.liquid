@@ -1,0 +1,83 @@
+{%- assign titulo_min = section.settings.titulo_tam | times: 0.6 | round -%}
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.fondo | default: 'var(--fd-fondo)' }};
+  }
+  #shopify-section-{{ section.id }} .fd-h2 { font-size: clamp({{ titulo_min }}px, 5vw, {{ section.settings.titulo_tam }}px); }
+  #shopify-section-{{ section.id }} .fd-usos__cabecera { text-align: {{ section.settings.alineacion }}; }
+  #shopify-section-{{ section.id }} .fd-usos__grid { --fd-usos-cols: {{ section.settings.columnas }}; }
+  #shopify-section-{{ section.id }} .fd-uso p { font-size: {{ section.settings.texto_tam }}px; }
+{% endstyle %}
+
+<section class="fd-section fd-usos" aria-label="{{ section.settings.titulo | strip_html | escape }}">
+  <div class="fd-container">
+    <div class="fd-usos__cabecera">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="fd-eyebrow fd-reveal">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="fd-h2 fd-reveal" style="--fd-i: 1">{{ section.settings.titulo }}</h2>
+      </div>
+      {%- if section.settings.texto != blank -%}
+        <p class="fd-body fd-reveal" style="--fd-i: 2">{{ section.settings.texto | newline_to_br }}</p>
+      {%- endif -%}
+    </div>
+    <div class="fd-usos__grid">
+      {%- for block in section.blocks -%}
+        <article class="fd-uso fd-reveal" style="--fd-i: {{ forloop.index }}" {{ block.shopify_attributes }}>
+          <span class="fd-uso__num" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <span class="fd-uso__icono">{% render 'fd-icono', nombre: block.settings.icono %}</span>
+          <h3>{{ block.settings.titulo | escape }}</h3>
+          <p>{{ block.settings.texto | escape }}</p>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FlexiDesk – Usos",
+  "tag": "div",
+  "class": "fd-wrap",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Una mesa, mil usos" },
+    { "type": "inline_richtext", "id": "titulo", "label": "Título", "default": "Hecha para tu día, <em>no para la oficina.</em>" },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Úsala junto a la cama, el sofá o el sillón. Cuando acabas, la apartas con las ruedas." },
+    { "type": "range", "id": "columnas", "label": "Tarjetas por fila (ordenador)", "min": 2, "max": 4, "step": 1, "default": 4 },
+    { "type": "header", "content": "Tipografía y color" },
+    { "type": "range", "id": "titulo_tam", "label": "Tamaño del título (px)", "min": 24, "max": 80, "step": 2, "unit": "px", "default": 52 },
+    { "type": "range", "id": "texto_tam", "label": "Tamaño del texto de las tarjetas (px)", "min": 13, "max": 20, "step": 1, "unit": "px", "default": 15 },
+    { "type": "select", "id": "alineacion", "label": "Alineación de la cabecera", "options": [ { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" } ], "default": "left" },
+    { "type": "color", "id": "fondo", "label": "Color de fondo", "info": "Vacío = fondo principal de la marca." },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "uso",
+      "name": "Uso",
+      "settings": [
+        { "type": "select", "id": "icono", "label": "Icono", "options": [ { "value": "portatil", "label": "Portátil" }, { "value": "libro", "label": "Libro" }, { "value": "taza", "label": "Taza" }, { "value": "lapiz", "label": "Lápiz" }, { "value": "altura", "label": "Altura" }, { "value": "ruedas", "label": "Ruedas" }, { "value": "superficie", "label": "Superficie" }, { "value": "check", "label": "Visto bueno" } ], "default": "portatil" },
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Trabaja" },
+        { "type": "textarea", "id": "texto", "label": "Texto", "default": "El portátil a la altura justa, sin hacer equilibrios sobre las rodillas." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FlexiDesk – Usos",
+      "blocks": [
+        { "type": "uso", "settings": { "icono": "portatil", "titulo": "Trabaja" } },
+        { "type": "uso", "settings": { "icono": "lapiz", "titulo": "Estudia" } },
+        { "type": "uso", "settings": { "icono": "libro", "titulo": "Lee" } },
+        { "type": "uso", "settings": { "icono": "taza", "titulo": "Desayuna" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

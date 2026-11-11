@@ -1,0 +1,120 @@
+{%- liquid
+  assign producto = section.settings.producto
+  assign enlace = section.settings.boton_enlace | default: producto.url | default: routes.all_products_collection_url
+  assign enlace2 = section.settings.boton2_enlace | default: '#medidas'
+  assign titulo_min = section.settings.titulo_tam | times: 0.46 | round
+-%}
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: var(--fd-fondo);
+  }
+  #shopify-section-{{ section.id }} .fd-h1 { font-size: clamp({{ titulo_min }}px, 8vw, {{ section.settings.titulo_tam }}px); }
+  #shopify-section-{{ section.id }} .fd-lead { font-size: {{ section.settings.texto_tam }}px; }
+  #shopify-section-{{ section.id }} .fd-hero__cabecera { text-align: {{ section.settings.alineacion }}; }
+  {%- if section.settings.alineacion == 'center' -%}
+    #shopify-section-{{ section.id }} .fd-hero__cabecera { margin-left: auto; margin-right: auto; }
+    #shopify-section-{{ section.id }} .fd-lead { margin-left: auto; margin-right: auto; }
+    #shopify-section-{{ section.id }} .fd-hero__compra { justify-content: center; }
+  {%- endif -%}
+{% endstyle %}
+
+<section class="fd-section fd-hero" data-fd-ancla-barra aria-label="{{ section.settings.titulo | strip_html | escape }}">
+  <div class="fd-container">
+    <div class="fd-hero__cabecera">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="fd-eyebrow fd-reveal">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="fd-h1 fd-reveal" style="--fd-i: 1">{{ section.settings.titulo }}</h2>
+      {%- if section.settings.texto != blank -%}
+        <p class="fd-lead fd-reveal" style="--fd-i: 2">{{ section.settings.texto | newline_to_br }}</p>
+      {%- endif -%}
+      <div class="fd-hero__compra fd-reveal" style="--fd-i: 3">
+        {%- if section.settings.mostrar_precio and producto != blank and producto.available -%}
+          {%- assign v = producto.selected_or_first_available_variant -%}
+          <p class="fd-hero__precio">
+            <strong>{{ v.price | money }}</strong>
+            {%- if v.compare_at_price > v.price -%}
+              <s>{{ v.compare_at_price | money }}</s>
+              {%- assign ahorro = v.compare_at_price | minus: v.price | times: 100 | divided_by: v.compare_at_price -%}
+              <span class="fd-ahorro">-{{ ahorro }}%</span>
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+        <div class="fd-botones">
+          {%- if section.settings.boton_texto != blank -%}
+            <a class="fd-btn" href="{{ enlace }}">{{ section.settings.boton_texto | escape }}{% render 'fd-icono', nombre: 'flecha' %}</a>
+          {%- endif -%}
+          {%- if section.settings.boton2_texto != blank -%}
+            <a class="fd-btn fd-btn--linea" href="{{ enlace2 }}">{{ section.settings.boton2_texto | escape }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="fd-hero__escena fd-reveal" style="--fd-i: 3">
+      {%- render 'fd-imagen',
+        imagen: section.settings.imagen,
+        tipo: 'sofa',
+        clase: 'fd-hero__marco fd-media--sin-margen',
+        eager: true,
+        sizes: '(min-width: 1240px) 1200px, 100vw',
+        alt: section.settings.titulo
+      -%}
+      {%- for i in (1..3) -%}
+        {%- liquid
+          assign k = 'chip' | append: i
+          assign ki = 'chip' | append: i | append: '_icono'
+          assign txt = section.settings[k]
+          assign ico = section.settings[ki]
+        -%}
+        {%- if txt != blank -%}
+          <span class="fd-chip fd-chip--{{ i }}{% if section.settings.flotar %} fd-chip--flota{% endif %}">
+            <span class="fd-chip__icono">{% render 'fd-icono', nombre: ico %}</span>{{ txt | escape }}
+          </span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FlexiDesk – Apertura",
+  "tag": "div",
+  "class": "fd-wrap",
+  "settings": [
+    { "type": "header", "content": "Producto" },
+    { "type": "product", "id": "producto", "label": "Producto (para precio y enlace)" },
+    { "type": "checkbox", "id": "mostrar_precio", "label": "Mostrar el precio", "default": true },
+    { "type": "header", "content": "Textos" },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Mesa auxiliar regulable con ruedas" },
+    { "type": "inline_richtext", "id": "titulo", "label": "Título", "info": "Pon una palabra en cursiva para que salga en color de acento.", "default": "Tu escritorio, <em>donde tú estés.</em>" },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Junto a la cama, el sofá o el sillón. Trabaja con el portátil, estudia, lee o desayuna sin renunciar a la comodidad." },
+    { "type": "header", "content": "Botones" },
+    { "type": "text", "id": "boton_texto", "label": "Botón principal: texto", "default": "Comprar ahora" },
+    { "type": "url", "id": "boton_enlace", "label": "Botón principal: enlace", "info": "Vacío = página del producto." },
+    { "type": "text", "id": "boton2_texto", "label": "Botón secundario: texto", "default": "Ver medidas" },
+    { "type": "url", "id": "boton2_enlace", "label": "Botón secundario: enlace", "info": "Vacío = baja a la sección de medidas." },
+    { "type": "header", "content": "Imagen" },
+    { "type": "image_picker", "id": "imagen", "label": "Foto panorámica", "info": "Apaisada (2:1), mínimo 2000 px de ancho. Mientras no subas una, se ve la ilustración." },
+    { "type": "header", "content": "Etiquetas flotantes sobre la imagen" },
+    { "type": "checkbox", "id": "flotar", "label": "Animación suave de flotar", "default": true },
+    { "type": "text", "id": "chip1", "label": "Etiqueta 1", "default": "Altura 60 – 90 cm" },
+    { "type": "select", "id": "chip1_icono", "label": "Icono 1", "options": [ { "value": "altura", "label": "Altura" }, { "value": "ruedas", "label": "Ruedas" }, { "value": "llave", "label": "Montaje" }, { "value": "superficie", "label": "Superficie" }, { "value": "envio", "label": "Envío" }, { "value": "check", "label": "Visto bueno" } ], "default": "altura" },
+    { "type": "text", "id": "chip2", "label": "Etiqueta 2", "default": "Con ruedas" },
+    { "type": "select", "id": "chip2_icono", "label": "Icono 2", "options": [ { "value": "altura", "label": "Altura" }, { "value": "ruedas", "label": "Ruedas" }, { "value": "llave", "label": "Montaje" }, { "value": "superficie", "label": "Superficie" }, { "value": "envio", "label": "Envío" }, { "value": "check", "label": "Visto bueno" } ], "default": "ruedas" },
+    { "type": "text", "id": "chip3", "label": "Etiqueta 3", "default": "Montaje en minutos" },
+    { "type": "select", "id": "chip3_icono", "label": "Icono 3", "options": [ { "value": "altura", "label": "Altura" }, { "value": "ruedas", "label": "Ruedas" }, { "value": "llave", "label": "Montaje" }, { "value": "superficie", "label": "Superficie" }, { "value": "envio", "label": "Envío" }, { "value": "check", "label": "Visto bueno" } ], "default": "llave" },
+    { "type": "header", "content": "Tipografía y alineación" },
+    { "type": "range", "id": "titulo_tam", "label": "Tamaño del título (px)", "min": 32, "max": 130, "step": 2, "unit": "px", "default": 104 },
+    { "type": "range", "id": "texto_tam", "label": "Tamaño del texto (px)", "min": 14, "max": 26, "step": 1, "unit": "px", "default": 19 },
+    { "type": "select", "id": "alineacion", "label": "Alineación del texto", "options": [ { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" } ], "default": "center" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 64 }
+  ],
+  "presets": [ { "name": "FlexiDesk – Apertura" } ]
+}
+{% endschema %}

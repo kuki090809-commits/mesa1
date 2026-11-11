@@ -20,7 +20,7 @@
             "text": "Envío gratis en todos los pedidos · 30 días para devolverlo",
             "text_alignment": "center",
             "color_scheme": "scheme-3",
-            "link": "shopify://products/especiero-giratorio-360"
+            "link": "shopify://products/flexidesk™-mesa-auxiliar-regulable"
           }
         }
       },
@@ -44,9 +44,9 @@
         "margin_bottom": 0,
         "padding_top": 16,
         "padding_bottom": 16,
-        "or_logo_texto": "Ordena",
-        "or_logo_icono": true,
-        "or_logo_texto_tam": 28
+        "fd_logo_texto": "FlexiDesk",
+        "fd_logo_icono": true,
+        "fd_logo_texto_tam": 26
       }
     }
   },
