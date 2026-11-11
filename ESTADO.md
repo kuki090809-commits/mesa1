@@ -34,6 +34,8 @@ La red de la sesión no llega a accounts.shopify.com, así que `shopify theme pu
   → Pedir al usuario fotos grandes del proveedor (≥1500 px) o generarlas con IA.
 - La ficha usa `templates/product.json` del tema (no hace falta asignar plantilla: tienda de un solo producto).
 - Descripción y SEO del catálogo NO tocados (el producto está en venta en la tienda publicada).
+- ✅ 2026-11-11: quitada la traducción «es» de la descripción y del título SEO, que estaba en inglés
+  (en /es salía la descripción en inglés). Ahora /es muestra la descripción original en español.
 
 ## Fases
 - [x] 0 Entorno · [x] 1 Conexión · [x] 2 Proyecto · [x] 3 Brief (estilo elegido por Claude, fotos opción B)
