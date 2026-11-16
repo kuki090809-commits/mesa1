@@ -195,7 +195,7 @@ html.no-js .md-reveal { opacity: 1; transform: none; }
 }
 .card-wrapper .card__information { padding-top: 1.4rem; }
 .card-wrapper .price { font-family: var(--md-sans); font-size: 1.5rem; letter-spacing: 0.02em; }
-.card-wrapper .price__sale .price-item--regular { color: var(--md-topo); }
+.card-wrapper .price__sale .price-item--regular { color: var(--md-texto-suave); }
 .card-wrapper .card__media .media img { transition: transform 0.9s var(--md-ease); }
 .card-wrapper:hover .card__media .media img { transform: scale(1.04); }
 .card-wrapper .card { --color-background: 252, 250, 246; }
@@ -210,7 +210,7 @@ html.no-js .md-reveal { opacity: 1; transform: none; }
   letter-spacing: 0.2em;
 }
 .card-wrapper .quick-add__submit:hover:not([disabled]) { background: var(--md-marron); color: var(--md-blanco); }
-.card-wrapper .rating-star { --color-rating-star: var(--md-topo); }
+.card-wrapper .rating-star { --color-rating-star: var(--md-marron); }
 .card__badge .badge { font-family: var(--md-sans); letter-spacing: 0.14em; text-transform: uppercase; font-size: 1.05rem; padding: 0.4rem 1rem; }
 
 /* ---------- Colección y filtros ---------- */
@@ -333,7 +333,7 @@ html.no-js .md-reveal { opacity: 1; transform: none; }
 /* ---------- Ventajas en la ficha de producto ---------- */
 .md-ventajas { list-style: none; margin: 0.8rem 0 0; padding: 1.8rem 0; border-block: 1px solid var(--md-linea); display: grid; gap: 1rem; font-size: 1.4rem; }
 .md-ventajas li { display: flex; align-items: center; gap: 1.2rem; }
-.md-ventajas svg { width: 2rem; height: 2rem; flex: none; color: var(--md-topo); }
+.md-ventajas svg { width: 2rem; height: 2rem; flex: none; color: var(--md-marron); }
 
 /* Cifras normales (Cormorant usa cifras antiguas por defecto: «50» parecía «5o») */
 body, h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5, .price, .md-anuncios__item { font-variant-numeric: lining-nums; }
