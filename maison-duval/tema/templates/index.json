@@ -1,0 +1,141 @@
+{
+  "sections": {
+    "hero": {
+      "type": "md-hero",
+      "settings": {
+        "imagen": "shopify://shop_images/md-hero-avion-nubes.jpg",
+        "titulo": "Viaja ligero.\nVive más.",
+        "texto": "Descubre nuestra colección de accesorios de viaje, diseñados para acompañarte en cada destino.",
+        "boton_texto": "Explorar colección",
+        "boton_enlace": "shopify://collections/all",
+        "alto": 70,
+        "titulo_tam": 88,
+        "tinte": 25
+      }
+    },
+    "categorias": {
+      "type": "md-categorias",
+      "blocks": {
+        "cat_1": {
+          "type": "categoria",
+          "settings": {
+            "coleccion": "equipaje",
+            "titulo": "Equipaje",
+            "imagen": "shopify://shop_images/md-cat-equipaje.jpg"
+          }
+        },
+        "cat_2": {
+          "type": "categoria",
+          "settings": {
+            "coleccion": "organizacion-de-viaje",
+            "titulo": "Organización",
+            "imagen": "shopify://shop_images/md-cat-organizacion.jpg"
+          }
+        },
+        "cat_3": {
+          "type": "categoria",
+          "settings": {
+            "coleccion": "accesorios",
+            "titulo": "Accesorios",
+            "imagen": "shopify://shop_images/md-cat-accesorios.jpg"
+          }
+        },
+        "cat_4": {
+          "type": "categoria",
+          "settings": {
+            "coleccion": "comodidad",
+            "titulo": "Comodidad",
+            "imagen": "shopify://shop_images/md-cat-comodidad.jpg"
+          }
+        },
+        "cat_5": {
+          "type": "categoria",
+          "settings": {
+            "coleccion": "tecnologia-de-viaje",
+            "titulo": "Tecnología",
+            "imagen": "shopify://shop_images/md-cat-tecnologia.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4",
+        "cat_5"
+      ],
+      "settings": {
+        "etiqueta": "Categorías",
+        "padding_top": 24,
+        "padding_bottom": 32
+      }
+    },
+    "beneficios": {
+      "type": "md-beneficios",
+      "blocks": {
+        "ben_1": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "camion",
+            "texto": "Envío gratuito\na partir de [umbral]",
+            "enlace": "shopify://pages/politica-de-envios"
+          }
+        },
+        "ben_2": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "escudo",
+            "texto": "Compra\nsegura"
+          }
+        },
+        "ben_3": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "devolucion",
+            "texto": "Devoluciones\nen [dias] días",
+            "enlace": "shopify://pages/politica-de-devoluciones-y-reembolsos"
+          }
+        },
+        "ben_4": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "atencion",
+            "texto": "Atención\nal cliente",
+            "enlace": "shopify://pages/contacto"
+          }
+        }
+      },
+      "block_order": [
+        "ben_1",
+        "ben_2",
+        "ben_3",
+        "ben_4"
+      ],
+      "settings": {
+        "etiqueta": "Ventajas de comprar en MAISON DUVAL",
+        "color_scheme": "scheme-2"
+      }
+    },
+    "destacados": {
+      "type": "md-destacados",
+      "settings": {
+        "titulo": "Nuestros imprescindibles",
+        "coleccion": "imprescindibles",
+        "cantidad": 4,
+        "banner_mostrar": true,
+        "banner_imagen": "shopify://shop_images/md-banner-atardecer.jpg",
+        "banner_titulo": "Tu próxima aventura te espera",
+        "banner_boton": "Descubrir",
+        "banner_enlace": "shopify://collections/all",
+        "padding_top": 72,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "categorias",
+    "beneficios",
+    "destacados"
+  ]
+}

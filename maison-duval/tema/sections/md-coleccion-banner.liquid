@@ -1,0 +1,60 @@
+{%- comment -%} MAISON DUVAL: banner de categoría con foto de la colección, migas de pan, título y descripción. {%- endcomment -%}
+{%- liquid
+  assign img = collection.image
+  if section.settings.imagen != blank
+    assign img = section.settings.imagen
+  endif
+  assign titulo = collection.title
+  if collection.handle == 'all' or collection.handle == blank
+    assign titulo = section.settings.titulo_todos
+  endif
+-%}
+<section class="md-col-banner{% if img == blank %} md-col-banner--sin-foto{% endif %}" aria-labelledby="md-col-titulo-{{ section.id }}">
+  {%- if img != blank -%}
+    {{ img | image_url: width: 2400 | image_tag: class: 'md-col-banner__img', loading: 'eager', fetchpriority: 'high', widths: '750, 1100, 1600, 2000, 2400', sizes: '100vw', alt: '' }}
+  {%- endif -%}
+  <div class="md-contenedor md-col-banner__texto">
+    <nav aria-label="Ruta de navegación" class="md-migas">
+      <ol role="list">
+        <li><a href="{{ routes.root_url }}">Inicio</a></li>
+        <li aria-current="page">{{ titulo | escape }}</li>
+      </ol>
+    </nav>
+    <h1 id="md-col-titulo-{{ section.id }}" class="md-col-banner__titulo">{{ titulo | escape }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="md-col-banner__desc">{{ collection.description }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% style %}
+  #shopify-section-{{ section.id }} .md-col-banner { position: relative; display: grid; align-items: end; min-height: {{ section.settings.alto }}px; overflow: hidden; background: var(--md-beige); color: var(--md-marron-hondo); }
+  #shopify-section-{{ section.id }} .md-col-banner__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: sepia(0.18) saturate(0.9); }
+  #shopify-section-{{ section.id }} .md-col-banner:not(.md-col-banner--sin-foto)::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(245, 240, 232, 0.95) 0%, rgba(245, 240, 232, 0.8) 38%, rgba(245, 240, 232, 0.1) 75%); }
+  #shopify-section-{{ section.id }} .md-col-banner__texto { position: relative; z-index: 1; width: 100%; padding-block: 4.8rem; }
+  #shopify-section-{{ section.id }} .md-col-banner__titulo { margin: 0 0 1.2rem; font-size: clamp(3.6rem, 5vw, 6rem); font-weight: 400; line-height: 1.05; color: inherit; }
+  #shopify-section-{{ section.id }} .md-col-banner__desc { max-width: 52rem; font-size: 1.6rem; line-height: 1.7; }
+  #shopify-section-{{ section.id }} .md-col-banner__desc p { margin: 0; }
+  .md-migas ol { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 0 0 1.6rem; padding: 0; list-style: none; font-size: 1.2rem; letter-spacing: 0.16em; text-transform: uppercase; }
+  .md-migas li + li::before { content: "/"; margin-inline-end: 0.8rem; opacity: 0.6; }
+  .md-migas a { color: inherit; text-decoration: none; }
+  .md-migas a:hover { text-decoration: underline; }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .md-col-banner { min-height: 28rem; }
+    #shopify-section-{{ section.id }} .md-col-banner:not(.md-col-banner--sin-foto)::after { background: linear-gradient(180deg, rgba(245, 240, 232, 0.2) 0%, rgba(245, 240, 232, 0.92) 70%); }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Banner de colección",
+  "tag": "div",
+  "enabled_on": { "templates": ["collection"] },
+  "settings": [
+    { "type": "image_picker", "id": "imagen", "label": "Foto (vacío = la imagen de la colección)" },
+    { "type": "text", "id": "titulo_todos", "label": "Título en «Todos los productos»", "default": "Toda la colección" },
+    { "type": "range", "id": "alto", "label": "Altura mínima (px)", "min": 200, "max": 600, "step": 20, "unit": "px", "default": 360 }
+  ],
+  "presets": [ { "name": "MD – Banner de colección" } ]
+}
+{% endschema %}

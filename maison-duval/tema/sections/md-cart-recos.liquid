@@ -1,0 +1,48 @@
+{%- comment -%}
+  MAISON DUVAL: «Completa tu viaje» en la página del carrito. Usa las recomendaciones de Shopify
+  a partir del primer producto del carrito (se cargan con JavaScript para no ralentizar la página).
+{%- endcomment -%}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'quick-add.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+  assign base = cart.items.first.product
+  if recommendations.performed
+    assign base = recommendations.product
+  endif
+-%}
+{%- if base != blank -%}
+  {%- capture url_recos -%}{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ base.id }}&limit={{ section.settings.cantidad }}&intent=related{%- endcapture -%}
+  <div class="md-contenedor md-recos"{% unless recommendations.performed %} hidden{% endunless %} data-md-recos data-url="{{ url_recos }}">
+    {%- if recommendations.performed and recommendations.products_count > 0 -%}
+      <h2 class="md-titulo-lineas h2">{{ section.settings.titulo | escape }}</h2>
+      <ul class="grid product-grid grid--2-col-tablet-down grid--4-col-desktop md-recos__grid" role="list">
+        {%- for recommendation in recommendations.products -%}
+          <li class="grid__item">
+            {% render 'card-product', card_product: recommendation, media_aspect_ratio: 'portrait', show_secondary_image: true, section_id: section.id, quick_add: 'standard', product_view_context: 'recommendation' %}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% style %}
+  #shopify-section-{{ section.id }} .md-recos { padding-block: 4.8rem 7.2rem; }
+  #shopify-section-{{ section.id }} .md-recos h2 { margin-bottom: 3.2rem; }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Recos carrito",
+  "tag": "div",
+  "enabled_on": { "templates": ["cart"] },
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Completa tu viaje" },
+    { "type": "range", "id": "cantidad", "label": "Número de productos", "min": 2, "max": 8, "step": 1, "default": 4 }
+  ],
+  "presets": [ { "name": "MD – Recos carrito" } ]
+}
+{% endschema %}

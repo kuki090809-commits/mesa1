@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "main": {
+      "type": "md-contacto",
+      "blocks": {
+        "q1": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Dónde está mi pedido?",
+            "respuesta": "<p>Cuando tu pedido salga del almacén recibirás un correo de confirmación de envío. Si el transportista facilita número de seguimiento, lo incluiremos en ese correo.</p>"
+          }
+        },
+        "q2": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Cómo devuelvo un producto?",
+            "respuesta": "<p>Escríbenos con tu número de pedido y te indicaremos los pasos. Tienes toda la información en la <a href=\"/pages/politica-de-devoluciones-y-reembolsos\">Política de devoluciones y reembolsos</a>.</p>"
+          }
+        },
+        "q3": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Puedo cambiar o cancelar mi pedido?",
+            "respuesta": "<p>Escríbenos cuanto antes con tu número de pedido. Si todavía no se ha enviado, intentaremos modificarlo o cancelarlo.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "overline": "Estamos aquí para ayudarte",
+        "motivos": "Un pedido\nEnvíos y seguimiento\nDevoluciones y reembolsos\nInformación sobre un producto\nOtra consulta",
+        "boton": "Enviar mensaje",
+        "texto_ok": "Gracias. Hemos recibido tu mensaje y te responderemos lo antes posible.",
+        "imagen": "shopify://shop_images/md-contacto-preparando-viaje.jpg",
+        "pagina_faq": "preguntas-frecuentes",
+        "pagina_privacidad": "politica-de-privacidad"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

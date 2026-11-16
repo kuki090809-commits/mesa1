@@ -1,0 +1,129 @@
+{%- comment -%}
+  MAISON DUVAL: «Nuestros imprescindibles» — productos reales de una colección (tarjetas de Dawn con
+  añadir al carrito y selector de opciones) junto a un banner de inspiración.
+{%- endcomment -%}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'quick-add.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign coleccion = section.settings.coleccion
+  assign total = section.settings.cantidad
+  assign hay_productos = false
+  if coleccion != blank and coleccion.products_count > 0
+    assign hay_productos = true
+  endif
+  assign banner = section.settings.banner_imagen
+-%}
+<section class="md-destacados" aria-labelledby="md-destacados-titulo-{{ section.id }}">
+  <div class="md-contenedor">
+    <h2 id="md-destacados-titulo-{{ section.id }}" class="md-titulo-lineas h1 md-destacados__titulo">{{ section.settings.titulo | escape }}</h2>
+    <div class="md-destacados__grid{% unless section.settings.banner_mostrar %} md-destacados__grid--sin-banner{% endunless %}">
+      <ul class="md-destacados__productos grid product-grid" role="list">
+        {%- if hay_productos -%}
+          {%- for product in coleccion.products limit: total -%}
+            <li class="grid__item md-reveal" style="--md-i: {{ forloop.index0 }}">
+              {% render 'card-product',
+                card_product: product,
+                media_aspect_ratio: 'portrait',
+                show_secondary_image: true,
+                show_rating: true,
+                section_id: section.id,
+                quick_add: 'standard',
+                product_view_context: 'collection'
+              %}
+            </li>
+          {%- endfor -%}
+        {%- elsif request.design_mode -%}
+          {%- for i in (1..total) -%}
+            <li class="grid__item">
+              {% render 'card-product', media_aspect_ratio: 'portrait', placeholder_image: 'product-apparel-1' %}
+            </li>
+          {%- endfor -%}
+        {%- else -%}
+          <li class="md-destacados__vacio">
+            <p class="h3">{{ section.settings.vacio_titulo | escape }}</p>
+            <p class="md-texto-suave">{{ section.settings.vacio_texto | escape }}</p>
+          </li>
+        {%- endif -%}
+      </ul>
+
+      {%- if section.settings.banner_mostrar -%}
+        {%- assign banner_enlace = section.settings.banner_enlace | default: routes.all_products_collection_url -%}
+        <aside class="md-inspiracion md-reveal" style="--md-i: 3" aria-labelledby="md-inspiracion-{{ section.id }}">
+          {%- if banner != blank -%}
+            {{ banner | image_url: width: 1400 | image_tag:
+                class: 'md-inspiracion__img',
+                loading: 'lazy',
+                widths: '500, 800, 1100, 1400',
+                sizes: '(min-width: 990px) 25vw, 100vw',
+                alt: banner.alt
+            }}
+          {%- else -%}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'md-inspiracion__img placeholder-svg' }}
+          {%- endif -%}
+          <div class="md-inspiracion__texto">
+            <span class="md-inspiracion__adorno" aria-hidden="true">{%- render 'md-icono', nombre: 'avion' -%}</span>
+            <h3 id="md-inspiracion-{{ section.id }}" class="md-inspiracion__titulo">{{ section.settings.banner_titulo | escape }}</h3>
+            {%- if section.settings.banner_boton != blank -%}
+              <a class="md-btn md-btn--claro" href="{{ banner_enlace }}">{{ section.settings.banner_boton | escape }}{%- render 'md-icono', nombre: 'flecha' -%}</a>
+            {%- endif -%}
+          </div>
+        </aside>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% style %}
+  #shopify-section-{{ section.id }} { padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px; background: var(--md-crema); }
+  #shopify-section-{{ section.id }} .md-destacados__titulo { margin-bottom: 3.6rem; font-size: clamp(3rem, 3.4vw, 4rem); }
+  #shopify-section-{{ section.id }} .md-destacados__grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 1.35fr); gap: 2.4rem; align-items: stretch; }
+  #shopify-section-{{ section.id }} .md-destacados__grid--sin-banner { grid-template-columns: minmax(0, 1fr); }
+  #shopify-section-{{ section.id }} .md-destacados__productos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; margin: 0; padding: 0; list-style: none; }
+  #shopify-section-{{ section.id }} .md-destacados__productos .grid__item { width: auto; max-width: none; padding: 0; }
+  #shopify-section-{{ section.id }} .md-destacados__vacio { grid-column: 1 / -1; display: grid; place-content: center; gap: 0.8rem; min-height: 32rem; padding: 4rem; border: 1px dashed rgba(81, 72, 63, 0.3); border-radius: 4px; text-align: center; }
+  #shopify-section-{{ section.id }} .md-destacados__vacio p { margin: 0; }
+  #shopify-section-{{ section.id }} .md-inspiracion { position: relative; display: grid; min-height: 46rem; overflow: hidden; border-radius: 4px; background: var(--md-arena); }
+  #shopify-section-{{ section.id }} .md-inspiracion__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: sepia(0.15); }
+  #shopify-section-{{ section.id }} .md-inspiracion::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(81, 72, 63, 0.55) 0%, rgba(81, 72, 63, 0.2) 45%, rgba(81, 72, 63, 0) 70%); }
+  #shopify-section-{{ section.id }} .md-inspiracion__texto { position: relative; z-index: 1; align-self: start; display: grid; justify-items: center; gap: 1.6rem; padding: 4.8rem 2.4rem; text-align: center; color: #FCFAF6; }
+  #shopify-section-{{ section.id }} .md-inspiracion__adorno { display: inline-flex; align-items: center; gap: 1rem; }
+  #shopify-section-{{ section.id }} .md-inspiracion__adorno::before,
+  #shopify-section-{{ section.id }} .md-inspiracion__adorno::after { content: ""; width: 2.4rem; height: 1px; background: currentColor; opacity: 0.8; }
+  #shopify-section-{{ section.id }} .md-inspiracion__adorno .md-icono { width: 2rem; height: 2rem; }
+  #shopify-section-{{ section.id }} .md-inspiracion__titulo { margin: 0; font-size: clamp(2.6rem, 2.4vw, 3.4rem); line-height: 1.2; color: inherit; text-shadow: 0 1px 14px rgba(0, 0, 0, 0.2); }
+  @media screen and (max-width: 1199px) {
+    #shopify-section-{{ section.id }} .md-destacados__grid { grid-template-columns: minmax(0, 1fr); }
+    #shopify-section-{{ section.id }} .md-inspiracion { min-height: 38rem; }
+  }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .md-destacados__productos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.4rem 1.2rem; }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Imprescindibles",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Nuestros imprescindibles" },
+    { "type": "collection", "id": "coleccion", "label": "Colección de productos" },
+    { "type": "range", "id": "cantidad", "label": "Número de productos", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "text", "id": "vacio_titulo", "label": "Mensaje si aún no hay productos: título", "default": "Nuestra primera selección llega muy pronto" },
+    { "type": "text", "id": "vacio_texto", "label": "Mensaje si aún no hay productos: texto", "default": "Suscríbete a la newsletter y te avisaremos en cuanto esté disponible." },
+    { "type": "header", "content": "Banner de inspiración" },
+    { "type": "checkbox", "id": "banner_mostrar", "label": "Mostrar el banner", "default": true },
+    { "type": "image_picker", "id": "banner_imagen", "label": "Fotografía" },
+    { "type": "text", "id": "banner_titulo", "label": "Título", "default": "Tu próxima aventura te espera" },
+    { "type": "text", "id": "banner_boton", "label": "Botón: texto", "default": "Descubrir" },
+    { "type": "url", "id": "banner_enlace", "label": "Botón: enlace" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 80 }
+  ],
+  "presets": [ { "name": "MD – Imprescindibles" } ]
+}
+{% endschema %}

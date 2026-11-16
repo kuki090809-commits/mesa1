@@ -1,0 +1,15 @@
+{%- comment -%}
+  MAISON DUVAL: ventajas bajo el botón de compra. Usa los mismos ajustes del tema que la barra
+  superior (envío gratuito y días de devolución), así nunca dicen cosas distintas.
+{%- endcomment -%}
+{%- liquid
+  assign umbral = settings.md_umbral_envio
+  assign umbral_cent = umbral | times: 100
+-%}
+<ul class="md-ventajas" role="list">
+  {%- if umbral != blank -%}
+    <li>{% render 'md-icono', nombre: 'camion' %}<span>Envío gratuito a partir de {{ umbral_cent | money_without_trailing_zeros }}</span></li>
+  {%- endif -%}
+  <li>{% render 'md-icono', nombre: 'devolucion' %}<span>Devoluciones en {{ settings.md_dias_devolucion }} días</span></li>
+  <li>{% render 'md-icono', nombre: 'escudo' %}<span>Pago seguro en el checkout de Shopify</span></li>
+</ul>

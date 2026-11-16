@@ -1,0 +1,194 @@
+{%- comment -%}
+  MAISON DUVAL: página de contacto. Formulario nativo de Shopify (los mensajes llegan al correo
+  de la tienda), información de atención al cliente, preguntas rápidas y primera capa de
+  protección de datos. Solo pide los datos necesarios: nombre, correo, motivo y mensaje.
+{%- endcomment -%}
+{%- liquid
+  assign motivos = section.settings.motivos | newline_to_br | split: '<br />'
+  assign pendiente = '[PENDIENTE: '
+-%}
+<div class="md-contenedor md-contacto">
+  <header class="md-pagina__cabecera md-reveal">
+    {%- if section.settings.overline != blank -%}<p class="md-overline">{{ section.settings.overline | escape }}</p>{%- endif -%}
+    <h1 class="h1">{{ page.title | escape }}</h1>
+    {%- if page.content != blank -%}<div class="md-texto-suave rte">{{ page.content }}</div>{%- endif -%}
+  </header>
+
+  <div class="md-contacto__rejilla">
+    <div class="md-contacto__form">
+      {%- form 'contact', id: 'MDContacto', class: 'md-form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="md-form__ok" role="status" tabindex="-1">
+            {% render 'md-icono', nombre: 'check' %} {{ section.settings.texto_ok | escape }}
+          </p>
+        {%- elsif form.errors -%}
+          <div class="md-form__error" role="alert" tabindex="-1">
+            <p>Revisa estos campos:</p>
+            <ul>
+              {%- for campo in form.errors -%}
+                <li>
+                  {%- case campo -%}
+                    {%- when 'email' -%}Correo electrónico: {{ form.errors.messages[campo] }}
+                    {%- when 'body' -%}Mensaje: {{ form.errors.messages[campo] }}
+                    {%- else -%}{{ form.errors.translated_fields[campo] | capitalize }} {{ form.errors.messages[campo] }}
+                  {%- endcase -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        <div class="field">
+          <input class="field__input" type="text" id="MDContacto-nombre" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" autocomplete="name" placeholder="Nombre" required aria-required="true">
+          <label class="field__label" for="MDContacto-nombre">Nombre <span aria-hidden="true">*</span></label>
+        </div>
+        <div class="field">
+          <input class="field__input" type="email" id="MDContacto-email" name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" autocomplete="email" spellcheck="false" autocapitalize="off" placeholder="Correo electrónico" required aria-required="true"{% if form.errors contains 'email' %} aria-invalid="true" aria-describedby="MDContacto-email-error"{% endif %}>
+          <label class="field__label" for="MDContacto-email">Correo electrónico <span aria-hidden="true">*</span></label>
+          {%- if form.errors contains 'email' -%}
+            <small class="form__message" id="MDContacto-email-error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</small>
+          {%- endif -%}
+        </div>
+        <div class="field md-select">
+          <label class="md-select__label" for="MDContacto-motivo">Motivo de la consulta <span aria-hidden="true">*</span></label>
+          <select class="field__input" id="MDContacto-motivo" name="contact[Motivo]" required aria-required="true">
+            <option value="" disabled selected>Elige una opción</option>
+            {%- for m in motivos -%}
+              {%- assign m = m | strip -%}
+              {%- if m != blank -%}<option value="{{ m | escape }}">{{ m | escape }}</option>{%- endif -%}
+            {%- endfor -%}
+          </select>
+        </div>
+        <div class="field">
+          <textarea rows="7" class="text-area field__input" id="MDContacto-mensaje" name="contact[body]" placeholder="Mensaje" required aria-required="true">{{- form.body -}}</textarea>
+          <label class="form__label field__label" for="MDContacto-mensaje">Mensaje <span aria-hidden="true">*</span></label>
+        </div>
+        <p class="md-texto-suave md-form__nota">* Campos obligatorios. Si tu consulta es sobre un pedido, indica el número de pedido en el mensaje.</p>
+
+        <div class="md-contacto__rgpd">
+          <h2 class="md-overline">Información sobre protección de datos</h2>
+          <dl>
+            <div><dt>Responsable</dt><dd>{% if section.settings.titular != blank %}{{ section.settings.titular | escape }}{% else %}{{ pendiente }}titular de la tienda]{% endif %}</dd></div>
+            <div><dt>Finalidad</dt><dd>Responder a tu consulta.</dd></div>
+            <div><dt>Base jurídica</dt><dd>Tu solicitud y, si tienes un pedido, la ejecución del contrato.</dd></div>
+            <div><dt>Destinatarios</dt><dd>Shopify, como proveedor de la plataforma. No se ceden datos a terceros salvo obligación legal.</dd></div>
+            <div><dt>Derechos</dt><dd>Acceso, rectificación, supresión, oposición, limitación y portabilidad, y reclamar ante la AEPD.</dd></div>
+          </dl>
+          {%- if section.settings.pagina_privacidad != blank -%}
+            <p>Más información en la <a href="{{ section.settings.pagina_privacidad.url }}">{{ section.settings.pagina_privacidad.title | escape }}</a>.</p>
+          {%- endif -%}
+        </div>
+
+        <button type="submit" class="button md-contacto__enviar">{{ section.settings.boton | escape }}</button>
+      {%- endform -%}
+    </div>
+
+    <aside class="md-contacto__info" aria-labelledby="MDContacto-info">
+      {%- if section.settings.imagen != blank -%}
+        <div class="md-contacto__imagen">
+          {{ section.settings.imagen | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 700, 900', sizes: '(min-width: 990px) 40vw, 100vw' }}
+        </div>
+      {%- endif -%}
+      <h2 class="h3" id="MDContacto-info">Atención al cliente</h2>
+      <ul class="md-contacto__datos" role="list">
+        <li>{% render 'md-icono', nombre: 'correo' %}<span>{% if section.settings.email != blank %}<a href="mailto:{{ section.settings.email | escape }}">{{ section.settings.email | escape }}</a>{% else %}{{ pendiente }}correo de atención al cliente]{% endif %}</span></li>
+        <li>{% render 'md-icono', nombre: 'reloj' %}<span>{% if section.settings.horario != blank %}{{ section.settings.horario | escape }}{% else %}{{ pendiente }}horario de atención]{% endif %}</span></li>
+        <li>{% render 'md-icono', nombre: 'atencion' %}<span>{% if section.settings.plazo != blank %}{{ section.settings.plazo | escape }}{% else %}{{ pendiente }}plazo habitual de respuesta]{% endif %}</span></li>
+      </ul>
+
+      {%- if section.blocks.size > 0 -%}
+        <h2 class="h3 md-contacto__faq-titulo">Preguntas rápidas</h2>
+        <div class="md-prosa md-contacto__faq">
+          {%- for block in section.blocks -%}
+            <details {{ block.shopify_attributes }}>
+              <summary>{{ block.settings.pregunta | escape }}</summary>
+              <div>{{ block.settings.respuesta }}</div>
+            </details>
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.pagina_faq != blank -%}
+          <p class="md-contacto__mas"><a class="md-btn md-btn--linea" href="{{ section.settings.pagina_faq.url }}">Ver todas las preguntas</a></p>
+        {%- endif -%}
+      {%- endif -%}
+    </aside>
+  </div>
+</div>
+
+{% style %}
+  #shopify-section-{{ section.id }} .md-contacto { padding-block: 64px 96px; }
+  #shopify-section-{{ section.id }} .md-pagina__cabecera { max-width: 72rem; margin: 0 auto 4.8rem; text-align: center; }
+  #shopify-section-{{ section.id }} .md-pagina__cabecera h1 { margin: 0.8rem 0 1.2rem; }
+  #shopify-section-{{ section.id }} .md-contacto__rejilla { display: grid; gap: 4.8rem; }
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .md-contacto__rejilla { grid-template-columns: 1.15fr 1fr; gap: 8rem; align-items: start; }
+  }
+  #shopify-section-{{ section.id }} .md-form .field { margin-bottom: 1.6rem; }
+  #shopify-section-{{ section.id }} .md-select { flex-direction: column; }
+  #shopify-section-{{ section.id }} .md-select__label { display: block; font-size: 1.3rem; margin-bottom: 0.6rem; color: var(--md-texto-suave); }
+  #shopify-section-{{ section.id }} .md-select select { appearance: auto; padding: 1.4rem 1.5rem; height: auto; min-height: 4.8rem; }
+  #shopify-section-{{ section.id }} .md-form__nota { font-size: 1.3rem; margin: 0 0 2.4rem; }
+  #shopify-section-{{ section.id }} .md-form__ok,
+  #shopify-section-{{ section.id }} .md-form__error { padding: 1.4rem 1.6rem; margin: 0 0 2.4rem; border: 1px solid var(--md-linea); border-radius: 2px; background: var(--md-blanco); }
+  #shopify-section-{{ section.id }} .md-form__ok { display: flex; gap: 1rem; align-items: center; }
+  #shopify-section-{{ section.id }} .md-form__error p { margin: 0 0 0.6rem; font-weight: 500; }
+  #shopify-section-{{ section.id }} .md-form__error ul { margin: 0; padding-inline-start: 2rem; }
+  #shopify-section-{{ section.id }} .md-contacto__rgpd { margin: 0 0 2.8rem; padding: 2rem 2.2rem; background: var(--md-beige); border-radius: 4px; font-size: 1.3rem; line-height: 1.55; }
+  #shopify-section-{{ section.id }} .md-contacto__rgpd h2 { margin: 0 0 1.2rem; }
+  #shopify-section-{{ section.id }} .md-contacto__rgpd dl { margin: 0 0 1rem; display: grid; gap: 0.6rem; }
+  #shopify-section-{{ section.id }} .md-contacto__rgpd dl div { display: grid; grid-template-columns: 11rem 1fr; gap: 1rem; }
+  #shopify-section-{{ section.id }} .md-contacto__rgpd dt { font-weight: 500; }
+  #shopify-section-{{ section.id }} .md-contacto__rgpd dd { margin: 0; color: var(--md-texto-suave); }
+  #shopify-section-{{ section.id }} .md-contacto__rgpd p { margin: 0; }
+  #shopify-section-{{ section.id }} .md-contacto__rgpd a { color: inherit; }
+  #shopify-section-{{ section.id }} .md-contacto__enviar { min-width: 22rem; }
+  #shopify-section-{{ section.id }} .md-contacto__imagen { border-radius: 4px; overflow: hidden; margin-bottom: 3.2rem; aspect-ratio: 4 / 3; }
+  #shopify-section-{{ section.id }} .md-contacto__imagen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #shopify-section-{{ section.id }} .md-contacto__info h2 { margin: 0 0 1.6rem; }
+  #shopify-section-{{ section.id }} .md-contacto__datos { list-style: none; margin: 0 0 4rem; padding: 0; display: grid; gap: 1.2rem; }
+  #shopify-section-{{ section.id }} .md-contacto__datos li { display: flex; gap: 1.2rem; align-items: center; }
+  #shopify-section-{{ section.id }} .md-contacto__datos svg { width: 2.2rem; height: 2.2rem; flex: none; color: var(--md-topo); }
+  #shopify-section-{{ section.id }} .md-contacto__datos a { color: inherit; }
+  #shopify-section-{{ section.id }} .md-contacto__faq { max-width: none; font-size: 1.5rem; }
+  #shopify-section-{{ section.id }} .md-contacto__faq details:first-child { border-top: 1px solid var(--md-linea); }
+  #shopify-section-{{ section.id }} .md-contacto__mas { margin-top: 2.4rem; }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .md-contacto__rgpd dl div { grid-template-columns: 1fr; gap: 0.2rem; }
+    #shopify-section-{{ section.id }} .md-contacto__enviar { width: 100%; }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Contacto",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": { "templates": ["page"] },
+  "settings": [
+    { "type": "text", "id": "overline", "label": "Texto pequeño sobre el título", "default": "Estamos aquí para ayudarte" },
+    { "type": "textarea", "id": "motivos", "label": "Motivos de consulta (uno por línea)", "default": "Un pedido\nEnvíos y seguimiento\nDevoluciones y reembolsos\nInformación sobre un producto\nOtra consulta" },
+    { "type": "text", "id": "boton", "label": "Texto del botón", "default": "Enviar mensaje" },
+    { "type": "text", "id": "texto_ok", "label": "Mensaje de envío correcto", "default": "Gracias. Hemos recibido tu mensaje y te responderemos lo antes posible." },
+    { "type": "header", "content": "Atención al cliente" },
+    { "type": "paragraph", "content": "Si un dato está vacío se muestra como [PENDIENTE]. Rellénalo antes de abrir la tienda." },
+    { "type": "text", "id": "email", "label": "Correo de atención al cliente" },
+    { "type": "text", "id": "horario", "label": "Horario de atención", "info": "Ejemplo: de lunes a viernes, de 9:00 a 18:00" },
+    { "type": "text", "id": "plazo", "label": "Plazo de respuesta", "info": "Ejemplo: respondemos en un máximo de 48 horas laborables" },
+    { "type": "image_picker", "id": "imagen", "label": "Imagen" },
+    { "type": "page", "id": "pagina_faq", "label": "Página de preguntas frecuentes" },
+    { "type": "header", "content": "Protección de datos" },
+    { "type": "text", "id": "titular", "label": "Responsable del tratamiento", "info": "Nombre o razón social y NIF del titular de la tienda" },
+    { "type": "page", "id": "pagina_privacidad", "label": "Página de política de privacidad" }
+  ],
+  "blocks": [
+    {
+      "type": "pregunta",
+      "name": "Pregunta rápida",
+      "settings": [
+        { "type": "text", "id": "pregunta", "label": "Pregunta", "default": "¿Dónde está mi pedido?" },
+        { "type": "richtext", "id": "respuesta", "label": "Respuesta", "default": "<p>Cuando tu pedido salga del almacén recibirás un correo de confirmación de envío. Si el transportista facilita número de seguimiento, lo incluiremos en ese correo.</p>" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "MD – Contacto" } ]
+}
+{% endschema %}

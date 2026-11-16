@@ -1,0 +1,41 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "newsletter": {
+      "type": "md-newsletter",
+      "settings": {
+        "logo_texto": "MAISON DUVAL",
+        "logo_subtitulo": "TRAVEL ESSENTIALS",
+        "titulo": "Un mundo por descubrir. Sé el primero en conocer nuestras novedades.",
+        "texto_descuento": "",
+        "boton": "Suscribirse",
+        "pagina_privacidad": "politica-de-privacidad",
+        "texto_ok": "Gracias. Te hemos suscrito a nuestra newsletter.",
+        "color_scheme": "scheme-2"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "logo_texto": "MAISON DUVAL",
+        "logo_subtitulo": "TRAVEL ESSENTIALS",
+        "lema": "Viaja ligero. Vive más.",
+        "menu_1": "atencion-al-cliente",
+        "menu_2": "maison",
+        "menu_3": "legal",
+        "contacto_titulo": "Contacto",
+        "contacto_pagina": "contacto",
+        "contacto_enlace_texto": "Escríbenos",
+        "copyright": "MAISON DUVAL",
+        "cookies_texto": "Preferencias de cookies",
+        "mostrar_pagos": true,
+        "color_scheme": "scheme-2"
+      }
+    }
+  },
+  "order": [
+    "newsletter",
+    "footer"
+  ]
+}

@@ -1,0 +1,43 @@
+{%- comment -%}
+  MAISON DUVAL: página de texto (legales, envíos, devoluciones…). El texto se edita en
+  Shopify > Tienda online > Páginas. Tipografía editorial y lectura cómoda.
+{%- endcomment -%}
+<div class="md-contenedor md-pagina">
+  <header class="md-pagina__cabecera md-reveal">
+    {%- if section.settings.overline != blank -%}
+      <p class="md-overline">{{ section.settings.overline | escape }}</p>
+    {%- endif -%}
+    <h1 class="h1">{{ page.title | escape }}</h1>
+    {%- if section.settings.mostrar_fecha -%}
+      <p class="md-texto-suave md-pagina__fecha">
+        Última actualización: <time datetime="{{ page.updated_at | date: '%Y-%m-%d' }}">{{ page.updated_at | date: '%d/%m/%Y' }}</time>
+      </p>
+    {%- endif -%}
+  </header>
+  <div class="md-prosa rte">
+    {{ page.content }}
+  </div>
+</div>
+
+{% style %}
+  #shopify-section-{{ section.id }} .md-pagina { padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px; }
+  #shopify-section-{{ section.id }} .md-pagina__cabecera { max-width: 72rem; margin: 0 auto 4rem; text-align: center; }
+  #shopify-section-{{ section.id }} .md-pagina__cabecera h1 { margin: 0.8rem 0 1.2rem; }
+  #shopify-section-{{ section.id }} .md-pagina__fecha { font-size: 1.3rem; letter-spacing: 0.04em; margin: 0; }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Página de texto",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": { "templates": ["page"] },
+  "settings": [
+    { "type": "text", "id": "overline", "label": "Texto pequeño sobre el título", "default": "Maison Duval" },
+    { "type": "checkbox", "id": "mostrar_fecha", "label": "Mostrar fecha de última actualización", "default": true },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 96 }
+  ],
+  "presets": [ { "name": "MD – Página de texto" } ]
+}
+{% endschema %}

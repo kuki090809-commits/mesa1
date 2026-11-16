@@ -1,0 +1,97 @@
+{%- comment -%}
+  MAISON DUVAL: información ampliada del producto desde metacampos (custom.materiales, custom.dimensiones,
+  custom.cuidados, custom.faq). Cada apartado solo aparece si el metacampo tiene contenido.
+  «Envío y devoluciones» usa la configuración del tema y enlaza a las páginas legales.
+{%- endcomment -%}
+{%- liquid
+  assign m = product.metafields.custom
+  assign faq = m.faq.value
+  assign umbral = settings.md_umbral_envio
+  assign umbral_cent = umbral | times: 100
+-%}
+<section class="md-info" aria-labelledby="md-info-{{ section.id }}">
+  <div class="md-contenedor md-info__grid">
+    <div class="md-info__cabecera">
+      <h2 id="md-info-{{ section.id }}" class="h1">{{ section.settings.titulo | escape }}</h2>
+      {%- if section.settings.texto != blank -%}<p class="md-texto-suave">{{ section.settings.texto | escape }}</p>{%- endif -%}
+    </div>
+    <div class="md-info__lista md-prosa">
+      {%- if m.materiales != blank -%}
+        <details open><summary>{{ section.settings.t_materiales | escape }}</summary><div>{{ m.materiales | metafield_tag }}</div></details>
+      {%- endif -%}
+      {%- if m.dimensiones != blank -%}
+        <details><summary>{{ section.settings.t_dimensiones | escape }}</summary><div>{{ m.dimensiones | metafield_tag }}</div></details>
+      {%- endif -%}
+      {%- if m.cuidados != blank -%}
+        <details><summary>{{ section.settings.t_cuidados | escape }}</summary><div>{{ m.cuidados | metafield_tag }}</div></details>
+      {%- endif -%}
+      <details>
+        <summary>{{ section.settings.t_envio | escape }}</summary>
+        <div>
+          {%- if umbral != blank -%}<p>Envío gratuito en pedidos superiores a {{ umbral_cent | money_without_trailing_zeros }}. El coste exacto se muestra en la pantalla de pago.</p>{%- endif -%}
+          <p>Tienes {{ settings.md_dias_devolucion }} días naturales desde la recepción para devolver tu pedido.</p>
+          <p>
+            {%- if section.settings.pagina_envios != blank -%}<a href="{{ section.settings.pagina_envios.url }}">{{ section.settings.pagina_envios.title | escape }}</a>{%- endif -%}
+            {%- if section.settings.pagina_envios != blank and section.settings.pagina_devoluciones != blank %} · {% endif -%}
+            {%- if section.settings.pagina_devoluciones != blank -%}<a href="{{ section.settings.pagina_devoluciones.url }}">{{ section.settings.pagina_devoluciones.title | escape }}</a>{%- endif -%}
+          </p>
+        </div>
+      </details>
+      {%- if faq != blank and faq.size > 0 -%}
+        <h3 class="md-info__faq-titulo">{{ section.settings.t_faq | escape }}</h3>
+        {%- for linea in faq -%}
+          {%- assign partes = linea | split: '|' -%}
+          <details><summary>{{ partes[0] | strip | escape }}</summary><p>{{ partes[1] | strip | escape }}</p></details>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{%- if faq != blank and faq.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for linea in faq -%}
+          {%- assign partes = linea | split: '|' -%}
+          { "@type": "Question", "name": {{ partes[0] | strip | json }}, "acceptedAnswer": { "@type": "Answer", "text": {{ partes[1] | strip | json }} } }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% style %}
+  #shopify-section-{{ section.id }} .md-info { padding: 7.2rem 0; }
+  #shopify-section-{{ section.id }} .md-info__grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(3.2rem, 6vw, 8rem); align-items: start; }
+  #shopify-section-{{ section.id }} .md-info__cabecera h2 { margin: 0 0 1.2rem; }
+  #shopify-section-{{ section.id }} .md-info__lista { max-width: none; margin: 0; border-top: 1px solid var(--md-linea); }
+  #shopify-section-{{ section.id }} .md-info__faq-titulo { margin: 4rem 0 0.8rem; }
+  #shopify-section-{{ section.id }} .md-info__lista div p:last-child { margin-bottom: 0; }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .md-info { padding: 4.8rem 0; }
+    #shopify-section-{{ section.id }} .md-info__grid { grid-template-columns: minmax(0, 1fr); }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Información producto",
+  "tag": "div",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Todo lo que necesitas saber" },
+    { "type": "text", "id": "texto", "label": "Texto", "default": "Información facilitada por el fabricante o proveedor de cada producto." },
+    { "type": "text", "id": "t_materiales", "label": "Título: materiales", "default": "Características y materiales" },
+    { "type": "text", "id": "t_dimensiones", "label": "Título: dimensiones", "default": "Dimensiones" },
+    { "type": "text", "id": "t_cuidados", "label": "Título: uso y mantenimiento", "default": "Uso y mantenimiento" },
+    { "type": "text", "id": "t_envio", "label": "Título: envío", "default": "Envío y devoluciones" },
+    { "type": "text", "id": "t_faq", "label": "Título: preguntas", "default": "Preguntas frecuentes" },
+    { "type": "page", "id": "pagina_envios", "label": "Página de envíos" },
+    { "type": "page", "id": "pagina_devoluciones", "label": "Página de devoluciones" }
+  ],
+  "presets": [ { "name": "MD – Información producto" } ]
+}
+{% endschema %}

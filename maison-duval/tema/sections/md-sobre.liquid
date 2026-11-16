@@ -1,0 +1,150 @@
+{%- comment -%}
+  MAISON DUVAL: página editorial «Sobre nosotros». Bloques: apertura con imagen, texto con imagen,
+  cita y valores. Todo el texto se edita en el editor; no contiene historias inventadas.
+{%- endcomment -%}
+<div class="md-sobre">
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'apertura' -%}
+        <div class="md-sobre__apertura" {{ block.shopify_attributes }}>
+          {%- if block.settings.imagen != blank -%}
+            {{ block.settings.imagen | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '750, 1100, 1500, 1900, 2400', sizes: '100vw', class: 'md-sobre__apertura-img' }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'md-sobre__apertura-img placeholder-svg' }}
+          {%- endif -%}
+          <div class="md-sobre__apertura-velo"></div>
+          <div class="md-contenedor md-sobre__apertura-texto">
+            {%- if block.settings.overline != blank -%}<p class="md-overline">{{ block.settings.overline | escape }}</p>{%- endif -%}
+            <h1 class="md-sobre__titulo">{{ block.settings.titulo | escape | newline_to_br }}</h1>
+          </div>
+        </div>
+
+      {%- when 'texto_imagen' -%}
+        <div class="md-contenedor md-sobre__bloque md-sobre__bloque--{{ block.settings.posicion }}" {{ block.shopify_attributes }}>
+          <div class="md-sobre__media md-reveal">
+            {%- if block.settings.imagen != blank -%}
+              {{ block.settings.imagen | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '500, 800, 1100, 1400', sizes: '(min-width: 990px) 50vw, 100vw' }}
+            {%- else -%}
+              {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="md-sobre__texto md-reveal">
+            {%- if block.settings.overline != blank -%}<p class="md-overline">{{ block.settings.overline | escape }}</p>{%- endif -%}
+            {%- if block.settings.titulo != blank -%}<h2 class="h2">{{ block.settings.titulo | escape }}</h2>{%- endif -%}
+            <div class="rte">{{ block.settings.texto }}</div>
+            {%- if block.settings.boton != blank and block.settings.enlace != blank -%}
+              <a class="md-btn md-btn--linea" href="{{ block.settings.enlace }}">{{ block.settings.boton | escape }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+
+      {%- when 'cita' -%}
+        <figure class="md-sobre__cita md-reveal" {{ block.shopify_attributes }}>
+          {% render 'md-icono', nombre: 'avion' %}
+          <blockquote><p>{{ block.settings.texto | escape }}</p></blockquote>
+          {%- if block.settings.firma != blank -%}<figcaption class="md-overline">{{ block.settings.firma | escape }}</figcaption>{%- endif -%}
+        </figure>
+
+      {%- when 'valor' -%}
+        {%- liquid
+          assign i_prev = forloop.index0 | minus: 1
+          assign i_next = forloop.index0 | plus: 1
+          assign abre = true
+          if forloop.first == false and section.blocks[i_prev].type == 'valor'
+            assign abre = false
+          endif
+          assign cierra = true
+          if forloop.last == false and section.blocks[i_next].type == 'valor'
+            assign cierra = false
+          endif
+        -%}
+        {%- if abre -%}<ul class="md-contenedor md-sobre__valores" role="list">{%- endif -%}
+        <li class="md-sobre__valor md-reveal" {{ block.shopify_attributes }}>
+          {% render 'md-icono', nombre: block.settings.icono %}
+          <h3 class="h4">{{ block.settings.titulo | escape }}</h3>
+          <p class="md-texto-suave">{{ block.settings.texto | escape }}</p>
+        </li>
+        {%- if cierra -%}</ul>{%- endif -%}
+    {%- endcase -%}
+  {%- endfor -%}
+</div>
+
+{% style %}
+  #shopify-section-{{ section.id }} .md-sobre { padding-bottom: 9.6rem; }
+  #shopify-section-{{ section.id }} .md-sobre__apertura { position: relative; min-height: min(72vh, 68rem); display: flex; align-items: flex-end; overflow: hidden; }
+  #shopify-section-{{ section.id }} .md-sobre__apertura-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #shopify-section-{{ section.id }} .md-sobre__apertura-velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(63,55,48,0) 35%, rgba(63,55,48,0.62) 100%); }
+  #shopify-section-{{ section.id }} .md-sobre__apertura-texto { position: relative; width: 100%; padding-block: 6.4rem; color: var(--md-blanco); }
+  #shopify-section-{{ section.id }} .md-sobre__apertura-texto .md-overline { color: var(--md-crema); }
+  #shopify-section-{{ section.id }} .md-sobre__titulo { margin: 1rem 0 0; color: var(--md-blanco); font-size: clamp(4rem, 7vw, 8rem); line-height: 1.02; max-width: 14ch; }
+  #shopify-section-{{ section.id }} .md-sobre__bloque { display: grid; gap: 3.2rem; align-items: center; margin-top: 9.6rem; }
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .md-sobre__bloque { grid-template-columns: 1fr 1fr; gap: 8rem; }
+    #shopify-section-{{ section.id }} .md-sobre__bloque--derecha .md-sobre__media { order: 2; }
+  }
+  #shopify-section-{{ section.id }} .md-sobre__media { border-radius: 4px; overflow: hidden; aspect-ratio: 4 / 5; background: var(--md-beige); }
+  #shopify-section-{{ section.id }} .md-sobre__media img,
+  #shopify-section-{{ section.id }} .md-sobre__media svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #shopify-section-{{ section.id }} .md-sobre__texto { max-width: 52rem; }
+  #shopify-section-{{ section.id }} .md-sobre__texto h2 { margin: 0.8rem 0 2rem; }
+  #shopify-section-{{ section.id }} .md-sobre__texto .rte { font-size: 1.7rem; line-height: 1.8; color: var(--md-texto-suave); margin-bottom: 2.8rem; }
+  #shopify-section-{{ section.id }} .md-sobre__cita { max-width: 86rem; margin: 11.2rem auto 0; padding: 0 var(--md-margen); text-align: center; }
+  #shopify-section-{{ section.id }} .md-sobre__cita svg { width: 3.6rem; height: 3.6rem; color: var(--md-topo); }
+  #shopify-section-{{ section.id }} .md-sobre__cita blockquote { margin: 2rem 0; }
+  #shopify-section-{{ section.id }} .md-sobre__cita p { font-family: var(--md-serif); font-size: clamp(2.6rem, 3.6vw, 4.2rem); line-height: 1.25; margin: 0; font-style: italic; }
+  #shopify-section-{{ section.id }} .md-sobre__valores { list-style: none; margin-top: 9.6rem; display: grid; gap: 2.4rem; }
+  @media screen and (min-width: 750px) { #shopify-section-{{ section.id }} .md-sobre__valores { grid-template-columns: repeat(3, 1fr); } }
+  #shopify-section-{{ section.id }} .md-sobre__valor { text-align: center; padding: 4rem 2.4rem; background: var(--md-beige); border-radius: 4px; }
+  #shopify-section-{{ section.id }} .md-sobre__valor svg { width: 3.6rem; height: 3.6rem; color: var(--md-marron); }
+  #shopify-section-{{ section.id }} .md-sobre__valor h3 { margin: 1.6rem 0 0.8rem; }
+  #shopify-section-{{ section.id }} .md-sobre__valor p { margin: 0; }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Sobre nosotros",
+  "tag": "section",
+  "enabled_on": { "templates": ["page"] },
+  "blocks": [
+    {
+      "type": "apertura", "name": "Apertura con imagen", "limit": 1,
+      "settings": [
+        { "type": "image_picker", "id": "imagen", "label": "Imagen" },
+        { "type": "text", "id": "overline", "label": "Texto pequeño", "default": "Sobre nosotros" },
+        { "type": "textarea", "id": "titulo", "label": "Título", "default": "El viaje empieza\nen los detalles." }
+      ]
+    },
+    {
+      "type": "texto_imagen", "name": "Texto con imagen",
+      "settings": [
+        { "type": "image_picker", "id": "imagen", "label": "Imagen" },
+        { "type": "select", "id": "posicion", "label": "Imagen a la", "options": [ { "value": "izquierda", "label": "Izquierda" }, { "value": "derecha", "label": "Derecha" } ], "default": "izquierda" },
+        { "type": "text", "id": "overline", "label": "Texto pequeño" },
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Nuestra idea" },
+        { "type": "richtext", "id": "texto", "label": "Texto", "default": "<p>Escribe aquí tu texto.</p>" },
+        { "type": "text", "id": "boton", "label": "Texto del botón" },
+        { "type": "url", "id": "enlace", "label": "Enlace del botón" }
+      ]
+    },
+    {
+      "type": "cita", "name": "Frase destacada",
+      "settings": [
+        { "type": "textarea", "id": "texto", "label": "Frase", "default": "Viaja ligero. Vive más." },
+        { "type": "text", "id": "firma", "label": "Firma", "default": "Maison Duval" }
+      ]
+    },
+    {
+      "type": "valor", "name": "Valor",
+      "settings": [
+        { "type": "select", "id": "icono", "label": "Icono", "options": [
+          { "value": "maleta", "label": "Maleta" }, { "value": "organizacion", "label": "Organización" }, { "value": "accesorios", "label": "Accesorios" },
+          { "value": "comodidad", "label": "Comodidad" }, { "value": "tecnologia", "label": "Tecnología" }, { "value": "avion", "label": "Avión" },
+          { "value": "check", "label": "Visto" }, { "value": "atencion", "label": "Atención" } ], "default": "check" },
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Funcionales" },
+        { "type": "textarea", "id": "texto", "label": "Texto", "default": "Productos pensados para hacer el viaje más fácil." }
+      ]
+    }
+  ],
+  "presets": [ { "name": "MD – Sobre nosotros" } ]
+}
+{% endschema %}

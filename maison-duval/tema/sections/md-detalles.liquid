@@ -1,0 +1,69 @@
+{%- comment -%}
+  MAISON DUVAL: «Detalles que marcan la diferencia». Lee el metacampo del producto custom.detalles
+  (lista de líneas «Título | Texto»). Si el producto no tiene detalles, la sección no se muestra:
+  así nunca se inventan características.
+{%- endcomment -%}
+{%- liquid
+  assign lista = product.metafields.custom.detalles.value
+  assign img = section.settings.imagen
+  if img == blank and product.media.size > 1
+    assign img = product.media[1].preview_image
+  elsif img == blank
+    assign img = product.featured_image
+  endif
+-%}
+{%- if lista != blank and lista.size > 0 -%}
+  <section class="md-detalles" aria-labelledby="md-detalles-{{ section.id }}">
+    <div class="md-contenedor md-detalles__grid">
+      <div class="md-detalles__media md-reveal">
+        {%- if img != blank -%}
+          {{ img | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1400', sizes: '(min-width: 990px) 45vw, 100vw', alt: '' }}
+        {%- endif -%}
+      </div>
+      <div class="md-detalles__texto">
+        <p class="md-overline">{{ section.settings.overline | escape }}</p>
+        <h2 id="md-detalles-{{ section.id }}" class="h1 md-detalles__titulo">{{ section.settings.titulo | escape }}</h2>
+        <ul class="md-detalles__lista" role="list">
+          {%- for linea in lista -%}
+            {%- assign partes = linea | split: '|' -%}
+            <li class="md-reveal" style="--md-i: {{ forloop.index }}">
+              <h3>{{ partes[0] | strip | escape }}</h3>
+              {%- if partes[1] != blank -%}<p>{{ partes[1] | strip | escape }}</p>{%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </section>
+{%- elsif request.design_mode -%}
+  <div class="md-contenedor"><p class="md-texto-suave" style="padding: 2rem 0;">«Detalles que marcan la diferencia» aparecerá cuando rellenes el metacampo «Detalles» del producto (una línea por detalle: Título | Texto).</p></div>
+{%- endif -%}
+
+{% style %}
+  #shopify-section-{{ section.id }} .md-detalles { padding: 8rem 0; background: var(--md-beige); }
+  #shopify-section-{{ section.id }} .md-detalles__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(3.2rem, 6vw, 8rem); align-items: center; }
+  #shopify-section-{{ section.id }} .md-detalles__media img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; }
+  #shopify-section-{{ section.id }} .md-detalles__titulo { margin: 0 0 3.2rem; }
+  #shopify-section-{{ section.id }} .md-detalles__lista { display: grid; gap: 2.4rem; margin: 0; padding: 0; list-style: none; }
+  #shopify-section-{{ section.id }} .md-detalles__lista li { padding-bottom: 2.4rem; border-bottom: 1px solid var(--md-linea); }
+  #shopify-section-{{ section.id }} .md-detalles__lista h3 { margin: 0 0 0.6rem; font-size: 2.2rem; }
+  #shopify-section-{{ section.id }} .md-detalles__lista p { margin: 0; color: var(--md-texto-suave); line-height: 1.7; }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .md-detalles { padding: 5.6rem 0; }
+    #shopify-section-{{ section.id }} .md-detalles__grid { grid-template-columns: minmax(0, 1fr); }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Detalles",
+  "tag": "div",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "overline", "label": "Texto pequeño superior", "default": "El cuidado está en los detalles" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Detalles que marcan la diferencia" },
+    { "type": "image_picker", "id": "imagen", "label": "Foto (vacío = segunda foto del producto)" }
+  ],
+  "presets": [ { "name": "MD – Detalles" } ]
+}
+{% endschema %}

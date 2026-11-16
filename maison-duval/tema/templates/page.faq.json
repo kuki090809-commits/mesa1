@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "md-faq",
+      "settings": {
+        "overline": "Ayuda",
+        "texto": "<p>Respuestas rápidas sobre pedidos, envíos, devoluciones y pagos.</p>",
+        "cta_titulo": "¿No encuentras lo que buscas?",
+        "cta_boton": "Contactar",
+        "cta_enlace": "shopify://pages/contacto"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

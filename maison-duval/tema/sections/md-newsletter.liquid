@@ -1,0 +1,80 @@
+{%- comment -%}
+  MAISON DUVAL: newsletter con consentimiento expreso y separado (casilla obligatoria para suscribirse,
+  sin marcar por defecto). El descuento de bienvenida solo se muestra si se escribe su texto.
+{%- endcomment -%}
+<section class="md-newsletter color-{{ section.settings.color_scheme }}" aria-labelledby="md-news-{{ section.id }}">
+  <div class="md-newsletter__grid md-contenedor">
+    <div class="md-newsletter__marca" aria-hidden="true">
+      {%- render 'md-logo', nombre: section.settings.logo_texto, subtitulo: section.settings.logo_subtitulo, tam: 26 -%}
+    </div>
+    <div class="md-newsletter__texto">
+      <h2 id="md-news-{{ section.id }}" class="md-newsletter__titulo">{{ section.settings.titulo | escape }}</h2>
+      {%- if section.settings.texto_descuento != blank -%}
+        <p class="md-newsletter__descuento">{{ section.settings.texto_descuento | escape }}</p>
+      {%- endif -%}
+    </div>
+    {%- form 'customer', id: 'md-newsletter-form', class: 'md-newsletter__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if form.posted_successfully? -%}
+        <p class="md-newsletter__ok" role="status" tabindex="-1">{%- render 'md-icono', nombre: 'check' -%} {{ section.settings.texto_ok | escape }}</p>
+      {%- else -%}
+        <div class="md-newsletter__fila">
+          <label class="visually-hidden" for="md-news-email-{{ section.id }}">Correo electrónico</label>
+          <input id="md-news-email-{{ section.id }}" class="md-newsletter__input" type="email" name="contact[email]" autocomplete="email" required placeholder="Tu correo electrónico" value="{{ form.email }}" aria-required="true"{% if form.errors %} aria-invalid="true" aria-describedby="md-news-error-{{ section.id }}"{% endif %}>
+          <button type="submit" class="md-btn md-btn--oscuro">{{ section.settings.boton | escape }}</button>
+        </div>
+        <label class="md-check" for="md-news-consent-{{ section.id }}">
+          <input id="md-news-consent-{{ section.id }}" type="checkbox" name="contact[accepts_marketing]" value="true" required>
+          <span>
+            {{ section.settings.consentimiento | escape }}
+            {%- if section.settings.pagina_privacidad != blank %} <a href="{{ section.settings.pagina_privacidad.url }}">{{ section.settings.pagina_privacidad.title | escape }}</a>.{% endif -%}
+          </span>
+        </label>
+        {%- if form.errors -%}
+          <p id="md-news-error-{{ section.id }}" class="md-newsletter__error" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% style %}
+  #shopify-section-{{ section.id }} .md-newsletter { border-top: 1px solid rgba(81, 72, 63, 0.1); }
+  #shopify-section-{{ section.id }} .md-newsletter__grid { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.1fr); gap: 3.2rem 4.8rem; align-items: center; padding-block: 4rem; }
+  #shopify-section-{{ section.id }} .md-newsletter__titulo { margin: 0; max-width: 44rem; font-size: 2.1rem; line-height: 1.4; }
+  #shopify-section-{{ section.id }} .md-newsletter__descuento { margin: 0.6rem 0 0; font-size: 1.4rem; }
+  #shopify-section-{{ section.id }} .md-newsletter__fila { display: flex; gap: 1rem; }
+  #shopify-section-{{ section.id }} .md-newsletter__input { flex: 1; min-width: 0; min-height: 4.8rem; padding: 0 1.6rem; border: 1px solid rgba(81, 72, 63, 0.28); border-radius: 2px; background: #FCFAF6; color: #51483F; font: inherit; font-size: 1.5rem; }
+  #shopify-section-{{ section.id }} .md-newsletter__input::placeholder { color: #7A7067; }
+  #shopify-section-{{ section.id }} .md-check { margin-top: 1.2rem; }
+  #shopify-section-{{ section.id }} .md-newsletter__ok { display: flex; align-items: center; gap: 0.8rem; margin: 0; font-size: 1.6rem; }
+  #shopify-section-{{ section.id }} .md-newsletter__ok .md-icono { width: 2rem; height: 2rem; }
+  #shopify-section-{{ section.id }} .md-newsletter__error { margin: 1rem 0 0; color: #8A2F1E; font-size: 1.35rem; }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .md-newsletter__grid { grid-template-columns: minmax(0, 1fr); text-align: center; }
+    #shopify-section-{{ section.id }} .md-newsletter__titulo { margin-inline: auto; }
+    #shopify-section-{{ section.id }} .md-check { text-align: start; }
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .md-newsletter__fila { flex-direction: column; }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Newsletter",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "logo_texto", "label": "Logo: nombre", "default": "MAISON DUVAL" },
+    { "type": "text", "id": "logo_subtitulo", "label": "Logo: subtítulo", "default": "TRAVEL ESSENTIALS" },
+    { "type": "text", "id": "titulo", "label": "Texto principal", "default": "Un mundo por descubrir. Sé el primero en conocer nuestras novedades." },
+    { "type": "text", "id": "texto_descuento", "label": "Texto del descuento de bienvenida", "info": "Déjalo vacío salvo que hayas creado un código de descuento real para nuevos suscriptores." },
+    { "type": "text", "id": "boton", "label": "Botón", "default": "Suscribirse" },
+    { "type": "textarea", "id": "consentimiento", "label": "Texto de la casilla de consentimiento", "default": "Quiero recibir novedades y comunicaciones comerciales de MAISON DUVAL por correo electrónico. Puedo darme de baja en cualquier momento. Más información en la" },
+    { "type": "page", "id": "pagina_privacidad", "label": "Página de privacidad" },
+    { "type": "text", "id": "texto_ok", "label": "Mensaje al suscribirse", "default": "Gracias. Te hemos suscrito a nuestra newsletter." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colores", "default": "scheme-2" }
+  ],
+  "presets": [ { "name": "MD – Newsletter" } ]
+}
+{% endschema %}

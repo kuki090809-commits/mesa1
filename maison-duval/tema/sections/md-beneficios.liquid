@@ -1,0 +1,77 @@
+{%- comment -%}
+  MAISON DUVAL: franja de beneficios. Los textos aceptan [umbral] (importe de envío gratuito de la
+  configuración del tema) y [dias] (días para devolver). Un beneficio de envío sin importe configurado se oculta.
+{%- endcomment -%}
+{%- liquid
+  assign umbral = settings.md_umbral_envio
+  assign umbral_cent = umbral | times: 100
+  assign umbral_txt = umbral_cent | money_without_trailing_zeros
+  assign dias_txt = settings.md_dias_devolucion | append: ''
+-%}
+<section class="md-beneficios color-{{ section.settings.color_scheme }}" aria-label="{{ section.settings.etiqueta | escape }}">
+  <ul class="md-beneficios__lista" role="list">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign texto = block.settings.texto
+        assign oculto = false
+        if texto contains '[umbral]'
+          if umbral == blank
+            assign oculto = true
+          else
+            assign texto = texto | replace: '[umbral]', umbral_txt
+          endif
+        endif
+        assign texto = texto | replace: '[dias]', dias_txt
+      -%}
+      {%- unless oculto -%}
+        <li class="md-beneficio" {{ block.shopify_attributes }}>
+          {%- render 'md-icono', nombre: block.settings.icono -%}
+          {%- if block.settings.enlace != blank -%}
+            <a href="{{ block.settings.enlace }}">{{ texto | escape | newline_to_br }}</a>
+          {%- else -%}
+            <span>{{ texto | escape | newline_to_br }}</span>
+          {%- endif -%}
+        </li>
+      {%- endunless -%}
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% style %}
+  #shopify-section-{{ section.id }} .md-beneficios { border-block: 1px solid rgba(81, 72, 63, 0.1); }
+  #shopify-section-{{ section.id }} .md-beneficios__lista { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); max-width: 128rem; margin: 0 auto; padding: 2.4rem var(--md-margen); list-style: none; }
+  #shopify-section-{{ section.id }} .md-beneficio { display: flex; align-items: center; justify-content: center; gap: 1.6rem; padding: 0.4rem 2rem; font-family: var(--font-heading-family); font-size: 1.75rem; line-height: 1.3; }
+  #shopify-section-{{ section.id }} .md-beneficio + .md-beneficio { border-inline-start: 1px solid rgba(81, 72, 63, 0.18); }
+  #shopify-section-{{ section.id }} .md-beneficio .md-icono { width: 3.4rem; height: 3.4rem; flex: none; stroke-width: 1.1; }
+  #shopify-section-{{ section.id }} .md-beneficio a { color: inherit; text-decoration: none; }
+  #shopify-section-{{ section.id }} .md-beneficio a:hover { text-decoration: underline; text-underline-offset: 0.3rem; }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .md-beneficios__lista { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2rem; }
+    #shopify-section-{{ section.id }} .md-beneficio { justify-content: flex-start; padding: 0.4rem 1.2rem; }
+    #shopify-section-{{ section.id }} .md-beneficio + .md-beneficio { border-inline-start: 0; }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Beneficios",
+  "tag": "div",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "etiqueta", "label": "Nombre para lectores de pantalla", "default": "Ventajas de comprar en MAISON DUVAL" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colores", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "beneficio",
+      "name": "Beneficio",
+      "settings": [
+        { "type": "select", "id": "icono", "label": "Icono", "options": [ { "value": "camion", "label": "Envío" }, { "value": "escudo", "label": "Compra segura" }, { "value": "devolucion", "label": "Devolución" }, { "value": "atencion", "label": "Atención" }, { "value": "avion", "label": "Avión" }, { "value": "correo", "label": "Correo" } ], "default": "camion" },
+        { "type": "textarea", "id": "texto", "label": "Texto", "info": "Usa [umbral] para el importe de envío gratuito y [dias] para los días de devolución (Configuración del tema).", "default": "Envío gratuito\na partir de [umbral]" },
+        { "type": "url", "id": "enlace", "label": "Enlace (opcional)" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "MD – Beneficios", "blocks": [ { "type": "beneficio" } ] } ]
+}
+{% endschema %}

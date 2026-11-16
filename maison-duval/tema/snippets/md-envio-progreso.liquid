@@ -1,0 +1,22 @@
+{%- comment -%} MAISON DUVAL: progreso hacia el envío gratuito (usa el importe de la configuración del tema). {%- endcomment -%}
+{%- liquid
+  assign umbral = settings.md_umbral_envio
+-%}
+{%- if umbral != blank and cart.item_count > 0 -%}
+  {%- liquid
+    assign umbral_cent = umbral | times: 100
+    assign falta = umbral_cent | minus: cart.total_price
+    assign pct = cart.total_price | times: 100 | divided_by: umbral_cent
+    if pct > 100
+      assign pct = 100
+    endif
+  -%}
+  <div class="md-envio-progreso" role="status">
+    {%- if falta > 0 -%}
+      <p>Te faltan <strong>{{ falta | money }}</strong> para el envío gratuito.</p>
+    {%- else -%}
+      <p><strong>Tu pedido tiene envío gratuito.</strong></p>
+    {%- endif -%}
+    <div class="md-envio-progreso__barra" aria-hidden="true"><span style="width: {{ pct }}%;"></span></div>
+  </div>
+{%- endif -%}

@@ -1,0 +1,50 @@
+{%- comment -%}
+  MAISON DUVAL: aviso de cookies propio sobre la API de privacidad de Shopify
+  (Shopify.customerPrivacy). Hasta que el visitante elige, solo funcionan las necesarias.
+  «Aceptar» y «Rechazar» tienen el mismo peso visual; se puede reabrir con [data-md-cookies-abrir].
+{%- endcomment -%}
+{%- if settings.md_cookies_activo -%}
+  <div class="md-cookies" id="md-cookies" role="region" aria-labelledby="md-cookies-titulo" hidden data-md-cookies>
+    <div data-md-cookies-inicio>
+      <h2 id="md-cookies-titulo">{{ settings.md_cookies_titulo | escape }}</h2>
+      <p>
+        {{ settings.md_cookies_texto | escape }}
+        {%- if settings.md_cookies_pagina != blank %} <a href="{{ settings.md_cookies_pagina.url }}">Política de cookies</a>{% endif -%}
+      </p>
+      <div class="md-cookies__acciones">
+        <button type="button" class="md-btn md-btn--oscuro" data-md-cookies-rechazar>Rechazar no necesarias</button>
+        <button type="button" class="md-btn md-btn--oscuro" data-md-cookies-aceptar>Aceptar todas</button>
+        <button type="button" class="md-cookies__config" data-md-cookies-configurar aria-expanded="false" aria-controls="md-cookies-prefs">Configurar preferencias</button>
+      </div>
+    </div>
+    <form id="md-cookies-prefs" hidden data-md-cookies-form>
+      <fieldset>
+        <legend>Elige qué cookies permites</legend>
+        <label class="md-cookies__opcion">
+          <input type="checkbox" checked disabled>
+          <strong>Necesarias</strong>
+          <span>Imprescindibles para el carrito, el pago y la seguridad. Siempre activas.</span>
+        </label>
+        <label class="md-cookies__opcion">
+          <input type="checkbox" name="preferences">
+          <strong>Preferencias</strong>
+          <span>Recuerdan opciones como el idioma o el país.</span>
+        </label>
+        <label class="md-cookies__opcion">
+          <input type="checkbox" name="analytics">
+          <strong>Analíticas</strong>
+          <span>Nos ayudan a entender, de forma agregada, cómo se usa la tienda.</span>
+        </label>
+        <label class="md-cookies__opcion">
+          <input type="checkbox" name="marketing">
+          <strong>Publicitarias</strong>
+          <span>Permiten mostrarte publicidad relevante y medir su eficacia.</span>
+        </label>
+      </fieldset>
+      <div class="md-cookies__acciones">
+        <button type="button" class="md-btn md-btn--oscuro" data-md-cookies-rechazar>Rechazar no necesarias</button>
+        <button type="submit" class="md-btn md-btn--oscuro">Guardar mi elección</button>
+      </div>
+    </form>
+  </div>
+{%- endif -%}

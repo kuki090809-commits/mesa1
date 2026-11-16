@@ -1,0 +1,77 @@
+{%- comment -%}
+  MAISON DUVAL: barra superior con mensajes breves. El mensaje de envío usa el umbral global
+  (Configuración del tema → MAISON DUVAL · Tienda) y se oculta si no está configurado.
+{%- endcomment -%}
+{%- liquid
+  assign umbral = settings.md_umbral_envio
+  assign umbral_cent = umbral | times: 100
+-%}
+<div class="md-anuncios color-{{ section.settings.color_scheme }}" role="region" aria-label="{{ section.settings.etiqueta | escape }}">
+  <ul class="md-anuncios__lista">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign mostrar = true
+        if block.settings.tipo == 'envio' and umbral == blank
+          assign mostrar = false
+        endif
+      -%}
+      {%- if mostrar -%}
+        <li class="md-anuncios__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.icono != 'ninguno' -%}{%- render 'md-icono', nombre: block.settings.icono -%}{%- endif -%}
+          {%- capture texto -%}
+            {%- if block.settings.tipo == 'envio' -%}
+              {{ block.settings.texto | replace: '[umbral]', '' | strip }} {{ umbral_cent | money_without_trailing_zeros }}
+            {%- else -%}
+              {{ block.settings.texto }}
+            {%- endif -%}
+          {%- endcapture -%}
+          {%- if block.settings.enlace != blank -%}
+            <a href="{{ block.settings.enlace }}">{{ texto | strip }}</a>
+          {%- else -%}
+            <span>{{ texto | strip }}</span>
+          {%- endif -%}
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% style %}
+  .md-anuncios { border-bottom: 1px solid rgba(81, 72, 63, 0.12); }
+  .md-anuncios__lista { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.6rem 0; margin: 0 auto; padding: 0.9rem var(--md-margen, 1.6rem); list-style: none; max-width: 128rem; }
+  .md-anuncios__item { display: inline-flex; align-items: center; gap: 0.8rem; font-family: var(--font-heading-family); font-size: 1.5rem; letter-spacing: 0.02em; line-height: 1.3; }
+  .md-anuncios__item + .md-anuncios__item::before { content: ""; width: 1px; height: 1.4rem; margin: 0 1.6rem; background: currentColor; opacity: 0.45; }
+  .md-anuncios__item .md-icono { width: 1.6rem; height: 1.6rem; flex: none; }
+  .md-anuncios__item a { color: inherit; text-decoration: none; }
+  .md-anuncios__item a:hover { text-decoration: underline; text-underline-offset: 0.3rem; }
+  @media screen and (max-width: 749px) {
+    .md-anuncios__lista { flex-direction: column; gap: 0.2rem; }
+    .md-anuncios__item { font-size: 1.35rem; }
+    .md-anuncios__item + .md-anuncios__item::before { display: none; }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Barra superior",
+  "class": "md-anuncios-wrap",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "etiqueta", "label": "Nombre para lectores de pantalla", "default": "Información de la tienda" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colores", "default": "scheme-3" }
+  ],
+  "blocks": [
+    {
+      "type": "mensaje",
+      "name": "Mensaje",
+      "settings": [
+        { "type": "select", "id": "tipo", "label": "Tipo", "options": [ { "value": "texto", "label": "Texto libre" }, { "value": "envio", "label": "Envío gratuito (usa el importe de la configuración del tema)" } ], "default": "texto" },
+        { "type": "text", "id": "texto", "label": "Texto", "info": "En el tipo «Envío gratuito», el importe se añade al final automáticamente.", "default": "Devoluciones fáciles en 30 días" },
+        { "type": "url", "id": "enlace", "label": "Enlace (opcional)" },
+        { "type": "select", "id": "icono", "label": "Icono", "options": [ { "value": "ninguno", "label": "Ninguno" }, { "value": "avion", "label": "Avión" }, { "value": "camion", "label": "Envío" }, { "value": "devolucion", "label": "Devolución" }, { "value": "escudo", "label": "Seguridad" } ], "default": "ninguno" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "MD – Barra superior" } ]
+}
+{% endschema %}

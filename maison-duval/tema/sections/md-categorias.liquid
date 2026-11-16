@@ -1,0 +1,85 @@
+{%- comment -%} MAISON DUVAL: tarjetas de categoría con fotografía que enlazan a cada colección. {%- endcomment -%}
+<section class="md-categorias" aria-label="{{ section.settings.etiqueta | escape }}">
+  <div class="md-contenedor">
+    {%- if section.settings.titulo != blank -%}
+      <h2 class="md-titulo-lineas h2 md-categorias__titulo">{{ section.settings.titulo | escape }}</h2>
+    {%- endif -%}
+    <ul class="md-categorias__lista" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign col = block.settings.coleccion
+          assign img = block.settings.imagen
+          if img == blank and col != blank
+            assign img = col.image
+          endif
+          assign destino = block.settings.enlace | default: col.url | default: routes.all_products_collection_url
+          assign nombre = block.settings.titulo | default: col.title
+        -%}
+        <li class="md-categoria md-reveal" style="--md-i: {{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <a class="md-categoria__enlace" href="{{ destino }}">
+            {%- if img != blank -%}
+              {{ img | image_url: width: 900 | image_tag:
+                  class: 'md-categoria__img',
+                  loading: 'lazy',
+                  widths: '360, 540, 720, 900',
+                  sizes: '(min-width: 990px) 20vw, (min-width: 750px) 33vw, 70vw',
+                  alt: ''
+              }}
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag: 'md-categoria__img placeholder-svg' }}
+            {%- endif -%}
+            <span class="md-categoria__nombre">{{ nombre | escape }}</span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% style %}
+  #shopify-section-{{ section.id }} { padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px; background: var(--md-crema); }
+  #shopify-section-{{ section.id }} .md-categorias__titulo { margin-bottom: 3.2rem; }
+  #shopify-section-{{ section.id }} .md-categorias__lista { display: grid; grid-template-columns: repeat({{ section.blocks.size | at_least: 1 }}, minmax(0, 1fr)); gap: 1.6rem; margin: 0; padding: 0; list-style: none; }
+  #shopify-section-{{ section.id }} .md-categoria__enlace { position: relative; display: block; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 8px; background: var(--md-beige); box-shadow: var(--md-sombra); color: #FCFAF6; text-decoration: none; }
+  #shopify-section-{{ section.id }} .md-categoria__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.1s var(--md-ease); filter: sepia(0.18) saturate(0.88); }
+  #shopify-section-{{ section.id }} .md-categoria__enlace::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(63, 55, 48, 0) 45%, rgba(63, 55, 48, 0.62) 100%); transition: opacity 0.6s var(--md-ease); }
+  #shopify-section-{{ section.id }} .md-categoria__nombre { position: absolute; inset-inline: 1rem; bottom: 1.6rem; z-index: 1; text-align: center; font-family: var(--font-heading-family); font-size: 2.2rem; letter-spacing: 0.02em; text-shadow: 0 1px 12px rgba(0, 0, 0, 0.25); }
+  #shopify-section-{{ section.id }} .md-categoria__enlace:hover .md-categoria__img { transform: scale(1.05); }
+  #shopify-section-{{ section.id }} .md-categoria__enlace:focus-visible { outline-offset: 4px; }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .md-categorias__lista { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .md-categorias__lista { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 1.2rem; margin: 0 calc(var(--md-margen) * -1); padding: 0.4rem var(--md-margen) 1.6rem; scrollbar-width: none; }
+    #shopify-section-{{ section.id }} .md-categorias__lista::-webkit-scrollbar { display: none; }
+    #shopify-section-{{ section.id }} .md-categoria { flex: 0 0 62%; scroll-snap-align: start; }
+    #shopify-section-{{ section.id }} .md-categoria__enlace { aspect-ratio: 4 / 5; }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Categorías",
+  "tag": "div",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título (opcional)" },
+    { "type": "text", "id": "etiqueta", "label": "Nombre para lectores de pantalla", "default": "Categorías" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "categoria",
+      "name": "Categoría",
+      "settings": [
+        { "type": "collection", "id": "coleccion", "label": "Colección" },
+        { "type": "text", "id": "titulo", "label": "Nombre (vacío = el de la colección)" },
+        { "type": "image_picker", "id": "imagen", "label": "Fotografía (vacío = la de la colección)" },
+        { "type": "url", "id": "enlace", "label": "Enlace (vacío = la colección)" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "MD – Categorías", "blocks": [ { "type": "categoria" }, { "type": "categoria" }, { "type": "categoria" }, { "type": "categoria" }, { "type": "categoria" } ] } ]
+}
+{% endschema %}

@@ -1,0 +1,79 @@
+{%- comment -%} MAISON DUVAL: apertura a pantalla completa con fotografía, titular, texto y botón. {%- endcomment -%}
+{%- liquid
+  assign img = section.settings.imagen
+  assign foco = 'center center'
+  if img != blank and img.presentation.focal_point != blank
+    assign foco = img.presentation.focal_point
+  endif
+  assign enlace = section.settings.boton_enlace | default: routes.all_products_collection_url
+  assign estilo_img = 'object-position: ' | append: foco | append: ';'
+-%}
+<section class="md-hero" style="--md-hero-alto: {{ section.settings.alto }}vh; --md-hero-tinte: {{ section.settings.tinte | divided_by: 100.0 }};" aria-labelledby="md-hero-titulo-{{ section.id }}">
+  <div class="md-hero__media">
+    {%- if img != blank -%}
+      {{ img | image_url: width: 3200 | image_tag:
+          class: 'md-hero__img',
+          loading: 'eager',
+          fetchpriority: 'high',
+          widths: '750, 1100, 1500, 2000, 2600, 3200',
+          sizes: '100vw',
+          alt: img.alt,
+          style: estilo_img
+      }}
+    {%- else -%}
+      {{ 'hero-apparel-1' | placeholder_svg_tag: 'md-hero__img placeholder-svg' }}
+    {%- endif -%}
+    <span class="md-hero__velo" aria-hidden="true"></span>
+  </div>
+  <div class="md-hero__contenido">
+    <div class="md-hero__texto">
+      <h2 id="md-hero-titulo-{{ section.id }}" class="md-hero__titulo md-reveal">{{ section.settings.titulo | newline_to_br }}</h2>
+      {%- if section.settings.texto != blank -%}
+        <p class="md-hero__subtitulo md-reveal" style="--md-i: 1">{{ section.settings.texto | newline_to_br }}</p>
+      {%- endif -%}
+      {%- if section.settings.boton_texto != blank -%}
+        <a class="md-btn md-btn--claro md-reveal" style="--md-i: 2" href="{{ enlace }}">{{ section.settings.boton_texto | escape }}{%- render 'md-icono', nombre: 'flecha' -%}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% style %}
+  #shopify-section-{{ section.id }} .md-hero { position: relative; min-height: var(--md-hero-alto, 70vh); display: grid; overflow: hidden; background: var(--md-beige); }
+  #shopify-section-{{ section.id }} .md-hero__media { position: absolute; inset: 0; }
+  #shopify-section-{{ section.id }} .md-hero__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #shopify-section-{{ section.id }} .md-hero__media::after { content: ""; position: absolute; inset: 0; background: #D5C3AB; mix-blend-mode: multiply; opacity: var(--md-hero-tinte, 0.25); }
+  #shopify-section-{{ section.id }} .md-hero__velo { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(245, 240, 232, 0.94) 0%, rgba(245, 240, 232, 0.78) 30%, rgba(245, 240, 232, 0.25) 55%, rgba(245, 240, 232, 0) 70%); }
+  #shopify-section-{{ section.id }} .md-hero__contenido { position: relative; z-index: 2; display: flex; align-items: center; width: 100%; max-width: 128rem; margin: 0 auto; padding: clamp(4rem, 8vw, 9rem) var(--md-margen); }
+  #shopify-section-{{ section.id }} .md-hero__texto { max-width: 54rem; color: var(--md-marron-hondo); }
+  #shopify-section-{{ section.id }} .md-hero__titulo { margin: 0 0 2.4rem; font-size: clamp(4.4rem, 6.4vw, {{ section.settings.titulo_tam }}px); line-height: 1.02; font-weight: 400; letter-spacing: -0.005em; color: inherit; }
+  #shopify-section-{{ section.id }} .md-hero__subtitulo { margin: 0 0 3.6rem; max-width: 44rem; font-family: var(--font-heading-family); font-size: clamp(1.9rem, 1.7vw, 2.3rem); line-height: 1.45; color: inherit; }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .md-hero { min-height: 0; grid-template-rows: auto auto; background: var(--md-crema); }
+    #shopify-section-{{ section.id }} .md-hero__media { position: relative; inset: auto; aspect-ratio: 4 / 3; }
+    #shopify-section-{{ section.id }} .md-hero__velo { background: linear-gradient(180deg, rgba(245, 240, 232, 0) 55%, rgba(245, 240, 232, 1) 100%); }
+    #shopify-section-{{ section.id }} .md-hero__contenido { padding: 0.8rem var(--md-margen) 4.8rem; }
+    #shopify-section-{{ section.id }} .md-hero__titulo { margin-bottom: 1.6rem; }
+    #shopify-section-{{ section.id }} .md-hero__subtitulo { margin-bottom: 2.8rem; }
+    #shopify-section-{{ section.id }} .md-btn { width: 100%; background: var(--md-marron); color: var(--md-blanco); }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Apertura",
+  "tag": "div",
+  "settings": [
+    { "type": "image_picker", "id": "imagen", "label": "Fotografía panorámica", "info": "Mínimo 2600 px de ancho. Marca el punto de interés para que no se recorte." },
+    { "type": "textarea", "id": "titulo", "label": "Título", "default": "Viaja ligero.\nVive más." },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Descubre nuestra colección de accesorios de viaje, diseñados para acompañarte en cada destino." },
+    { "type": "text", "id": "boton_texto", "label": "Botón: texto", "default": "Explorar colección" },
+    { "type": "url", "id": "boton_enlace", "label": "Botón: enlace", "info": "Vacío = todos los productos." },
+    { "type": "header", "content": "Estilo" },
+    { "type": "range", "id": "alto", "label": "Altura en ordenador (% de la pantalla)", "min": 40, "max": 100, "step": 5, "unit": "%", "default": 70 },
+    { "type": "range", "id": "titulo_tam", "label": "Tamaño máximo del título (px)", "min": 44, "max": 120, "step": 2, "unit": "px", "default": 88 },
+    { "type": "range", "id": "tinte", "label": "Tono cálido sobre la foto (%)", "min": 0, "max": 60, "step": 5, "unit": "%", "default": 25 }
+  ],
+  "presets": [ { "name": "MD – Apertura" } ]
+}
+{% endschema %}

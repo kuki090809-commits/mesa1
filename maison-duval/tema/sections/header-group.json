@@ -1,0 +1,59 @@
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "anuncios": {
+      "type": "md-barra-anuncios",
+      "blocks": {
+        "m1": {
+          "type": "mensaje",
+          "settings": {
+            "tipo": "envio",
+            "texto": "Envío gratuito en pedidos superiores a",
+            "icono": "avion"
+          }
+        },
+        "m2": {
+          "type": "mensaje",
+          "settings": {
+            "tipo": "texto",
+            "texto": "Devoluciones fáciles en 30 días",
+            "icono": "ninguno"
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "logo_position": "top-center",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": false,
+        "enable_country_selector": false,
+        "enable_language_selector": true,
+        "mobile_logo_position": "center",
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 12,
+        "md_logo_texto": "MAISON DUVAL",
+        "md_logo_subtitulo": "TRAVEL ESSENTIALS",
+        "md_logo_tam": 34
+      }
+    }
+  },
+  "order": [
+    "anuncios",
+    "header"
+  ]
+}

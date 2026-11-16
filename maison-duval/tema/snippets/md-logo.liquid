@@ -1,0 +1,10 @@
+{%- comment -%} MAISON DUVAL: logotipo de texto (nombre + subtítulo). Parámetros: nombre, subtitulo, tam (px) {%- endcomment -%}
+{%- liquid
+  assign n = nombre | default: shop.name
+  assign t = tam | default: 34
+  assign t_rem = t | divided_by: 10.0
+-%}
+<span class="md-logo" style="--md-logo-tam: {{ t_rem }}rem;">
+  <span class="md-logo__nombre">{{ n | escape }}</span>
+  {%- if subtitulo != blank -%}<span class="md-logo__subtitulo">{{ subtitulo | escape }}</span>{%- endif -%}
+</span>

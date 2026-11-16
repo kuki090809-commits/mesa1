@@ -1,0 +1,68 @@
+{%- comment -%}
+  MAISON DUVAL: preguntas frecuentes. El contenido viene de la página (títulos H2 por apartado
+  y cada pregunta como desplegable). Genera datos estructurados FAQPage a partir del mismo texto.
+{%- endcomment -%}
+<div class="md-contenedor md-pagina">
+  <header class="md-pagina__cabecera md-reveal">
+    {%- if section.settings.overline != blank -%}<p class="md-overline">{{ section.settings.overline | escape }}</p>{%- endif -%}
+    <h1 class="h1">{{ page.title | escape }}</h1>
+    {%- if section.settings.texto != blank -%}<div class="md-texto-suave">{{ section.settings.texto }}</div>{%- endif -%}
+  </header>
+  <div class="md-prosa md-faq rte">
+    {{ page.content }}
+  </div>
+  {%- if section.settings.cta_titulo != blank -%}
+    <div class="md-faq__cta md-reveal">
+      <h2 class="h3">{{ section.settings.cta_titulo | escape }}</h2>
+      {%- if section.settings.cta_boton != blank and section.settings.cta_enlace != blank -%}
+        <a class="md-btn md-btn--oscuro" href="{{ section.settings.cta_enlace }}">{{ section.settings.cta_boton | escape }}</a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{%- assign trozos = page.content | split: '<details' -%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- assign primero = true -%}
+      {%- for trozo in trozos -%}
+        {%- unless trozo contains '</summary>' -%}{%- continue -%}{%- endunless -%}
+        {%- assign p = trozo | split: '</summary>' | first | split: '<summary>' | last | strip_html | strip -%}
+        {%- assign r = trozo | split: '</summary>' | last | split: '</details>' | first | strip_html | strip -%}
+        {%- if p == blank or r == blank -%}{%- continue -%}{%- endif -%}
+        {%- unless primero -%},{%- endunless -%}
+        {"@type": "Question", "name": {{ p | json }}, "acceptedAnswer": {"@type": "Answer", "text": {{ r | json }}}}
+        {%- assign primero = false -%}
+      {%- endfor -%}
+    ]
+  }
+</script>
+
+{% style %}
+  #shopify-section-{{ section.id }} .md-pagina { padding-block: 64px 96px; }
+  #shopify-section-{{ section.id }} .md-pagina__cabecera { max-width: 72rem; margin: 0 auto 4rem; text-align: center; }
+  #shopify-section-{{ section.id }} .md-pagina__cabecera h1 { margin: 0.8rem 0 1.2rem; }
+  #shopify-section-{{ section.id }} .md-faq__cta { max-width: 72rem; margin: 6.4rem auto 0; padding: 4rem 2.4rem; text-align: center; background: var(--md-beige); border-radius: 4px; }
+  #shopify-section-{{ section.id }} .md-faq__cta h2 { margin: 0 0 2rem; }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Preguntas frecuentes",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": { "templates": ["page"] },
+  "settings": [
+    { "type": "paragraph", "content": "Las preguntas se editan en Tienda online > Páginas > Preguntas frecuentes. Cada apartado es un título y cada pregunta un desplegable." },
+    { "type": "text", "id": "overline", "label": "Texto pequeño sobre el título", "default": "Ayuda" },
+    { "type": "richtext", "id": "texto", "label": "Introducción", "default": "<p>Respuestas rápidas sobre pedidos, envíos, devoluciones y pagos.</p>" },
+    { "type": "text", "id": "cta_titulo", "label": "Título del recuadro final", "default": "¿No encuentras lo que buscas?" },
+    { "type": "text", "id": "cta_boton", "label": "Texto del botón", "default": "Contactar" },
+    { "type": "url", "id": "cta_enlace", "label": "Enlace del botón" }
+  ],
+  "presets": [ { "name": "MD – Preguntas frecuentes" } ]
+}
+{% endschema %}

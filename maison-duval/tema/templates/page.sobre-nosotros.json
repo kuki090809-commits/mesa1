@@ -1,0 +1,96 @@
+{
+  "sections": {
+    "main": {
+      "type": "md-sobre",
+      "blocks": {
+        "apertura": {
+          "type": "apertura",
+          "settings": {
+            "imagen": "shopify://shop_images/md-sobre-aeropuerto.jpg",
+            "overline": "Sobre nosotros",
+            "titulo": "El viaje empieza\nen los detalles."
+          }
+        },
+        "idea": {
+          "type": "texto_imagen",
+          "settings": {
+            "imagen": "shopify://shop_images/md-sobre-maleta-hotel.jpg",
+            "posicion": "izquierda",
+            "overline": "Nuestra idea",
+            "titulo": "Más que llegar a un destino",
+            "texto": "<p>MAISON DUVAL nace de la idea de que viajar no consiste únicamente en llegar a un destino, sino también en disfrutar de cada pequeño detalle del camino.</p>"
+          }
+        },
+        "cita": {
+          "type": "cita",
+          "settings": {
+            "texto": "Viaja ligero. Vive más.",
+            "firma": "Maison Duval"
+          }
+        },
+        "seleccion": {
+          "type": "texto_imagen",
+          "settings": {
+            "imagen": "shopify://shop_images/md-sobre-cafe-hotel.jpg",
+            "posicion": "derecha",
+            "overline": "Nuestra selección",
+            "titulo": "Funcionales, bonitos y elegidos con cuidado",
+            "texto": "<p>Queremos reunir productos funcionales, bonitos y cuidadosamente seleccionados que acompañen a las personas en sus viajes.</p>",
+            "boton": "Explorar colección",
+            "enlace": "shopify://collections/all"
+          }
+        },
+        "v1": {
+          "type": "valor",
+          "settings": {
+            "icono": "maleta",
+            "titulo": "Funcionales",
+            "texto": "Pensados para hacer cada trayecto más sencillo."
+          }
+        },
+        "v2": {
+          "type": "valor",
+          "settings": {
+            "icono": "check",
+            "titulo": "Bonitos",
+            "texto": "Un diseño sereno que acompaña tu forma de viajar."
+          }
+        },
+        "v3": {
+          "type": "valor",
+          "settings": {
+            "icono": "organizacion",
+            "titulo": "Seleccionados con cuidado",
+            "texto": "Elegidos pensando en cómo los usarás en el camino."
+          }
+        },
+        "destino": {
+          "type": "texto_imagen",
+          "settings": {
+            "imagen": "shopify://shop_images/md-sobre-mediterraneo.jpg",
+            "posicion": "izquierda",
+            "overline": "Inspiración",
+            "titulo": "Del aeropuerto a la orilla del Mediterráneo",
+            "texto": "<p>Equipaje, organización, accesorios, comodidad y tecnología de viaje, reunidos en un mismo lugar.</p>",
+            "boton": "Ver categorías",
+            "enlace": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "apertura",
+        "idea",
+        "cita",
+        "seleccion",
+        "v1",
+        "v2",
+        "v3",
+        "destino"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
