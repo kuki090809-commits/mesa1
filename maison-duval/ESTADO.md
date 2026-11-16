@@ -34,3 +34,16 @@
 - Materiales, medidas, cuidados, detalles y FAQ del producto: solo si se rellenan los metacampos.
 - Newsletter: casilla de consentimiento obligatoria y separada; el texto de descuento está vacío (solo si existe un código real).
 - Cookies: banner propio con la API de privacidad de Shopify (aceptar / rechazar / configurar, mismo peso), reabrible desde el pie.
+
+## Lecciones (16/11/2026)
+- Shopify rechaza en silencio (NOT_FOUND) un archivo con errores al subir por zip o `themeFilesUpsert`. Para ver el motivo,
+  escribir el archivo con `theme_bash` y guardar con `theme_commit`, que devuelve `pushErrors`. Casos vistos:
+  etiqueta de opción de un `select` de más de 50 caracteres; `page_width` fuera de los pasos (1000–1600 de 100 en 100).
+- `theme_screenshot` y `theme_bash` usan una copia de trabajo que NO ve lo subido con `themeFilesUpsert`.
+  Hacer los mismos cambios con `theme_bash` + `theme_commit` (o solo usar esa vía) para que las capturas sean fieles.
+- Cormorant de Shopify no admite `font-variant-numeric: lining-nums` (sale «5o»): cifras importantes con la fuente de texto (Jost).
+- La vista previa de la tienda solo muestra el tema publicado; MAISON DUVAL sigue sin publicar (decisión del usuario).
+
+## Estado
+- Tema completo y revisado con capturas (portada, producto, colección, carrito, páginas, móvil y ordenador).
+- Auditoría y lista de pendientes: `maison-duval/PENDIENTES.md`.
