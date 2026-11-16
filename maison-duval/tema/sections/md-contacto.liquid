@@ -49,9 +49,9 @@
             <small class="form__message" id="MDContacto-email-error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</small>
           {%- endif -%}
         </div>
-        <div class="field md-select">
+        <div class="md-select">
           <label class="md-select__label" for="MDContacto-motivo">Motivo de la consulta <span aria-hidden="true">*</span></label>
-          <select class="field__input" id="MDContacto-motivo" name="contact[Motivo]" required aria-required="true">
+          <select class="md-select__input" id="MDContacto-motivo" name="contact[Motivo]" required aria-required="true">
             <option value="" disabled selected>Elige una opción</option>
             {%- for m in motivos -%}
               {%- assign m = m | strip -%}
@@ -123,9 +123,10 @@
     #shopify-section-{{ section.id }} .md-contacto__rejilla { grid-template-columns: 1.15fr 1fr; gap: 8rem; align-items: start; }
   }
   #shopify-section-{{ section.id }} .md-form .field { margin-bottom: 1.6rem; }
-  #shopify-section-{{ section.id }} .md-select { flex-direction: column; }
+  #shopify-section-{{ section.id }} .md-select { margin-bottom: 1.6rem; }
   #shopify-section-{{ section.id }} .md-select__label { display: block; font-size: 1.3rem; margin-bottom: 0.6rem; color: var(--md-texto-suave); }
-  #shopify-section-{{ section.id }} .md-select select { appearance: auto; padding: 1.4rem 1.5rem; height: auto; min-height: 4.8rem; }
+  #shopify-section-{{ section.id }} .md-select__input { display: block; width: 100%; min-height: 4.8rem; padding: 1.2rem 1.5rem; font: inherit; font-size: 1.6rem; color: rgb(var(--color-foreground)); background: rgb(var(--color-background)); border: 1px solid rgba(var(--color-foreground), 0.55); border-radius: 2px; }
+  #shopify-section-{{ section.id }} .md-select__input:focus-visible { outline: 2px solid rgb(var(--color-foreground)); outline-offset: 2px; }
   #shopify-section-{{ section.id }} .md-form__nota { font-size: 1.3rem; margin: 0 0 2.4rem; }
   #shopify-section-{{ section.id }} .md-form__ok,
   #shopify-section-{{ section.id }} .md-form__error { padding: 1.4rem 1.6rem; margin: 0 0 2.4rem; border: 1px solid var(--md-linea); border-radius: 2px; background: var(--md-blanco); }

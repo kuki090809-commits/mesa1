@@ -39,14 +39,14 @@
 {% style %}
   .md-anuncios { border-bottom: 1px solid rgba(81, 72, 63, 0.12); }
   .md-anuncios__lista { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.6rem 0; margin: 0 auto; padding: 0.9rem var(--md-margen, 1.6rem); list-style: none; max-width: 128rem; }
-  .md-anuncios__item { display: inline-flex; align-items: center; gap: 0.8rem; font-family: var(--font-heading-family); font-size: 1.5rem; letter-spacing: 0.02em; line-height: 1.3; }
+  .md-anuncios__item { display: inline-flex; align-items: center; gap: 0.8rem; font-family: var(--font-body-family); font-size: 1.25rem; letter-spacing: 0.08em; line-height: 1.4; }
   .md-anuncios__item + .md-anuncios__item::before { content: ""; width: 1px; height: 1.4rem; margin: 0 1.6rem; background: currentColor; opacity: 0.45; }
   .md-anuncios__item .md-icono { width: 1.6rem; height: 1.6rem; flex: none; }
   .md-anuncios__item a { color: inherit; text-decoration: none; }
   .md-anuncios__item a:hover { text-decoration: underline; text-underline-offset: 0.3rem; }
   @media screen and (max-width: 749px) {
     .md-anuncios__lista { flex-direction: column; gap: 0.2rem; }
-    .md-anuncios__item { font-size: 1.35rem; }
+    .md-anuncios__item { font-size: 1.15rem; }
     .md-anuncios__item + .md-anuncios__item::before { display: none; }
   }
 {% endstyle %}
@@ -65,7 +65,7 @@
       "type": "mensaje",
       "name": "Mensaje",
       "settings": [
-        { "type": "select", "id": "tipo", "label": "Tipo", "options": [ { "value": "texto", "label": "Texto libre" }, { "value": "envio", "label": "Envío gratuito (usa el importe de la configuración del tema)" } ], "default": "texto" },
+        { "type": "select", "id": "tipo", "label": "Tipo", "options": [ { "value": "texto", "label": "Texto libre" }, { "value": "envio", "label": "Envío gratuito (importe del tema)" } ], "default": "texto" },
         { "type": "text", "id": "texto", "label": "Texto", "info": "En el tipo «Envío gratuito», el importe se añade al final automáticamente.", "default": "Devoluciones fáciles en 30 días" },
         { "type": "url", "id": "enlace", "label": "Enlace (opcional)" },
         { "type": "select", "id": "icono", "label": "Icono", "options": [ { "value": "ninguno", "label": "Ninguno" }, { "value": "avion", "label": "Avión" }, { "value": "camion", "label": "Envío" }, { "value": "devolucion", "label": "Devolución" }, { "value": "escudo", "label": "Seguridad" } ], "default": "ninguno" }

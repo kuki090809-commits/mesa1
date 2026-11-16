@@ -1,5 +1,8 @@
 # Estado del proyecto — FlexiDesk (tienda de producto único)
 
+> **2026-11-16 · Proyecto nuevo MAISON DUVAL** (tienda de viajes): ver `maison-duval/ESTADO.md`. Lo de abajo es FlexiDesk.
+
+
 > 2026-11-11: el usuario pidió una tienda SOLO para FlexiDesk (no quería el especiero de cocina).
 > El diseño anterior «Ordena» queda guardado en el historial git (commit `5f26b0d`) y como
 > tema «Ordena (Claude)» (199326171518) en Shopify, sin publicar. No mezclar.

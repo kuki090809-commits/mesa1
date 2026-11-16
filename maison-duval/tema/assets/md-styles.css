@@ -181,7 +181,7 @@ html.no-js .md-reveal { opacity: 1; transform: none; }
 .header__menu-item:hover span::after,
 .header__active-menu-item::after { transform: scaleX(1); }
 .header__active-menu-item { text-decoration: none; }
-.header__icon .svg-wrapper svg { width: 2.2rem; height: 2.2rem; }
+.header__icon:not(.header__icon--cart) .svg-wrapper svg { width: 2.2rem; height: 2.2rem; }
 .header__submenu .header__menu-item { font-family: var(--md-sans); font-size: 1.4rem; }
 
 /* ---------- Tarjetas de producto (Dawn) ---------- */
@@ -318,6 +318,10 @@ html.no-js .md-reveal { opacity: 1; transform: none; }
   .md-cookies { inset-inline: 1.2rem; bottom: 1.2rem; padding: 2rem; }
   .md-cookies__acciones { grid-template-columns: 1fr; }
   .md-logo__nombre { font-size: calc(var(--md-logo-tam, 3.4rem) * 0.68); }
+  .header .md-logo__nombre { font-size: min(calc(var(--md-logo-tam, 3.4rem) * 0.56), 5.4vw); letter-spacing: 0.1em; padding-inline-start: 0.1em; }
+  .header .md-logo__subtitulo { font-size: 0.85rem; letter-spacing: 0.3em; padding-inline-start: 0.3em; }
+  .header__icons { gap: 0; }
+  .header__icon { width: 4rem; }
   .header__menu-item, .list-menu__item--link { font-size: 1.9rem; }
 }
 
@@ -330,3 +334,6 @@ html.no-js .md-reveal { opacity: 1; transform: none; }
 .md-ventajas { list-style: none; margin: 0.8rem 0 0; padding: 1.8rem 0; border-block: 1px solid var(--md-linea); display: grid; gap: 1rem; font-size: 1.4rem; }
 .md-ventajas li { display: flex; align-items: center; gap: 1.2rem; }
 .md-ventajas svg { width: 2rem; height: 2rem; flex: none; color: var(--md-topo); }
+
+/* Cifras normales (Cormorant usa cifras antiguas por defecto: «50» parecía «5o») */
+body, h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5, .price, .md-anuncios__item { font-variant-numeric: lining-nums; }
