@@ -76,3 +76,5 @@
   Lleva la petición de personalización de los 8 productos, la búsqueda de los 4 que faltan y 7 páginas adjuntas (la petición en JPG).
   Para ver respuestas: `POST ticket/list`, `GET ticket/detail?ticketId=…`, `GET ticket/messages?ticketId=…`. No crear otro ticket igual.
   Los adjuntos se subieron a CJ desde Archivos de Shopify y después se borraron de Shopify.
+- 17/11/2026: el usuario eligió en el catálogo de CJ los estuches para los productos 11 y 12 (actualizados en Shopify, en borrador y sin precio).
+  Se añadieron al ticket con una respuesta (`ticket/reply`). Quedan por localizar el Signature Luggage Set y el Travel Backpack.

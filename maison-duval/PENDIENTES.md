@@ -50,11 +50,12 @@ Fecha de la revisión: 16/11/2026. El tema **MAISON DUVAL** está subido a la ti
 
 Consulta del 17/11/2026 con la API oficial de CJdropshipping. El detalle, con SKU, enlaces, stock y envío, está en el Excel interno (hoja «CJdropshipping»), que no se sube a GitHub. En Shopify, cada producto guarda su referencia en el metacampo `proveedor.referencia`.
 
-**Localizados (8):**
+**Localizados (10):**
 - Por SKU: Nécessaire Double, Mini Vanity, Travel Pouch y Cable Organizer.
 - Por nombre y precio de referencia exacto (conviene confirmarlo): Packing Cubes 8 piezas, Packing Cubes 6 piezas, Aluminium Trolley y Foldable Travel Bag.
+- Elegidos por ti entre candidatos del catálogo de CJ (17/11/2026): Dental Travel Case (estuche blanco con detalles dorados, también en verde) y Toothbrush Travel Set (estuche que se convierte en vaso, en oro rosa o plata). Ninguno incluye cepillo.
 
-**Pendientes de localizar (4):** Signature Luggage Set, Travel Backpack, Dental Travel Case y Toothbrush Travel Set. Hace falta el enlace o el SKU de CJ de cada uno.
+**Pendientes de localizar (2):** Signature Luggage Set y Travel Backpack. Hace falta el enlace o el SKU de CJ de cada uno (también se lo hemos pedido a CJ en el ticket).
 
 **En la tienda (que sigue cerrada con contraseña):**
 - **Activos, con fotos reales del proveedor:** Nécessaire Double, Travel Pouch, Packing Cubes 8 piezas (beige, gris y negro), Cable Organizer (gris y negro) y Aluminium Trolley (negro y plata, 20" y 22").
@@ -63,14 +64,17 @@ Consulta del 17/11/2026 con la API oficial de CJdropshipping. El detalle, con SK
   - Mini Vanity: lleva una placa con la marca «Shell Bags».
   - Packing Cubes 6 piezas: solo existe con estampados.
   - Foldable Travel Bag: es una bolsa deportiva con franjas de color.
-  - Travel Backpack, Dental Travel Case y Toothbrush Travel Set: sin localizar.
+  - Dental Travel Case: con fotos del proveedor, pero el estuche lleva impreso el logo «MUDU» del fabricante. Pedido a CJ que lo quite y ponga el monograma MD.
+  - Toothbrush Travel Set: con fotos del proveedor (algunas llevan textos del fabricante en inglés). Falta el precio.
+  - Travel Backpack: sin localizar.
 
 1. [ ] **Confirmar la variante del Nécessaire Double.** El SKU indicado es la versión de una capa; en la tienda está puesta la de dos capas, que encaja con el nombre.
-2. [ ] **Pasar el enlace o el SKU de CJ** de los 4 productos pendientes de localizar. Ya se lo hemos pedido a CJ en el ticket T202611171041277601.
+2. [ ] **Pasar el enlace o el SKU de CJ** del Signature Luggage Set y del Travel Backpack. Ya se lo hemos pedido a CJ en el ticket T202611171041277601.
 3. [ ] **Logo MAISON DUVAL**: ninguno de los productos localizados figura en CJ como personalizable. Pregunta a tu agente de CJ por placa, etiqueta o embalaje con logo y por su pedido mínimo. Hasta tener respuesta, la tienda no dice que lleven logo.
 4. [ ] **Productos con marca o textos del fabricante:**
    - Mini Vanity: placa «Shell Bags».
    - Packing Cubes 8 piezas: frase impresa «Wish U have a colorful life».
+   - Dental Travel Case: emblema redondo «MUDU» en el frente.
 
    Pide a CJ una versión neutra o con tu marca, o busca alternativas.
 5. [ ] **Alternativas para lo que no encaja con la marca**: unos packing cubes de 6 piezas lisos y en tonos neutros, y una bolsa plegable minimalista.
