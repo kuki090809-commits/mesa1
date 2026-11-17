@@ -71,3 +71,8 @@
 - Guía v1 (12 fichas) y petición a CJ en inglés entregadas al usuario por el chat. Herramientas de boceto en el scratchpad de la sesión: no en el repo.
 - Logotipos del cliente: SVG solo con texto (fuente Cormorant no incrustada); los PNG y el PDF usan una fuente de sustitución. Pendiente fijar la tipografía y vectorizar.
 - Regla: las imágenes con logo son PROPUESTAS; no van a la tienda hasta que CJ confirme y haya muestra aprobada.
+- 17/11/2026: petición enviada a CJ por la API de tickets (con permiso del usuario). Ticket **T202611171041277601**
+  (ticketId 2611171041270827600), tipo «Service Consultation → Products & Package Customization», estado AWAITING_CJ_REPLY.
+  Lleva la petición de personalización de los 8 productos, la búsqueda de los 4 que faltan y 7 páginas adjuntas (la petición en JPG).
+  Para ver respuestas: `POST ticket/list`, `GET ticket/detail?ticketId=…`, `GET ticket/messages?ticketId=…`. No crear otro ticket igual.
+  Los adjuntos se subieron a CJ desde Archivos de Shopify y después se borraron de Shopify.

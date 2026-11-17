@@ -66,7 +66,7 @@ Consulta del 17/11/2026 con la API oficial de CJdropshipping. El detalle, con SK
   - Travel Backpack, Dental Travel Case y Toothbrush Travel Set: sin localizar.
 
 1. [ ] **Confirmar la variante del Nécessaire Double.** El SKU indicado es la versión de una capa; en la tienda está puesta la de dos capas, que encaja con el nombre.
-2. [ ] **Pasar el enlace o el SKU de CJ** de los 4 productos pendientes de localizar.
+2. [ ] **Pasar el enlace o el SKU de CJ** de los 4 productos pendientes de localizar. Ya se lo hemos pedido a CJ en el ticket T202611171041277601.
 3. [ ] **Logo MAISON DUVAL**: ninguno de los productos localizados figura en CJ como personalizable. Pregunta a tu agente de CJ por placa, etiqueta o embalaje con logo y por su pedido mínimo. Hasta tener respuesta, la tienda no dice que lleven logo.
 4. [ ] **Productos con marca o textos del fabricante:**
    - Mini Vanity: placa «Shell Bags».
@@ -87,7 +87,7 @@ Consulta del 17/11/2026 con la API oficial de CJdropshipping. El detalle, con SK
 La guía de personalización v1 (12 fichas con bocetos) y la petición para CJ en inglés se han entregado por el chat. No se suben a GitHub porque contienen los logotipos y las referencias del proveedor.
 
 1. [ ] **Fijar la tipografía del logo** y obtenerlo en vectores con el texto convertido en trazos. Los PNG actuales usan una fuente de sustitución; la web usa Cormorant.
-2. [ ] **Enviar a CJ** el PDF «customization request» y el mensaje (en el archivo MENSAJE-PARA-CJ). En la última página, poner el contacto o borrar esa línea.
+2. [x] **Enviado a CJ** el 17/11/2026: ticket **T202611171041277601** (Service Consultation → Products & Package Customization), con la petición de personalización, la búsqueda de los 4 productos que faltan y las 7 páginas adjuntas. Estado: esperando respuesta de CJ. Puedes verlo en CJ → Tickets.
 3. [ ] Con la respuesta de CJ, marcar en cada ficha si la personalización es «técnicamente posible» y si está «confirmada por CJ».
 4. [ ] Pedir y aprobar una **muestra física** de cada producto personalizado.
 5. [ ] **No poner fotos con el logo en la tienda** hasta tener la muestra aprobada. Después: sesión de fotos (6 imágenes por producto) con las muestras reales.
