@@ -48,22 +48,39 @@ Fecha de la revisión: 16/11/2026. El tema **MAISON DUVAL** está subido a la ti
 
 ## 4. Catálogo de productos (The Travel Collection)
 
-Estado actual: **12 productos creados**. 9 están visibles en la tienda, que sigue cerrada con contraseña. Otros 3 están en borrador porque no tienen precio de proveedor: Travel Backpack, Dental Travel Case y Toothbrush Travel Set. Todos llevan las etiquetas `pendiente-verificar` y `sin-fotos-reales`.
+Consulta del 17/11/2026 con la API oficial de CJdropshipping. El detalle, con SKU, enlaces, stock y envío, está en el Excel interno (hoja «CJdropshipping»), que no se sube a GitHub. En Shopify, cada producto guarda su referencia en el metacampo `proveedor.referencia`.
 
-1. [ ] **Fotos reales.** Ningún producto tiene fotos todavía. En su lugar se ve un hueco de marca que dice «Fotografía en preparación»: no hay imágenes inventadas ni generadas. Opciones:
-   - Pásame el **enlace o SKU de CJdropshipping** de cada producto y subo sus fotos si tienen calidad suficiente.
-   - O pide muestras y haz una sesión de fotos (piedra clara, lino, hotel, maleta abierta). Conviene hacerla con el logo, si el proveedor lo permite.
-2. [ ] **Datos que faltan por producto.** Están en la hoja «Estado de los datos» del Excel interno: colores reales, medidas, materiales, capacidad, peso y plazos.
-3. [ ] **Logo MAISON DUVAL en los productos.** Pregunta a CJ si permite bordado, grabado, etiqueta o placa en pedidos de una unidad. Hasta confirmarlo, ningún texto de la tienda dice que los productos lleven el logo.
-4. [ ] **Signature Luggage Set**: confirmar si incluye batería para el puerto USB (normalmente no) y el coste real del envío. Es lo que más cambia su margen.
-5. [ ] **Aluminium Trolley**: confirmar colores y tamaño (¿cabina?). No se ha puesto ningún color.
-6. [ ] **Precios**: son orientativos. Revisa el Excel interno con los costes reales de CJ (producto + envío) antes de abrir la tienda.
-7. [ ] **Conectar CJdropshipping** con su app oficial de Shopify. Así los pedidos se envían solos y el stock se sincroniza. Cuando el stock sea real, puedes volver a mostrar el filtro de disponibilidad (Personalizar tema → Configuración del tema → MAISON DUVAL · Tienda).
-8. [ ] **Filtros por color y categoría**: instala la app gratuita **Search & Discovery** y activa los filtros «Tipo de producto» y «Color». Ahora solo hay filtro de precio y la barra de categorías.
-9. [ ] **Etiquetas «Bestseller» o «New»**: el tema está preparado. Añade al producto la etiqueta `etiqueta:bestseller` o `etiqueta:new`, pero solo cuando esté justificado (ventas reales o lanzamiento reciente).
-10. [ ] **Travel Care** está oculta en la portada y en la barra de categorías hasta que tenga productos activos. Aparecerá sola cuando actives el Dental Travel Case o el Toothbrush Travel Set.
-11. [ ] Peso de cada producto (lo necesitan las tarifas de envío) y país de origen, si vas a indicarlo.
-12. [ ] Reseñas: instala una app de valoraciones. Las estrellas solo aparecerán con opiniones reales.
+**Localizados (8):**
+- Por SKU: Nécessaire Double, Mini Vanity, Travel Pouch y Cable Organizer.
+- Por nombre y precio de referencia exacto (conviene confirmarlo): Packing Cubes 8 piezas, Packing Cubes 6 piezas, Aluminium Trolley y Foldable Travel Bag.
+
+**Pendientes de localizar (4):** Signature Luggage Set, Travel Backpack, Dental Travel Case y Toothbrush Travel Set. Hace falta el enlace o el SKU de CJ de cada uno.
+
+**En la tienda (que sigue cerrada con contraseña):**
+- **Activos, con fotos reales del proveedor:** Nécessaire Double, Travel Pouch, Packing Cubes 8 piezas (beige, gris y negro), Cable Organizer (gris y negro) y Aluminium Trolley (negro y plata, 20" y 22").
+- **Activo sin fotos:** Signature Luggage Set (no localizado).
+- **En borrador:**
+  - Mini Vanity: lleva una placa con la marca «Shell Bags».
+  - Packing Cubes 6 piezas: solo existe con estampados.
+  - Foldable Travel Bag: es una bolsa deportiva con franjas de color.
+  - Travel Backpack, Dental Travel Case y Toothbrush Travel Set: sin localizar.
+
+1. [ ] **Confirmar la variante del Nécessaire Double.** El SKU indicado es la versión de una capa; en la tienda está puesta la de dos capas, que encaja con el nombre.
+2. [ ] **Pasar el enlace o el SKU de CJ** de los 4 productos pendientes de localizar.
+3. [ ] **Logo MAISON DUVAL**: ninguno de los productos localizados figura en CJ como personalizable. Pregunta a tu agente de CJ por placa, etiqueta o embalaje con logo y por su pedido mínimo. Hasta tener respuesta, la tienda no dice que lleven logo.
+4. [ ] **Productos con marca o textos del fabricante:**
+   - Mini Vanity: placa «Shell Bags».
+   - Packing Cubes 8 piezas: frase impresa «Wish U have a colorful life».
+
+   Pide a CJ una versión neutra o con tu marca, o busca alternativas.
+5. [ ] **Alternativas para lo que no encaja con la marca**: unos packing cubes de 6 piezas lisos y en tonos neutros, y una bolsa plegable minimalista.
+6. [ ] **Fotos**: las del proveedor son correctas, pero no son de marca premium (fondo blanco y poca variedad). Lo ideal es una sesión propia con muestras.
+7. [ ] **Precios**: se revisan después, con los costes reales. Ojo: el Aluminium Trolley pesa 4,9 kg y su envío a España ronda los 100–120 USD.
+8. [ ] **Conectar la app de CJdropshipping con Shopify.** Las variantes ya llevan el SKU de CJ para enlazarlas. Cuando el stock esté sincronizado, puedes volver a mostrar el filtro de disponibilidad.
+9. [ ] **Filtros por color y categoría**: instala la app gratuita **Search & Discovery** y activa los filtros «Tipo de producto» y «Color».
+10. [ ] **Etiquetas «Bestseller» o «New»**: añade la etiqueta `etiqueta:bestseller` o `etiqueta:new` al producto, solo cuando esté justificado.
+11. [ ] **Travel Care** está oculta hasta que tenga productos activos.
+12. [ ] **Reseñas**: instala una app de valoraciones. Las estrellas solo aparecerán con opiniones reales.
 
 ## 5. Antes de quitar la contraseña
 

@@ -58,3 +58,11 @@
 - El tema oculta las categorías vacías y el filtro de disponibilidad (ajuste `md_ocultar_disponibilidad`) hasta conectar el stock de CJ.
 - Etiquetas de tarjeta preparadas: `etiqueta:bestseller` y `etiqueta:new` (solo si están justificadas).
 - theme_bash: no usar barras invertidas dentro de comillas simples (el intérprete da «unterminated quote»).
+
+## CJdropshipping (17/11/2026)
+- El Access Token de CJ está guardado como secreto de red del entorno «mesa1» (host developers.cjdropshipping.com, cabecera CJ-Access-Token).
+  Para usarlo, las llamadas deben enviar `CJ-Access-Token: proxy-injected` y el proxy lo sustituye. La API admite 1 consulta por segundo.
+- La web pública de CJ redirige a los programas automáticos a una verificación anti-robots: usar solo la API oficial.
+- El usuario puede renovar el token con `maison-duval/conectar-cj.html` (la clave no pasa por el chat).
+- La relación de productos con CJ (SKU y pid) está en el metacampo `proveedor.referencia` de cada producto y en el Excel interno.
+  NO se sube al repo (público).
