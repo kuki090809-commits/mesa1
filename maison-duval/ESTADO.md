@@ -81,3 +81,6 @@
 - 17/11/2026: el usuario eligió también el juego de maletas (3 piezas, almacén de CJ en Polonia) y la mochila. Productos 7 y 9 actualizados
   en Shopify en borrador (el 7 pasó de activo a borrador porque cambió de 4 a 3 maletas). Añadidos al ticket con una segunda respuesta.
   Los 12 productos están identificados en CJ. Los juegos de maletas de almacenes de EE. UU. no tienen envío a España en CJ.
+- 17/11/2026: el usuario pidió que maletas y mochilas cumplan las medidas de equipaje de mano. Hecho: mochila cambiada por una de dos tallas
+  (S 40×25×20, L 45×32×20), Aluminium Trolley sin 22" y en borrador hasta tener medidas con ruedas, Foldable Bag solo talla S, y Signature Set
+  marcado (su 20" mide 56×36×22). Pedido a CJ en el ticket. Tabla en PENDIENTES §7. Etiquetas: medidas-cabina, revisar-medidas-cabina, solo-talla-s-cabina.

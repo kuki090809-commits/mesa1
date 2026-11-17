@@ -57,10 +57,11 @@ Consulta del 17/11/2026 con la API oficial de CJdropshipping. El detalle, con SK
   - Dental Travel Case: estuche blanco con detalles dorados, también en verde. No incluye cepillo.
   - Toothbrush Travel Set: estuche que se convierte en vaso, en oro rosa o plata. No incluye cepillo.
   - Signature Luggage Set: juego de **3** maletas (20", 24" y 28") en topo champán, sin USB ni función expandible. Sale del almacén de CJ en Polonia (3-7 días a España). El juego de 4 beige con USB solo estaba en almacenes de EE. UU., que no envían a España.
-  - Travel Backpack: mochila en crema, gris o negro, para portátil de 15,6".
+  - Travel Backpack: mochila en beige o negro, en dos tallas pensadas para el equipaje de mano (ver sección 7).
 
 **En la tienda (que sigue cerrada con contraseña):**
-- **Activos, con fotos reales del proveedor:** Nécessaire Double, Travel Pouch, Packing Cubes 8 piezas (beige, gris y negro), Cable Organizer (gris y negro) y Aluminium Trolley (negro y plata, 20" y 22").
+- **Activos, con fotos reales del proveedor:** Nécessaire Double, Travel Pouch, Packing Cubes 8 piezas (beige, gris y negro) y Cable Organizer (gris y negro).
+- **Pasado a borrador el 17/11/2026:** Aluminium Trolley, hasta que CJ confirme sus medidas con ruedas (ver sección 7). Se ha quitado la versión de 22".
 - **En borrador:**
   - Mini Vanity: lleva una placa con la marca «Shell Bags».
   - Packing Cubes 6 piezas: solo existe con estampados.
@@ -68,7 +69,7 @@ Consulta del 17/11/2026 con la API oficial de CJdropshipping. El detalle, con SK
   - Dental Travel Case: con fotos del proveedor, pero el estuche lleva impreso el logo «MUDU» del fabricante. Pedido a CJ que lo quite y ponga el monograma MD.
   - Toothbrush Travel Set: con fotos del proveedor (algunas llevan textos del fabricante en inglés). Falta el precio.
   - Signature Luggage Set: con 2 fotos del proveedor (las demás parecen hechas por ordenador y no se han usado). Revisar el precio: el anterior era para un juego de 4.
-  - Travel Backpack: con fotos del proveedor. Falta el precio.
+  - Travel Backpack: con 2 fotos del proveedor (son tablas de medidas con texto). Falta el precio.
 
 1. [ ] **Confirmar la variante del Nécessaire Double.** El SKU indicado es la versión de una capa; en la tienda está puesta la de dos capas, que encaja con el nombre.
 2. [x] **Los 12 productos están localizados** (los 4 últimos, elegidos por ti el 17/11/2026 y añadidos al ticket de CJ).
@@ -87,6 +88,31 @@ Consulta del 17/11/2026 con la API oficial de CJdropshipping. El detalle, con SK
 10. [ ] **Etiquetas «Bestseller» o «New»**: añade la etiqueta `etiqueta:bestseller` o `etiqueta:new` al producto, solo cuando esté justificado.
 11. [ ] **Travel Care** está oculta hasta que tenga productos activos.
 12. [ ] **Reseñas**: instala una app de valoraciones. Las estrellas solo aparecerán con opiniones reales.
+
+## 7. Medidas de equipaje de mano (maletas y mochilas)
+
+Objetivo: que las maletas y mochilas entren en las medidas de equipaje de mano de las aerolíneas. Medidas consultadas el 17/11/2026 en comparativas (reclamador.es, publico.es, equipaje.net); conviene confirmarlas en la web de cada aerolínea antes de publicar.
+
+| Aerolínea | Bolso pequeño gratis (bajo el asiento) | Maleta de cabina |
+|---|---|---|
+| Ryanair, Vueling, Volotea | 40 × 30 × 20 cm | 55 × 40 × 20 cm (de pago) |
+| Iberia | 40 × 30 × 15 cm | 56 × 40 × 25 cm (incluida) |
+| Air Europa | 40 × 30 × 15 cm | 55 × 35 × 25 cm (incluida) |
+| easyJet | 45 × 36 × 20 cm | 56 × 45 × 25 cm (de pago) |
+
+Para servir en todas: maleta de cabina de **55 × 35 × 20 cm como máximo, con ruedas y asas** (55 × 40 × 20 si no contamos Air Europa).
+
+| Producto | Medidas | Estado |
+|---|---|---|
+| Travel Backpack S | 40 × 25 × 20 cm | ✅ Bolso bajo el asiento en Ryanair, Vueling, Volotea y easyJet; equipaje de mano en Iberia y Air Europa. |
+| Travel Backpack L | 45 × 32 × 20 cm | ✅ Bolso bajo el asiento en easyJet; equipaje de mano en todas. |
+| Foldable Travel Bag (solo talla S) | 50 × 25 × 20 cm | ✅ Equipaje de mano en todas. Las tallas M y L se han quitado. |
+| Aluminium Trolley 20" | Sin medidas en cm | ❓ En borrador. Pedidas a CJ las medidas con ruedas. La de 22" se ha quitado. |
+| Signature Luggage Set (maleta de 20") | 56 × 36 × 22 cm | ❌ Solo valdría en Iberia y easyJet. Pedido a CJ un juego cuyo tamaño pequeño mida como máximo 55 × 40 × 20 cm. Las de 24" y 28" son para facturar y cumplen el límite habitual de 158 cm. |
+
+1. [x] Pedido a CJ en el ticket (17/11/2026): medidas con ruedas del trolley de 20", un juego de maletas y una maleta de cabina de 55 × 40 × 20 cm como máximo, y el cambio de mochila.
+2. [ ] Cuando CJ conteste, sustituir el Signature Luggage Set y, si no cumple, el Aluminium Trolley.
+3. [ ] En la tienda, no escribir nunca «apta para cabina» sin más: poner las medidas con ruedas y las aerolíneas comprobadas, con la fecha, y recomendar comprobarlo antes de volar.
 
 ## 6. Personalización con el logo (propuestas)
 
