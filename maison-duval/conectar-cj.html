@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conectar CJ · MAISON DUVAL</title>
+<style>
+  :root { --crema: #F5F0E8; --marron: #51483F; --linea: rgba(81,72,63,.2); }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 16px; background: var(--crema); color: var(--marron); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 560px; margin: 0 auto; }
+  h1 { font: 500 26px/1.2 Georgia, serif; letter-spacing: .04em; margin: 0 0 8px; }
+  p, li { color: #5c5249; }
+  ol { padding-left: 20px; }
+  label { display: block; margin: 24px 0 6px; font-weight: 600; }
+  input, textarea { width: 100%; padding: 12px; border: 1px solid var(--linea); border-radius: 4px; font: 15px monospace; background: #FCFAF6; color: var(--marron); }
+  button { margin-top: 12px; padding: 12px 20px; border: 0; border-radius: 2px; background: var(--marron); color: #FCFAF6; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+  .aviso { margin-top: 20px; padding: 14px; border: 1px solid var(--linea); border-radius: 4px; background: #FCFAF6; font-size: 14px; }
+  #salida { display: none; }
+  .error { color: #8a2c1d; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Conectar CJdropshipping</h1>
+  <p>Esta página convierte tu <strong>API Key</strong> de CJ en un <strong>Access Token</strong>. Lo hace directamente entre tu navegador y la API oficial de CJ (<code>developers.cjdropshipping.com</code>). La clave no se guarda ni se envía a ningún otro sitio.</p>
+  <ol>
+    <li>En CJ, abre <em>Mi cuenta → Authorization → API</em> (cjdropshipping.com/my.html#/authorize/API). Pulsa <em>Add API</em>, elige el tipo <em>API Key</em> y copia la clave.</li>
+    <li>Pégala aquí debajo y pulsa «Obtener token».</li>
+    <li>Copia el token y pégalo en el <strong>formulario seguro</strong> que te muestra Claude, nunca en el chat.</li>
+  </ol>
+  <label for="clave">API Key de CJ</label>
+  <input id="clave" type="password" autocomplete="off" placeholder="CJ…@api@…">
+  <button id="obtener" type="button">Obtener token</button>
+  <p id="estado" role="status"></p>
+  <div id="salida">
+    <label for="token">Tu Access Token (válido unos 180 días)</label>
+    <textarea id="token" rows="3" readonly></textarea>
+    <button id="copiar" type="button">Copiar token</button>
+  </div>
+  <p class="aviso">Cuando termines, cierra esta página. Si algún día quieres cortar el acceso, borra esa API en CJ (Authorization → API) y el token dejará de funcionar.</p>
+</main>
+<script>
+  const estado = document.getElementById('estado');
+  document.getElementById('obtener').addEventListener('click', async () => {
+    const apiKey = document.getElementById('clave').value.trim();
+    estado.className = ''; estado.textContent = 'Conectando con CJ…';
+    if (!apiKey) { estado.className = 'error'; estado.textContent = 'Pega primero tu API Key.'; return; }
+    try {
+      const r = await fetch('https://developers.cjdropshipping.com/api2.0/v1/authentication/getAccessToken', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ apiKey })
+      });
+      const j = await r.json();
+      if (j && j.result && j.data && j.data.accessToken) {
+        document.getElementById('token').value = j.data.accessToken;
+        document.getElementById('salida').style.display = 'block';
+        document.getElementById('clave').value = '';
+        estado.textContent = 'Listo. Caduca el ' + (j.data.accessTokenExpiryDate || '—').slice(0, 10) + '.';
+      } else {
+        estado.className = 'error'; estado.textContent = 'CJ ha respondido: ' + ((j && j.message) || 'error desconocido');
+      }
+    } catch (e) {
+      estado.className = 'error'; estado.textContent = 'No se pudo conectar con CJ. Prueba desde un ordenador con otro navegador.';
+    }
+  });
+  document.getElementById('copiar').addEventListener('click', async () => {
+    const t = document.getElementById('token');
+    try { await navigator.clipboard.writeText(t.value); estado.textContent = 'Token copiado.'; }
+    catch (e) { t.select(); document.execCommand('copy'); estado.textContent = 'Token copiado.'; }
+  });
+</script>
+</body>
+</html>
