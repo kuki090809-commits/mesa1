@@ -78,3 +78,6 @@
   Los adjuntos se subieron a CJ desde Archivos de Shopify y después se borraron de Shopify.
 - 17/11/2026: el usuario eligió en el catálogo de CJ los estuches para los productos 11 y 12 (actualizados en Shopify, en borrador y sin precio).
   Se añadieron al ticket con una respuesta (`ticket/reply`). Quedan por localizar el Signature Luggage Set y el Travel Backpack.
+- 17/11/2026: el usuario eligió también el juego de maletas (3 piezas, almacén de CJ en Polonia) y la mochila. Productos 7 y 9 actualizados
+  en Shopify en borrador (el 7 pasó de activo a borrador porque cambió de 4 a 3 maletas). Añadidos al ticket con una segunda respuesta.
+  Los 12 productos están identificados en CJ. Los juegos de maletas de almacenes de EE. UU. no tienen envío a España en CJ.
