@@ -82,6 +82,16 @@ Consulta del 17/11/2026 con la API oficial de CJdropshipping. El detalle, con SK
 11. [ ] **Travel Care** está oculta hasta que tenga productos activos.
 12. [ ] **Reseñas**: instala una app de valoraciones. Las estrellas solo aparecerán con opiniones reales.
 
+## 6. Personalización con el logo (propuestas)
+
+La guía de personalización v1 (12 fichas con bocetos) y la petición para CJ en inglés se han entregado por el chat. No se suben a GitHub porque contienen los logotipos y las referencias del proveedor.
+
+1. [ ] **Fijar la tipografía del logo** y obtenerlo en vectores con el texto convertido en trazos. Los PNG actuales usan una fuente de sustitución; la web usa Cormorant.
+2. [ ] **Enviar a CJ** el PDF «customization request» y el mensaje (en el archivo MENSAJE-PARA-CJ). En la última página, poner el contacto o borrar esa línea.
+3. [ ] Con la respuesta de CJ, marcar en cada ficha si la personalización es «técnicamente posible» y si está «confirmada por CJ».
+4. [ ] Pedir y aprobar una **muestra física** de cada producto personalizado.
+5. [ ] **No poner fotos con el logo en la tienda** hasta tener la muestra aprobada. Después: sesión de fotos (6 imágenes por producto) con las muestras reales.
+
 ## 5. Antes de quitar la contraseña
 
 1. [ ] Publicar el tema MAISON DUVAL (Tienda online → Temas → Publicar), cuando des el visto bueno.

@@ -66,3 +66,8 @@
 - El usuario puede renovar el token con `maison-duval/conectar-cj.html` (la clave no pasa por el chat).
 - La relación de productos con CJ (SKU y pid) está en el metacampo `proveedor.referencia` de cada producto y en el Excel interno.
   NO se sube al repo (público).
+
+## Personalización (17/11/2026)
+- Guía v1 (12 fichas) y petición a CJ en inglés entregadas al usuario por el chat. Herramientas de boceto en el scratchpad de la sesión: no en el repo.
+- Logotipos del cliente: SVG solo con texto (fuente Cormorant no incrustada); los PNG y el PDF usan una fuente de sustitución. Pendiente fijar la tipografía y vectorizar.
+- Regla: las imágenes con logo son PROPUESTAS; no van a la tienda hasta que CJ confirme y haya muestra aprobada.
