@@ -3,6 +3,12 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "marca": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<p class=\"md-overline md-ficha-overline\">Maison Duval{% if product.type != blank %} · {{ product.type | escape }}{% endif %}</p>"
+          }
+        },
         "title": {
           "type": "title",
           "settings": {}
@@ -53,6 +59,7 @@
         }
       },
       "block_order": [
+        "marca",
         "title",
         "rating",
         "price",

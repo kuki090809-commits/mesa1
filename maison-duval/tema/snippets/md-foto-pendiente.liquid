@@ -1,0 +1,30 @@
+{%- comment -%}
+  MAISON DUVAL: hueco elegante para un producto que aún no tiene fotografías reales.
+  No muestra imágenes falsas ni generadas: indica al cliente que la fotografía está en preparación.
+  Parámetros: producto (product), clase (opcional).
+{%- endcomment -%}
+{%- liquid
+  assign h = producto.handle | default: ''
+  assign t = producto.type | default: '' | downcase
+  assign icono = 'maleta'
+  if h contains 'cable'
+    assign icono = 'cable'
+  elsif h contains 'backpack' or h contains 'mochila'
+    assign icono = 'mochila'
+  elsif h contains 'bag' or h contains 'bolsa'
+    assign icono = 'bolsa'
+  elsif h contains 'tooth' or h contains 'dental' or t contains 'care'
+    assign icono = 'cepillo'
+  elsif h contains 'cube' or t contains 'organizer'
+    assign icono = 'cubos'
+  elsif t contains 'cessaire' or h contains 'vanity' or h contains 'pouch' or h contains 'necessaire'
+    assign icono = 'neceser'
+  elsif t contains 'accessor'
+    assign icono = 'accesorios'
+  endif
+-%}
+<div class="md-foto-pendiente{% if clase != blank %} {{ clase }}{% endif %}" role="img" aria-label="{{ producto.title | escape }}: fotografía en preparación">
+  <span class="md-foto-pendiente__icono">{% render 'md-icono', nombre: icono %}</span>
+  <span class="md-foto-pendiente__marca" aria-hidden="true">Maison Duval</span>
+  <span class="md-foto-pendiente__nota" aria-hidden="true">Fotografía en preparación</span>
+</div>

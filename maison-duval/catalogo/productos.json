@@ -1,0 +1,683 @@
+[
+  {
+    "n": 1,
+    "input": {
+      "title": "Nécessaire Double",
+      "handle": "necessaire-double",
+      "status": "ACTIVE",
+      "vendor": "MAISON DUVAL",
+      "productType": "Nécessaires",
+      "tags": [
+        "necessaires",
+        "imprescindible",
+        "pendiente-verificar",
+        "sin-fotos-reales"
+      ],
+      "descriptionHtml": "<p>Cada viaje merece empezar con orden. El Nécessaire Double reúne en una sola pieza dos compartimentos para separar cosméticos, maquillaje y artículos de higiene, en un beige sereno y atemporal.</p><p>Todo lo que necesitas, siempre en su sitio: del baño del hotel a tu maleta.</p><h3>Lo que lo hace especial</h3><ul><li>Dos compartimentos para separar lo que usas cada día.</li><li>Espacio pensado para cosméticos, maquillaje e higiene personal.</li><li>Un diseño minimalista en beige que acompaña a cualquier equipaje.</li></ul>",
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "resumen",
+          "type": "single_line_text_field",
+          "value": "Neceser de doble compartimento para tu rutina de viaje."
+        },
+        {
+          "namespace": "custom",
+          "key": "detalles",
+          "type": "list.single_line_text_field",
+          "value": "[\"Doble compartimento | Dos espacios independientes para organizar tu rutina de viaje.\", \"Beige atemporal | Un tono neutro y sereno, fiel al estilo de la casa.\"]"
+        }
+      ],
+      "seo": {
+        "title": "Nécessaire Double | MAISON DUVAL",
+        "description": "Neceser de viaje de doble compartimento en beige para cosméticos, maquillaje e higiene. Orden y estética atemporal para cada escapada."
+      },
+      "productOptions": [
+        {
+          "name": "Color",
+          "values": [
+            {
+              "name": "Beige"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "optionValues": [
+            {
+              "optionName": "Color",
+              "name": "Beige"
+            }
+          ],
+          "price": "39.00"
+        }
+      ]
+    }
+  },
+  {
+    "n": 2,
+    "input": {
+      "title": "Mini Vanity",
+      "handle": "mini-vanity",
+      "status": "ACTIVE",
+      "vendor": "MAISON DUVAL",
+      "productType": "Nécessaires",
+      "tags": [
+        "necessaires",
+        "pendiente-verificar",
+        "sin-fotos-reales"
+      ],
+      "descriptionHtml": "<p>Para los viajes que empiezan con una bolsa ligera. El Mini Vanity guarda lo esencial de tu rutina en un formato compacto, con líneas sencillas y un color marfil luminoso.</p><p>Ideal para escapadas de fin de semana y viajes cortos.</p><h3>Lo que lo hace especial</h3><ul><li>Formato compacto para lo imprescindible.</li><li>Color marfil, sencillo y elegante.</li><li>Pensado para escapadas y viajes cortos.</li></ul>",
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "resumen",
+          "type": "single_line_text_field",
+          "value": "Neceser compacto en marfil para escapadas cortas."
+        },
+        {
+          "namespace": "custom",
+          "key": "dimensiones",
+          "type": "multi_line_text_field",
+          "value": "21 × 8 × 19 cm (medidas aproximadas)."
+        },
+        {
+          "namespace": "custom",
+          "key": "detalles",
+          "type": "list.single_line_text_field",
+          "value": "[\"Formato compacto | Unos 21 × 8 × 19 cm: lo justo para lo esencial.\", \"Marfil luminoso | Un color claro y sencillo que combina con todo.\"]"
+        }
+      ],
+      "seo": {
+        "title": "Mini Vanity | MAISON DUVAL",
+        "description": "Neceser compacto color marfil para escapadas y viajes cortos. Lo esencial de tu rutina, en un formato sencillo y elegante."
+      },
+      "productOptions": [
+        {
+          "name": "Color",
+          "values": [
+            {
+              "name": "Marfil"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "optionValues": [
+            {
+              "optionName": "Color",
+              "name": "Marfil"
+            }
+          ],
+          "price": "24.00"
+        }
+      ]
+    }
+  },
+  {
+    "n": 3,
+    "input": {
+      "title": "Travel Pouch",
+      "handle": "travel-pouch",
+      "status": "ACTIVE",
+      "vendor": "MAISON DUVAL",
+      "productType": "Nécessaires",
+      "tags": [
+        "necessaires",
+        "pendiente-verificar",
+        "sin-fotos-reales"
+      ],
+      "descriptionHtml": "<p>Una forma cilíndrica, compacta y fácil de colocar en la maleta. El Travel Pouch reúne tus productos de cuidado personal en un beige suave que encaja con cualquier equipaje.</p><h3>Lo que lo hace especial</h3><ul><li>Forma cilíndrica y compacta.</li><li>Para tus productos de cuidado personal.</li><li>Beige suave y atemporal.</li></ul>",
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "resumen",
+          "type": "single_line_text_field",
+          "value": "Neceser cilíndrico en beige para tus productos de cuidado."
+        },
+        {
+          "namespace": "custom",
+          "key": "dimensiones",
+          "type": "multi_line_text_field",
+          "value": "20 × 13 × 13 cm (medidas aproximadas)."
+        },
+        {
+          "namespace": "custom",
+          "key": "detalles",
+          "type": "list.single_line_text_field",
+          "value": "[\"Forma cilíndrica | Compacta y fácil de colocar entre la ropa.\", \"Beige suave | Un tono neutro que acompaña a cualquier equipaje.\"]"
+        }
+      ],
+      "seo": {
+        "title": "Travel Pouch | MAISON DUVAL",
+        "description": "Neceser de viaje cilíndrico en beige para productos de cuidado personal. Compacto, sencillo y fácil de llevar en la maleta."
+      },
+      "productOptions": [
+        {
+          "name": "Color",
+          "values": [
+            {
+              "name": "Beige"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "optionValues": [
+            {
+              "optionName": "Color",
+              "name": "Beige"
+            }
+          ],
+          "price": "22.00"
+        }
+      ]
+    }
+  },
+  {
+    "n": 4,
+    "input": {
+      "title": "Packing Cubes Set (8 piezas)",
+      "handle": "packing-cubes-set-8-piezas",
+      "status": "ACTIVE",
+      "vendor": "MAISON DUVAL",
+      "productType": "Travel Organizers",
+      "tags": [
+        "travel-organizers",
+        "imprescindible",
+        "pendiente-verificar",
+        "sin-fotos-reales"
+      ],
+      "descriptionHtml": "<p>Hacer la maleta también puede ser un pequeño ritual. Este juego de ocho organizadores te ayuda a separar ropa, accesorios y objetos personales para que cada cosa tenga su lugar.</p><p>Abre la maleta y encuentra lo que buscas sin tener que deshacerla.</p><h3>Lo que lo hace especial</h3><ul><li>Juego completo de 8 organizadores de equipaje.</li><li>Separa ropa, accesorios y objetos personales.</li><li>Mantén la maleta ordenada durante todo el viaje.</li></ul>",
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "resumen",
+          "type": "single_line_text_field",
+          "value": "Ocho organizadores para una maleta siempre en orden."
+        },
+        {
+          "namespace": "custom",
+          "key": "detalles",
+          "type": "list.single_line_text_field",
+          "value": "[\"Ocho piezas | Un juego completo para organizar todo tu equipaje.\", \"Cada cosa en su sitio | Ropa, accesorios y objetos personales, siempre separados.\"]"
+        }
+      ],
+      "seo": {
+        "title": "Packing Cubes Set (8 piezas) | MAISON DUVAL",
+        "description": "Juego de 8 organizadores de maleta para separar ropa, accesorios y objetos personales. Viaja con la maleta siempre en orden."
+      },
+      "productOptions": [
+        {
+          "name": "Title",
+          "values": [
+            {
+              "name": "Default Title"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "optionValues": [
+            {
+              "optionName": "Title",
+              "name": "Default Title"
+            }
+          ],
+          "price": "39.00"
+        }
+      ]
+    }
+  },
+  {
+    "n": 5,
+    "input": {
+      "title": "Packing Cubes Set (6 piezas)",
+      "handle": "packing-cubes-set-6-piezas",
+      "status": "ACTIVE",
+      "vendor": "MAISON DUVAL",
+      "productType": "Travel Organizers",
+      "tags": [
+        "travel-organizers",
+        "pendiente-verificar",
+        "sin-fotos-reales"
+      ],
+      "descriptionHtml": "<p>Seis organizadores ligeros y funcionales para separar tu ropa por prendas, por días o por viajeros, y mantener la maleta en orden de principio a fin.</p><h3>Lo que lo hace especial</h3><ul><li>Juego de 6 organizadores de viaje.</li><li>Diseño ligero y funcional.</li><li>Organiza por prendas, por días o por viajeros.</li></ul>",
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "resumen",
+          "type": "single_line_text_field",
+          "value": "Seis organizadores ligeros para viajar con orden."
+        },
+        {
+          "namespace": "custom",
+          "key": "materiales",
+          "type": "multi_line_text_field",
+          "value": "Tejido Oxford."
+        },
+        {
+          "namespace": "custom",
+          "key": "detalles",
+          "type": "list.single_line_text_field",
+          "value": "[\"Seis piezas | Organiza tu equipaje por prendas, por días o por viajeros.\"]"
+        }
+      ],
+      "seo": {
+        "title": "Packing Cubes Set (6 piezas) | MAISON DUVAL",
+        "description": "Juego de 6 organizadores de viaje ligeros y funcionales. Separa tu ropa y mantén la maleta en orden durante todo el viaje."
+      },
+      "productOptions": [
+        {
+          "name": "Title",
+          "values": [
+            {
+              "name": "Default Title"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "optionValues": [
+            {
+              "optionName": "Title",
+              "name": "Default Title"
+            }
+          ],
+          "price": "29.00"
+        }
+      ]
+    }
+  },
+  {
+    "n": 6,
+    "input": {
+      "title": "Cable Organizer",
+      "handle": "cable-organizer",
+      "status": "ACTIVE",
+      "vendor": "MAISON DUVAL",
+      "productType": "Travel Organizers",
+      "tags": [
+        "travel-organizers",
+        "accessories",
+        "imprescindible",
+        "pendiente-verificar",
+        "sin-fotos-reales"
+      ],
+      "descriptionHtml": "<p>Cables, cargadores y pequeños accesorios electrónicos suelen ser lo primero que se pierde en un viaje. El Cable Organizer los reúne en un solo lugar para que viajen contigo, ordenados y a mano.</p><h3>Lo que lo hace especial</h3><ul><li>Para cables, cargadores y pequeños accesorios electrónicos.</li><li>Todo reunido en un único organizador.</li><li>Fácil de llevar en la mochila o en la maleta.</li></ul>",
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "resumen",
+          "type": "single_line_text_field",
+          "value": "Cables, cargadores y pequeños accesorios, en un solo lugar."
+        },
+        {
+          "namespace": "custom",
+          "key": "detalles",
+          "type": "list.single_line_text_field",
+          "value": "[\"Todo a mano | Cables y cargadores reunidos, sin enredos en el fondo de la mochila.\"]"
+        }
+      ],
+      "seo": {
+        "title": "Cable Organizer | MAISON DUVAL",
+        "description": "Organizador de viaje para cables, cargadores y pequeños accesorios electrónicos. Todo en un solo lugar, ordenado y a mano."
+      },
+      "productOptions": [
+        {
+          "name": "Title",
+          "values": [
+            {
+              "name": "Default Title"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "optionValues": [
+            {
+              "optionName": "Title",
+              "name": "Default Title"
+            }
+          ],
+          "price": "39.00"
+        }
+      ]
+    }
+  },
+  {
+    "n": 7,
+    "input": {
+      "title": "Signature Luggage Set",
+      "handle": "signature-luggage-set",
+      "status": "ACTIVE",
+      "vendor": "MAISON DUVAL",
+      "productType": "Luggage",
+      "tags": [
+        "luggage",
+        "imprescindible",
+        "pendiente-verificar",
+        "sin-fotos-reales"
+      ],
+      "descriptionHtml": "<p>Cuatro maletas coordinadas en un beige sereno, para que cada viaje —un fin de semana o una gran travesía— empiece con la pieza adecuada.</p><p>Un conjunto elegante y coherente, pensado para viajar con calma y con estilo.</p><h3>Lo que lo hace especial</h3><ul><li>Juego de 4 maletas coordinadas.</li><li>Un tono beige elegante y atemporal.</li><li>Función expandible y puerto USB: consulta «Características y materiales».</li></ul>",
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "resumen",
+          "type": "single_line_text_field",
+          "value": "Juego de cuatro maletas coordinadas en beige."
+        },
+        {
+          "namespace": "custom",
+          "key": "materiales",
+          "type": "multi_line_text_field",
+          "value": "Carcasa de ABS.\nFunción expandible.\nPuerto USB."
+        },
+        {
+          "namespace": "custom",
+          "key": "detalles",
+          "type": "list.single_line_text_field",
+          "value": "[\"Juego de cuatro | Cuatro maletas coordinadas en el mismo tono beige.\", \"Expandible | Más capacidad cuando el viaje lo pide.\"]"
+        }
+      ],
+      "seo": {
+        "title": "Signature Luggage Set | MAISON DUVAL",
+        "description": "Juego de 4 maletas coordinadas en beige, con carcasa de ABS, función expandible y puerto USB. Elegancia serena para cada viaje."
+      },
+      "productOptions": [
+        {
+          "name": "Color",
+          "values": [
+            {
+              "name": "Beige"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "optionValues": [
+            {
+              "optionName": "Color",
+              "name": "Beige"
+            }
+          ],
+          "price": "549.00"
+        }
+      ]
+    }
+  },
+  {
+    "n": 8,
+    "input": {
+      "title": "Aluminium Trolley",
+      "handle": "aluminium-trolley",
+      "status": "ACTIVE",
+      "vendor": "MAISON DUVAL",
+      "productType": "Luggage",
+      "tags": [
+        "luggage",
+        "pendiente-verificar",
+        "sin-fotos-reales"
+      ],
+      "descriptionHtml": "<p>Líneas limpias y una estructura metálica de carácter contemporáneo. El Aluminium Trolley está pensado para quien viaja a menudo y busca una maleta sobria y con presencia.</p><h3>Lo que lo hace especial</h3><ul><li>Estructura de aluminio y magnesio.</li><li>Diseño moderno y sobrio.</li><li>Pensado para quien viaja a menudo.</li></ul>",
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "resumen",
+          "type": "single_line_text_field",
+          "value": "Trolley con estructura de aluminio y magnesio."
+        },
+        {
+          "namespace": "custom",
+          "key": "materiales",
+          "type": "multi_line_text_field",
+          "value": "Estructura de aluminio y magnesio."
+        },
+        {
+          "namespace": "custom",
+          "key": "detalles",
+          "type": "list.single_line_text_field",
+          "value": "[\"Estructura metálica | Aluminio y magnesio, de líneas limpias y contemporáneas.\"]"
+        }
+      ],
+      "seo": {
+        "title": "Aluminium Trolley | MAISON DUVAL",
+        "description": "Maleta trolley con estructura de aluminio y magnesio y diseño moderno. Una pieza sobria y contemporánea para quien viaja a menudo."
+      },
+      "productOptions": [
+        {
+          "name": "Title",
+          "values": [
+            {
+              "name": "Default Title"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "optionValues": [
+            {
+              "optionName": "Title",
+              "name": "Default Title"
+            }
+          ],
+          "price": "189.00"
+        }
+      ]
+    }
+  },
+  {
+    "n": 9,
+    "input": {
+      "title": "Travel Backpack",
+      "handle": "travel-backpack",
+      "status": "DRAFT",
+      "vendor": "MAISON DUVAL",
+      "productType": "Luggage",
+      "tags": [
+        "luggage",
+        "pendiente-verificar",
+        "sin-fotos-reales",
+        "sin-precio"
+      ],
+      "descriptionHtml": "<p>Una mochila de viaje práctica y de líneas sencillas, pensada para acompañarte del aeropuerto a la ciudad.</p><h3>Lo que lo hace especial</h3><ul><li>Diseño práctico y minimalista.</li><li>Pensada para el día a día del viaje.</li></ul>",
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "resumen",
+          "type": "single_line_text_field",
+          "value": "Mochila de viaje práctica y minimalista."
+        }
+      ],
+      "seo": {
+        "title": "Travel Backpack | MAISON DUVAL",
+        "description": "Mochila de viaje práctica y minimalista."
+      },
+      "productOptions": [
+        {
+          "name": "Title",
+          "values": [
+            {
+              "name": "Default Title"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "optionValues": [
+            {
+              "optionName": "Title",
+              "name": "Default Title"
+            }
+          ],
+          "price": "0.00"
+        }
+      ]
+    }
+  },
+  {
+    "n": 10,
+    "input": {
+      "title": "Foldable Travel Bag",
+      "handle": "foldable-travel-bag",
+      "status": "ACTIVE",
+      "vendor": "MAISON DUVAL",
+      "productType": "Luggage",
+      "tags": [
+        "luggage",
+        "accessories",
+        "pendiente-verificar",
+        "sin-fotos-reales"
+      ],
+      "descriptionHtml": "<p>Plegada ocupa muy poco; desplegada, te da ese espacio extra para las compras del viaje, una escapada improvisada o el equipaje de vuelta.</p><h3>Lo que lo hace especial</h3><ul><li>Plegable: se guarda en poco espacio.</li><li>Para escapadas, viajes cortos y equipaje adicional.</li></ul>",
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "resumen",
+          "type": "single_line_text_field",
+          "value": "Bolsa plegable para el equipaje de más."
+        },
+        {
+          "namespace": "custom",
+          "key": "detalles",
+          "type": "list.single_line_text_field",
+          "value": "[\"Plegable | Guárdala en la maleta y despliégala cuando necesites más espacio.\"]"
+        }
+      ],
+      "seo": {
+        "title": "Foldable Travel Bag | MAISON DUVAL",
+        "description": "Bolsa de viaje plegable para escapadas, viajes cortos y equipaje adicional. Se guarda en poco espacio y se despliega cuando la necesitas."
+      },
+      "productOptions": [
+        {
+          "name": "Title",
+          "values": [
+            {
+              "name": "Default Title"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "optionValues": [
+            {
+              "optionName": "Title",
+              "name": "Default Title"
+            }
+          ],
+          "price": "29.00"
+        }
+      ]
+    }
+  },
+  {
+    "n": 11,
+    "input": {
+      "title": "Dental Travel Case",
+      "handle": "dental-travel-case",
+      "status": "DRAFT",
+      "vendor": "MAISON DUVAL",
+      "productType": "Travel Care",
+      "tags": [
+        "travel-care",
+        "pendiente-verificar",
+        "sin-fotos-reales",
+        "sin-precio"
+      ],
+      "descriptionHtml": "<p>Un estuche compacto y de líneas limpias para llevar tu cepillo y tus accesorios dentales bien guardados durante el viaje.</p><h3>Lo que lo hace especial</h3><ul><li>Diseño compacto y limpio.</li><li>Para el cepillo y los accesorios dentales.</li></ul>",
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "resumen",
+          "type": "single_line_text_field",
+          "value": "Estuche de viaje para tu cepillo y accesorios dentales."
+        }
+      ],
+      "seo": {
+        "title": "Dental Travel Case | MAISON DUVAL",
+        "description": "Estuche de viaje para tu cepillo y accesorios dentales."
+      },
+      "productOptions": [
+        {
+          "name": "Title",
+          "values": [
+            {
+              "name": "Default Title"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "optionValues": [
+            {
+              "optionName": "Title",
+              "name": "Default Title"
+            }
+          ],
+          "price": "0.00"
+        }
+      ]
+    }
+  },
+  {
+    "n": 12,
+    "input": {
+      "title": "Toothbrush Travel Set",
+      "handle": "toothbrush-travel-set",
+      "status": "DRAFT",
+      "vendor": "MAISON DUVAL",
+      "productType": "Travel Care",
+      "tags": [
+        "travel-care",
+        "pendiente-verificar",
+        "sin-fotos-reales",
+        "sin-precio"
+      ],
+      "descriptionHtml": "<p>Lo esencial para tu higiene dental de viaje, en una presentación sencilla y neutra.</p><h3>Lo que lo hace especial</h3><ul><li>Presentación minimalista.</li><li>Pensado para viajar.</li></ul>",
+      "metafields": [
+        {
+          "namespace": "custom",
+          "key": "resumen",
+          "type": "single_line_text_field",
+          "value": "Higiene dental de viaje, en una presentación minimalista."
+        }
+      ],
+      "seo": {
+        "title": "Toothbrush Travel Set | MAISON DUVAL",
+        "description": "Higiene dental de viaje, en una presentación minimalista."
+      },
+      "productOptions": [
+        {
+          "name": "Title",
+          "values": [
+            {
+              "name": "Default Title"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "optionValues": [
+            {
+              "optionName": "Title",
+              "name": "Default Title"
+            }
+          ],
+          "price": "0.00"
+        }
+      ]
+    }
+  }
+]

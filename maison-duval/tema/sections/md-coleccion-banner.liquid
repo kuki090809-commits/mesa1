@@ -17,9 +17,13 @@
     <nav aria-label="Ruta de navegación" class="md-migas">
       <ol role="list">
         <li><a href="{{ routes.root_url }}">Inicio</a></li>
+        {%- if section.settings.padre != blank and section.settings.padre.handle != collection.handle -%}
+          <li><a href="{{ section.settings.padre.url }}">{{ section.settings.padre.title | escape }}</a></li>
+        {%- endif -%}
         <li aria-current="page">{{ titulo | escape }}</li>
       </ol>
     </nav>
+    {%- if section.settings.overline != blank -%}<p class="md-overline md-col-banner__overline">{{ section.settings.overline | escape }}</p>{%- endif -%}
     <h1 id="md-col-titulo-{{ section.id }}" class="md-col-banner__titulo">{{ titulo | escape }}</h1>
     {%- if collection.description != blank -%}
       <div class="md-col-banner__desc">{{ collection.description }}</div>
@@ -53,6 +57,8 @@
   "settings": [
     { "type": "image_picker", "id": "imagen", "label": "Foto (vacío = la imagen de la colección)" },
     { "type": "text", "id": "titulo_todos", "label": "Título en «Todos los productos»", "default": "Toda la colección" },
+    { "type": "text", "id": "overline", "label": "Texto pequeño sobre el título" },
+    { "type": "collection", "id": "padre", "label": "Colección principal (para la ruta de navegación)" },
     { "type": "range", "id": "alto", "label": "Altura mínima (px)", "min": 200, "max": 600, "step": 20, "unit": "px", "default": 360 }
   ],
   "presets": [ { "name": "MD – Banner de colección" } ]

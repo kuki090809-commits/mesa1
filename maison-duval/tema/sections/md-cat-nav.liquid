@@ -1,0 +1,64 @@
+{%- comment -%}
+  MAISON DUVAL: navegación por categorías (pastillas) encima de la cuadrícula de productos.
+  Marca la categoría actual y muestra cuántos productos tiene cada una.
+{%- endcomment -%}
+<nav class="md-contenedor md-catnav" aria-label="{{ section.settings.etiqueta | escape }}">
+  <ul class="md-catnav__lista" role="list">
+    {%- if section.settings.todo != blank -%}
+      {%- assign actual = false -%}
+      {%- if collection.handle == section.settings.todo.handle -%}{%- assign actual = true -%}{%- endif -%}
+      <li>
+        <a class="md-catnav__item{% if actual %} is-actual{% endif %}" href="{{ section.settings.todo.url }}"{% if actual %} aria-current="page"{% endif %}>
+          {{ section.settings.todo_texto | escape }}
+        </a>
+      </li>
+    {%- endif -%}
+    {%- for block in section.blocks -%}
+      {%- assign c = block.settings.coleccion -%}
+      {%- if c == blank -%}{%- continue -%}{%- endif -%}
+      {%- assign actual = false -%}
+      {%- if collection.handle == c.handle -%}{%- assign actual = true -%}{%- endif -%}
+      <li {{ block.shopify_attributes }}>
+        <a class="md-catnav__item{% if actual %} is-actual{% endif %}" href="{{ c.url }}"{% if actual %} aria-current="page"{% endif %}>
+          {{ block.settings.texto | default: c.title | escape }}
+          {%- if section.settings.mostrar_cantidad -%}<span class="md-catnav__num" aria-label="{{ c.products_count }} productos">{{ c.products_count }}</span>{%- endif -%}
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>
+
+{% style %}
+  #shopify-section-{{ section.id }} .md-catnav { padding-block: 2.8rem 0.8rem; }
+  #shopify-section-{{ section.id }} .md-catnav__lista { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+  #shopify-section-{{ section.id }} .md-catnav__item { display: inline-flex; align-items: center; gap: 0.8rem; min-height: 4.4rem; padding: 0 2rem; border: 1px solid var(--md-linea); border-radius: 999px; color: var(--md-marron); font-size: 1.3rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; background: transparent; transition: background 0.3s var(--md-ease), border-color 0.3s var(--md-ease); }
+  #shopify-section-{{ section.id }} .md-catnav__item:hover { border-color: var(--md-marron); }
+  #shopify-section-{{ section.id }} .md-catnav__item.is-actual { background: var(--md-marron); border-color: var(--md-marron); color: var(--md-blanco); }
+  #shopify-section-{{ section.id }} .md-catnav__num { font-size: 1.1rem; letter-spacing: 0.04em; opacity: 0.8; }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .md-catnav__lista { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin: 0 calc(var(--md-margen) * -1); padding: 0.2rem var(--md-margen) 0.8rem; scrollbar-width: none; }
+    #shopify-section-{{ section.id }} .md-catnav__lista::-webkit-scrollbar { display: none; }
+    #shopify-section-{{ section.id }} .md-catnav__item { white-space: nowrap; padding: 0 1.6rem; }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "MD – Categorías (barra)",
+  "tag": "div",
+  "enabled_on": { "templates": ["collection"] },
+  "settings": [
+    { "type": "text", "id": "etiqueta", "label": "Nombre para lectores de pantalla", "default": "Categorías" },
+    { "type": "collection", "id": "todo", "label": "Colección «Todo»" },
+    { "type": "text", "id": "todo_texto", "label": "Texto de «Todo»", "default": "Todo" },
+    { "type": "checkbox", "id": "mostrar_cantidad", "label": "Mostrar número de productos", "default": true }
+  ],
+  "blocks": [
+    { "type": "categoria", "name": "Categoría", "settings": [
+      { "type": "collection", "id": "coleccion", "label": "Colección" },
+      { "type": "text", "id": "texto", "label": "Texto (vacío = nombre de la colección)" }
+    ] }
+  ],
+  "presets": [ { "name": "MD – Categorías (barra)" } ]
+}
+{% endschema %}

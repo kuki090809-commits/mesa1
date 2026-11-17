@@ -1,0 +1,85 @@
+{
+  "sections": {
+    "banner": {
+      "type": "md-coleccion-banner",
+      "settings": {
+        "titulo_todos": "The Travel Collection",
+        "overline": "Maison Duval · Travel Essentials",
+        "alto": 440
+      }
+    },
+    "categorias": {
+      "type": "md-cat-nav",
+      "blocks": {
+        "c1": {
+          "type": "categoria",
+          "settings": {
+            "coleccion": "luggage"
+          }
+        },
+        "c2": {
+          "type": "categoria",
+          "settings": {
+            "coleccion": "travel-organizers"
+          }
+        },
+        "c3": {
+          "type": "categoria",
+          "settings": {
+            "coleccion": "necessaires"
+          }
+        },
+        "c4": {
+          "type": "categoria",
+          "settings": {
+            "coleccion": "travel-care"
+          }
+        },
+        "c5": {
+          "type": "categoria",
+          "settings": {
+            "coleccion": "accessories"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "settings": {
+        "etiqueta": "Categorías",
+        "todo": "the-travel-collection",
+        "todo_texto": "Todo",
+        "mostrar_cantidad": true
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 12,
+        "columns_desktop": 3,
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "standard",
+        "enable_filtering": true,
+        "filter_type": "vertical",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 24,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "categorias",
+    "product-grid"
+  ]
+}

@@ -337,3 +337,26 @@ html.no-js .md-reveal { opacity: 1; transform: none; }
 
 /* Cifras normales (Cormorant usa cifras antiguas por defecto: «50» parecía «5o») */
 body, h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5, .price, .md-anuncios__item { font-variant-numeric: lining-nums; }
+
+/* ---------- Producto sin fotografía real: hueco de marca (nunca imágenes falsas) ---------- */
+.md-foto-pendiente {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.2rem;
+  padding: 2rem; text-align: center; color: var(--md-marron);
+  background: radial-gradient(120% 90% at 50% 38%, var(--md-blanco) 0%, #F1E9DD 58%, var(--md-beige) 100%);
+}
+.md-foto-pendiente::after { content: ""; position: absolute; inset: 1.2rem; border: 1px solid rgba(81, 72, 63, 0.1); border-radius: 2px; pointer-events: none; }
+.md-foto-pendiente__icono svg { width: clamp(3.6rem, 22%, 6.4rem); height: auto; stroke-width: 1; }
+.md-foto-pendiente__marca { font-family: var(--md-serif); font-size: clamp(1.3rem, 1.4vw, 1.7rem); letter-spacing: 0.32em; text-transform: uppercase; padding-inline-start: 0.32em; }
+.md-foto-pendiente__nota { font-size: 1.15rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--md-texto-suave); }
+.md-card-sin-foto { position: absolute; inset: 0; overflow: hidden; border-radius: var(--product-card-corner-radius, 4px); }
+.md-card-sin-foto + .card__content { display: none; }
+.product-card-wrapper .card:hover .md-foto-pendiente__icono svg { transform: translateY(-2px); }
+.md-foto-pendiente__icono svg { transition: transform 0.6s var(--md-ease); }
+.md-ficha-sin-foto { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 4px; }
+.md-ficha-sin-foto .md-foto-pendiente__nota { font-size: 1.25rem; }
+@media screen and (min-width: 750px) { .md-product--sin-foto .product__media-wrapper { position: sticky; top: 2rem; align-self: start; } }
+
+/* ---------- Tarjeta de producto: resumen y etiquetas discretas ---------- */
+.md-card-resumen { margin: 0.4rem 0 0.6rem; font-size: 1.35rem; line-height: 1.5; color: var(--md-texto-suave); }
+.badge.md-etiqueta { background: var(--md-blanco); color: var(--md-marron); border: 1px solid var(--md-linea); font-size: 1.05rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 0.5rem 1rem; border-radius: 2px; }
+.md-ficha-overline { margin: 0 0 0.8rem; }

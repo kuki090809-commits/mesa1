@@ -7,7 +7,7 @@
         "titulo": "Viaja ligero.\nVive más.",
         "texto": "Descubre nuestra colección de accesorios de viaje, diseñados para acompañarte en cada destino.",
         "boton_texto": "Explorar colección",
-        "boton_enlace": "shopify://collections/all",
+        "boton_enlace": "shopify://collections/the-travel-collection",
         "alto": 70,
         "titulo_tam": 88,
         "tinte": 25
@@ -19,41 +19,41 @@
         "cat_1": {
           "type": "categoria",
           "settings": {
-            "coleccion": "equipaje",
-            "titulo": "Equipaje",
+            "coleccion": "luggage",
+            "titulo": "Luggage",
             "imagen": "shopify://shop_images/md-cat-equipaje.jpg"
           }
         },
         "cat_2": {
           "type": "categoria",
           "settings": {
-            "coleccion": "organizacion-de-viaje",
-            "titulo": "Organización",
+            "coleccion": "travel-organizers",
+            "titulo": "Travel Organizers",
             "imagen": "shopify://shop_images/md-cat-organizacion.jpg"
           }
         },
         "cat_3": {
           "type": "categoria",
           "settings": {
-            "coleccion": "accesorios",
-            "titulo": "Accesorios",
-            "imagen": "shopify://shop_images/md-cat-accesorios.jpg"
+            "coleccion": "necessaires",
+            "titulo": "Nécessaires",
+            "imagen": "shopify://shop_images/md-cat-necessaires.jpg"
           }
         },
         "cat_4": {
           "type": "categoria",
           "settings": {
-            "coleccion": "comodidad",
-            "titulo": "Comodidad",
-            "imagen": "shopify://shop_images/md-cat-comodidad.jpg"
+            "coleccion": "travel-care",
+            "titulo": "Travel Care",
+            "imagen": "shopify://shop_images/md-cat-travel-care.jpg"
           }
         },
         "cat_5": {
           "type": "categoria",
           "settings": {
-            "coleccion": "tecnologia-de-viaje",
-            "titulo": "Tecnología",
-            "imagen": "shopify://shop_images/md-cat-tecnologia.jpg"
+            "coleccion": "accessories",
+            "titulo": "Accessories",
+            "imagen": "shopify://shop_images/md-cat-accesorios.jpg"
           }
         }
       },
@@ -126,7 +126,7 @@
         "banner_imagen": "shopify://shop_images/md-banner-atardecer.jpg",
         "banner_titulo": "Tu próxima aventura te espera",
         "banner_boton": "Descubrir",
-        "banner_enlace": "shopify://collections/all",
+        "banner_enlace": "shopify://collections/the-travel-collection",
         "padding_top": 72,
         "padding_bottom": 80
       }

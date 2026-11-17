@@ -37,7 +37,7 @@
             "titulo": "Funcionales, bonitos y elegidos con cuidado",
             "texto": "<p>Queremos reunir productos funcionales, bonitos y cuidadosamente seleccionados que acompañen a las personas en sus viajes.</p>",
             "boton": "Explorar colección",
-            "enlace": "shopify://collections/all"
+            "enlace": "shopify://collections/the-travel-collection"
           }
         },
         "v1": {
@@ -71,9 +71,9 @@
             "posicion": "izquierda",
             "overline": "Inspiración",
             "titulo": "Del aeropuerto a la orilla del Mediterráneo",
-            "texto": "<p>Equipaje, organización, accesorios, comodidad y tecnología de viaje, reunidos en un mismo lugar.</p>",
+            "texto": "<p>Equipaje, organizadores, neceseres, cuidado personal y accesorios de viaje, reunidos en un mismo lugar.</p>",
             "boton": "Ver categorías",
-            "enlace": "shopify://collections/all"
+            "enlace": "shopify://collections/the-travel-collection"
           }
         }
       },
