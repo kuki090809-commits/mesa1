@@ -32,6 +32,13 @@
         "info": "El mínimo legal en la UE es 14 días."
       },
       {
+        "type": "checkbox",
+        "id": "md_ocultar_disponibilidad",
+        "label": "Ocultar el filtro de disponibilidad",
+        "default": true,
+        "info": "Actívalo mientras el stock no esté conectado con tu proveedor, para no mostrar «En stock» sin datos reales."
+      },
+      {
         "type": "header",
         "content": "Aviso de cookies"
       },

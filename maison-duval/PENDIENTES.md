@@ -46,15 +46,24 @@ Fecha de la revisión: 16/11/2026. El tema **MAISON DUVAL** está subido a la ti
 8. [ ] **Privacidad del cliente** (Configuración → Privacidad del cliente): usa **un solo** banner. Si activas el de Shopify, desactiva el del tema (Configuración del tema → MAISON DUVAL · Tienda).
 9. [ ] **Revisión jurídica profesional** de las 8 páginas legales antes de publicarlas.
 
-## 4. Productos
+## 4. Catálogo de productos (The Travel Collection)
 
-1. [ ] **Borrar el «PRODUCTO DE PRUEBA — borrar antes de abrir»** (solo sirve para ver el diseño).
-2. [ ] Crear los productos reales con su **tipo de producto**: Equipaje, Organización, Accesorios, Comodidad o Tecnología. Así entran solos en su colección.
-3. [ ] Poner la etiqueta **imprescindible** a los 4 productos que quieras en la portada.
-4. [ ] Rellenar los metacampos solo con datos del proveedor: materiales, dimensiones, cuidados, «Detalles que marcan la diferencia» (`Título | Texto`) y preguntas del producto (`Pregunta | Respuesta`).
-5. [ ] Fotos de producto propias o con licencia. Precio tachado solo con una rebaja real, respecto al precio más bajo de los 30 días anteriores.
-6. [ ] Reseñas: instalar una app de valoraciones (por ejemplo, Judge.me o Product Reviews). Las estrellas aparecerán solas cuando haya opiniones reales.
-7. [ ] Filtros: app gratuita **Search & Discovery** para filtrar por color, precio o tipo.
+Estado actual: **12 productos creados**. 9 están visibles en la tienda, que sigue cerrada con contraseña. Otros 3 están en borrador porque no tienen precio de proveedor: Travel Backpack, Dental Travel Case y Toothbrush Travel Set. Todos llevan las etiquetas `pendiente-verificar` y `sin-fotos-reales`.
+
+1. [ ] **Fotos reales.** Ningún producto tiene fotos todavía. En su lugar se ve un hueco de marca que dice «Fotografía en preparación»: no hay imágenes inventadas ni generadas. Opciones:
+   - Pásame el **enlace o SKU de CJdropshipping** de cada producto y subo sus fotos si tienen calidad suficiente.
+   - O pide muestras y haz una sesión de fotos (piedra clara, lino, hotel, maleta abierta). Conviene hacerla con el logo, si el proveedor lo permite.
+2. [ ] **Datos que faltan por producto.** Están en la hoja «Estado de los datos» del Excel interno: colores reales, medidas, materiales, capacidad, peso y plazos.
+3. [ ] **Logo MAISON DUVAL en los productos.** Pregunta a CJ si permite bordado, grabado, etiqueta o placa en pedidos de una unidad. Hasta confirmarlo, ningún texto de la tienda dice que los productos lleven el logo.
+4. [ ] **Signature Luggage Set**: confirmar si incluye batería para el puerto USB (normalmente no) y el coste real del envío. Es lo que más cambia su margen.
+5. [ ] **Aluminium Trolley**: confirmar colores y tamaño (¿cabina?). No se ha puesto ningún color.
+6. [ ] **Precios**: son orientativos. Revisa el Excel interno con los costes reales de CJ (producto + envío) antes de abrir la tienda.
+7. [ ] **Conectar CJdropshipping** con su app oficial de Shopify. Así los pedidos se envían solos y el stock se sincroniza. Cuando el stock sea real, puedes volver a mostrar el filtro de disponibilidad (Personalizar tema → Configuración del tema → MAISON DUVAL · Tienda).
+8. [ ] **Filtros por color y categoría**: instala la app gratuita **Search & Discovery** y activa los filtros «Tipo de producto» y «Color». Ahora solo hay filtro de precio y la barra de categorías.
+9. [ ] **Etiquetas «Bestseller» o «New»**: el tema está preparado. Añade al producto la etiqueta `etiqueta:bestseller` o `etiqueta:new`, pero solo cuando esté justificado (ventas reales o lanzamiento reciente).
+10. [ ] **Travel Care** está oculta en la portada y en la barra de categorías hasta que tenga productos activos. Aparecerá sola cuando actives el Dental Travel Case o el Toothbrush Travel Set.
+11. [ ] Peso de cada producto (lo necesitan las tarifas de envío) y país de origen, si vas a indicarlo.
+12. [ ] Reseñas: instala una app de valoraciones. Las estrellas solo aparecerán con opiniones reales.
 
 ## 5. Antes de quitar la contraseña
 

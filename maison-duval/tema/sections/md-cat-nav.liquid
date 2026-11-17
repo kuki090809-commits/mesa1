@@ -15,7 +15,7 @@
     {%- endif -%}
     {%- for block in section.blocks -%}
       {%- assign c = block.settings.coleccion -%}
-      {%- if c == blank -%}{%- continue -%}{%- endif -%}
+      {%- if c == blank or c.products_count == 0 -%}{%- continue -%}{%- endif -%}
       {%- assign actual = false -%}
       {%- if collection.handle == c.handle -%}{%- assign actual = true -%}{%- endif -%}
       <li {{ block.shopify_attributes }}>

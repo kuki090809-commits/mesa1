@@ -14,7 +14,7 @@
 -%}
 {%- if lista != blank and lista.size > 0 -%}
   <section class="md-detalles" aria-labelledby="md-detalles-{{ section.id }}">
-    <div class="md-contenedor md-detalles__grid">
+    <div class="md-contenedor md-detalles__grid{% if img == blank %} md-detalles__grid--sin-foto{% endif %}">
       <div class="md-detalles__media md-reveal">
         {%- if img != blank -%}
           {{ img | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1400', sizes: '(min-width: 990px) 45vw, 100vw', alt: '' }}
@@ -48,7 +48,14 @@
   #shopify-section-{{ section.id }} .md-detalles__lista li { padding-bottom: 2.4rem; border-bottom: 1px solid var(--md-linea); }
   #shopify-section-{{ section.id }} .md-detalles__lista h3 { margin: 0 0 0.6rem; font-size: 2.2rem; }
   #shopify-section-{{ section.id }} .md-detalles__lista p { margin: 0; color: var(--md-texto-suave); line-height: 1.7; }
+  #shopify-section-{{ section.id }} .md-detalles__grid--sin-foto { grid-template-columns: minmax(0, 1fr); }
+  #shopify-section-{{ section.id }} .md-detalles__grid--sin-foto .md-detalles__media { display: none; }
+  #shopify-section-{{ section.id }} .md-detalles__grid--sin-foto .md-detalles__texto { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); column-gap: clamp(3.2rem, 7vw, 9.6rem); align-items: start; }
+  #shopify-section-{{ section.id }} .md-detalles__grid--sin-foto .md-detalles__lista { grid-column: 2; grid-row: 1 / span 2; }
+  #shopify-section-{{ section.id }} .md-detalles__grid--sin-foto .md-detalles__lista li:first-child { padding-top: 0; }
   @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .md-detalles__grid--sin-foto .md-detalles__texto { grid-template-columns: minmax(0, 1fr); }
+    #shopify-section-{{ section.id }} .md-detalles__grid--sin-foto .md-detalles__lista { grid-column: auto; grid-row: auto; }
     #shopify-section-{{ section.id }} .md-detalles { padding: 5.6rem 0; }
     #shopify-section-{{ section.id }} .md-detalles__grid { grid-template-columns: minmax(0, 1fr); }
   }

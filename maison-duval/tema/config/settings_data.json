@@ -178,7 +178,8 @@
     "md_umbral_envio": 50,
     "md_dias_devolucion": 30,
     "md_cookies_activo": true,
-    "md_cookies_pagina": "politica-de-cookies"
+    "md_cookies_pagina": "politica-de-cookies",
+    "md_ocultar_disponibilidad": true
   },
   "presets": {
     "Dawn": {

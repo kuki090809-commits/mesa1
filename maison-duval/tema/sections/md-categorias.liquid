@@ -4,8 +4,17 @@
     {%- if section.settings.titulo != blank -%}
       <h2 class="md-titulo-lineas h2 md-categorias__titulo">{{ section.settings.titulo | escape }}</h2>
     {%- endif -%}
+    {%- liquid
+      assign visibles = 0
+      for b in section.blocks
+        if b.settings.coleccion == blank or b.settings.coleccion.products_count > 0 or section.settings.ocultar_vacias == false
+          assign visibles = visibles | plus: 1
+        endif
+      endfor
+    -%}
     <ul class="md-categorias__lista" role="list">
       {%- for block in section.blocks -%}
+        {%- if section.settings.ocultar_vacias and block.settings.coleccion != blank and block.settings.coleccion.products_count == 0 -%}{%- continue -%}{%- endif -%}
         {%- liquid
           assign col = block.settings.coleccion
           assign img = block.settings.imagen
@@ -39,7 +48,7 @@
 {% style %}
   #shopify-section-{{ section.id }} { padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px; background: var(--md-crema); }
   #shopify-section-{{ section.id }} .md-categorias__titulo { margin-bottom: 3.2rem; }
-  #shopify-section-{{ section.id }} .md-categorias__lista { display: grid; grid-template-columns: repeat({{ section.blocks.size | at_least: 1 }}, minmax(0, 1fr)); gap: 1.6rem; margin: 0; padding: 0; list-style: none; }
+  #shopify-section-{{ section.id }} .md-categorias__lista { display: grid; grid-template-columns: repeat({{ visibles | at_least: 1 }}, minmax(0, 1fr)); gap: 1.6rem; margin: 0; padding: 0; list-style: none; }
   #shopify-section-{{ section.id }} .md-categoria__enlace { position: relative; display: block; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 8px; background: var(--md-beige); box-shadow: var(--md-sombra); color: #FCFAF6; text-decoration: none; }
   #shopify-section-{{ section.id }} .md-categoria__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.1s var(--md-ease); filter: sepia(0.18) saturate(0.88); }
   #shopify-section-{{ section.id }} .md-categoria__enlace::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(63, 55, 48, 0) 45%, rgba(63, 55, 48, 0.62) 100%); transition: opacity 0.6s var(--md-ease); }
@@ -63,6 +72,7 @@
   "tag": "div",
   "max_blocks": 6,
   "settings": [
+    { "type": "checkbox", "id": "ocultar_vacias", "label": "Ocultar categorías sin productos", "default": true },
     { "type": "text", "id": "titulo", "label": "Título (opcional)" },
     { "type": "text", "id": "etiqueta", "label": "Nombre para lectores de pantalla", "default": "Categorías" },
     { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },

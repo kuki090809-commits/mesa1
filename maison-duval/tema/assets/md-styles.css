@@ -345,9 +345,9 @@ body, h1, h2, h3, h4, h5, .h0, .h1, .h2, .h3, .h4, .h5, .price, .md-anuncios__it
   background: radial-gradient(120% 90% at 50% 38%, var(--md-blanco) 0%, #F1E9DD 58%, var(--md-beige) 100%);
 }
 .md-foto-pendiente::after { content: ""; position: absolute; inset: 1.2rem; border: 1px solid rgba(81, 72, 63, 0.1); border-radius: 2px; pointer-events: none; }
-.md-foto-pendiente__icono svg { width: clamp(3.6rem, 22%, 6.4rem); height: auto; stroke-width: 1; }
-.md-foto-pendiente__marca { font-family: var(--md-serif); font-size: clamp(1.3rem, 1.4vw, 1.7rem); letter-spacing: 0.32em; text-transform: uppercase; padding-inline-start: 0.32em; }
-.md-foto-pendiente__nota { font-size: 1.15rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--md-texto-suave); }
+.md-foto-pendiente__icono svg { width: clamp(4.4rem, 4.6vw, 6rem); height: auto; stroke-width: 1; }
+.md-foto-pendiente__marca { font-family: var(--md-serif); font-size: clamp(1.1rem, 1.15vw, 1.6rem); letter-spacing: 0.26em; text-transform: uppercase; padding-inline-start: 0.26em; white-space: nowrap; }
+.md-foto-pendiente__nota { font-size: 1.05rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--md-texto-suave); max-width: 20ch; line-height: 1.6; }
 .md-card-sin-foto { position: absolute; inset: 0; overflow: hidden; border-radius: var(--product-card-corner-radius, 4px); }
 .md-card-sin-foto + .card__content { display: none; }
 .product-card-wrapper .card:hover .md-foto-pendiente__icono svg { transform: translateY(-2px); }

@@ -17,15 +17,17 @@
 - Límite de peticiones muy estricto (≈1 por minuto): agrupar mutaciones con alias.
 
 ## Creado en la tienda
-- Colecciones automáticas por tipo de producto: Equipaje (`Equipaje`), Organización de viaje (`Organización`),
-  Accesorios (`Accesorios`), Comodidad (`Comodidad`), Tecnología de viaje (`Tecnología`); Imprescindibles = etiqueta `imprescindible`.
+- Colecciones (17/11/2026, modelo nuevo de Shopify con `sources`): Luggage, Travel Organizers, Nécessaires, Travel Care y
+  Accessories, que se rellenan por etiqueta (`luggage`, `travel-organizers`, `necessaires`, `travel-care`, `accessories`).
+  The Travel Collection (`the-travel-collection`, plantilla `collection.catalogo`) = proveedor «MAISON DUVAL».
+  Imprescindibles = etiqueta `imprescindible`. Las antiguas Equipaje/Comodidad/Tecnología se borraron.
 - Páginas: aviso-legal, politica-de-privacidad, politica-de-cookies, condiciones-generales-de-contratacion,
   politica-de-envios, politica-de-devoluciones-y-reembolsos, informacion-sobre-el-desistimiento,
   formulario-de-desistimiento, preguntas-frecuentes (plantilla faq), sobre-nosotros (plantilla sobre-nosotros), contacto (plantilla contacto).
 - Menús: main-menu, atencion-al-cliente, maison, legal.
 - Metacampos de producto: custom.materiales, custom.dimensiones, custom.cuidados, custom.detalles («Título | Texto»), custom.faq («Pregunta | Respuesta»).
 - Fotos (Burst, licencia de uso comercial gratuita): md-hero-avion-nubes, md-cat-*, md-banner-atardecer, md-sobre-*, md-contacto-preparando-viaje.
-- **PRODUCTO DE PRUEBA** (`producto-de-prueba`, etiquetas `prueba-borrar`): solo para revisar el diseño. BORRAR antes de abrir.
+- Producto de prueba: BORRADO el 17/11/2026 (sustituido por el catálogo real).
 
 ## Reglas de honestidad implementadas en el tema
 - Envío gratuito: un único ajuste (`md_umbral_envio`, ahora 50 € PENDIENTE de confirmar con las tarifas reales). Si se vacía, desaparece en toda la web.
@@ -47,3 +49,12 @@
 ## Estado
 - Tema completo y revisado con capturas (portada, producto, colección, carrito, páginas, móvil y ordenador).
 - Auditoría y lista de pendientes: `maison-duval/PENDIENTES.md`.
+
+## Catálogo (17/11/2026)
+- 12 productos: contenido en `maison-duval/catalogo/productos.json`, sin costes de proveedor (el repo es público).
+  9 activos y 3 en borrador por falta de precio (travel-backpack, dental-travel-case, toothbrush-travel-set).
+- Sin fotos reales: el tema muestra `snippets/md-foto-pendiente.liquid` («Fotografía en preparación»). Nunca imágenes generadas.
+- Precios y márgenes: Excel INTERNO entregado al usuario por chat, NO se sube al repo (contiene costes de proveedor).
+- El tema oculta las categorías vacías y el filtro de disponibilidad (ajuste `md_ocultar_disponibilidad`) hasta conectar el stock de CJ.
+- Etiquetas de tarjeta preparadas: `etiqueta:bestseller` y `etiqueta:new` (solo si están justificadas).
+- theme_bash: no usar barras invertidas dentro de comillas simples (el intérprete da «unterminated quote»).
